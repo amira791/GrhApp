@@ -61,3 +61,13 @@
 
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adjust the padding as needed */
+  }
+  
+  .logo img {
+    max-width: 100%; /* Ensure the logo image doesn't exceed its container */
+  }
