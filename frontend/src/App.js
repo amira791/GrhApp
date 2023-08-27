@@ -1,11 +1,11 @@
 import React from 'react';
-import SideBar from './components/SideBar';
+import DataTable from './components/DataTable';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <SideBar />
+      <DataTable />
     </div>
   );
 }

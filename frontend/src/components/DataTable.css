@@ -1,0 +1,44 @@
+/* DataTable.css */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .data-table th, .data-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .data-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .data-table td:last-child {
+    font-weight: bold;
+  }
+  
+  .data-table td:last-child span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .data-table td:last-child span.actif {
+    background-color: green;
+    color: white;
+  }
+  
+  .data-table td:last-child span.depart {
+    background-color: red;
+    color: white;
+  }
+  
