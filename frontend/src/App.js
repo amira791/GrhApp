@@ -1,11 +1,11 @@
 import React from 'react';
-import DataTable from './components/DataTable';
+import TopNavBar from './components/TopNavBar';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <DataTable />
+      <TopNavBar />
     </div>
   );
 }
