@@ -8,38 +8,38 @@ import React from 'react'
 // import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faPeopleLine, faPersonWalkingLuggage, faChartLine, faSitemap, faHospitalUser, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
 
 
 export const SideBarData = [
     {
         title: "Employe",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        icon: <FontAwesomeIcon icon={faPeopleLine} />,
         link: "/Main"
     },
     {
         title: "Dossier Employe",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        icon: <FontAwesomeIcon icon={faFolderOpen} />,
         link: "/Main"
     },
     {
         title: "Mouvement",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        icon: <FontAwesomeIcon icon={faPersonWalkingLuggage} />,
         link: "/Main"
     },
     {
         title: "Prestatuions et primes",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        icon: <FontAwesomeIcon icon={faHospitalUser} />,
         link: "/Main"
     },
     {
         title: "Statistiques",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        icon: <FontAwesomeIcon icon={faChartLine} />,
         link: "/Main"
     },
     {
-        title: "Prametres",
-        icon: <FontAwesomeIcon icon={faEnvelope} />,
+        title: "Parametres",
+        icon: <FontAwesomeIcon icon={faSitemap} />,
         link: "/Main"
     }
     
