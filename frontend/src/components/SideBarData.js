@@ -20,27 +20,27 @@ export const SideBarData = [
     {
         title: "Dossier Employe",
         icon: <FontAwesomeIcon icon={faFolderOpen} />,
-        link: "/Main"
+        link: "/Dossier"
     },
     {
         title: "Mouvement",
         icon: <FontAwesomeIcon icon={faPersonWalkingLuggage} />,
-        link: "/Main"
+        link: "/Mouvement"
     },
     {
-        title: "Prestatuions et primes",
+        title: "Prestatuions et avantages",
         icon: <FontAwesomeIcon icon={faHospitalUser} />,
-        link: "/Main"
+        link: "/Prestatuions"
     },
     {
         title: "Statistiques",
         icon: <FontAwesomeIcon icon={faChartLine} />,
-        link: "/Main"
+        link: "/Statistiques"
     },
     {
         title: "Parametres",
         icon: <FontAwesomeIcon icon={faSitemap} />,
-        link: "/Main"
+        link: "/Parametres"
     }
     
 ]
