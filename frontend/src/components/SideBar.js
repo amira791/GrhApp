@@ -9,14 +9,14 @@ function SideBar ()
 {
   return ( 
    <div className="SideBar">
-     <ul>
+     <ul className="SideBarList">
        {SideBarData.map((val,key) => {
           return (
             <li
-            key={key}
+            key={key} className="row"
             onClick={() => {window.location.pathname = val.link;}}>
              {""}
-             <div>{val.icon}</div> <div>{val.title}</div>
+             <div id="icon">{val.icon}</div> <div id="title">{val.title}</div>
             </li>
           );
        })}

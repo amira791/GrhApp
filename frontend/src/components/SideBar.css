@@ -1,6 +1,46 @@
 .SideBar {
   height: 100% ;
-  width: 250px;
+  width: 300px;
   background-color: #E3FAFC ;
 
 }
+
+
+.SideBarList{
+    height: auto;
+    width: 250px;
+}
+
+
+.SideBarList .row {
+    height: 60px;
+    width: 100%;
+    /*border: 1px solid black;*/
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    padding: 0;
+    flex-direction: row;
+    color: #374957;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    align-items: center; /* Vertically center the contents */
+    gap: 8px; /* Adjust the value to control the spacing */
+
+}
+
+
+.row #icon {
+    flex: 10%;
+    display: list-item;
+    place-items: center;
+    margin-right: 1px;
+}
+
+.row #title {
+    flex: 70%;
+    display: list-item;
+    place-items: center;
+    margin-left: 1px; 
+}
+
