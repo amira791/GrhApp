@@ -30,9 +30,15 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    bottom: 0;
-    left: 123;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    left: 150;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+    
+
   }
   
   .buttons button {
