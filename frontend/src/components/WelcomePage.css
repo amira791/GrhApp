@@ -25,24 +25,25 @@
     width: 846px; /* Adjust the width as needed */
     height: 564px; /* Adjust the height as needed */
   }
-  
+
 
   .buttons {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    align-items: flex-start;
     justify-content: center;
     position: absolute;
-    left: 150;
-    top: 50%; /* Center vertically */
+    top: 65%; /* Center vertically */
     transform: translateY(-50%); /* Center vertically */
-    
-
+    left: 500; /* For left-side buttons */
   }
   
+
+
+  
+
   .buttons button {
-    background-color: #4FC1C2; /* Set the button background color */
+    background-color: #1fadaf; /* Set the button background color */
     color: white; /* Set the button text color */
     font-size: 25px; /* Set the font size */
     font-family: 'Poppins', sans-serif; /* Set the font family */
@@ -51,6 +52,7 @@
     padding: 10px 20px; /* Add some padding for better visual appearance */
     border: none; /* Remove the default button border */
     cursor: pointer; /* Show a pointer cursor on hover */
+    border-radius: 10px;
   }
   
   
