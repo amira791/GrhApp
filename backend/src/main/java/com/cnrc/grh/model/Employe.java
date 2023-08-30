@@ -1,11 +1,12 @@
 // Employee.java (Model)
 package com.cnrc.grh.model;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 
 @Entity
 public class Employe {
@@ -18,7 +19,18 @@ public class Employe {
     private String NbEnfant;
 
     private String LieuNaissance;
-    private LocalDate dateOfBirth;
+    private LocalDate DateNaissance;
+    private  String Sexe;
+    private String SituationFamiliale;
     private long NumTelephone;
+    private long NSS;
+    private  String Adresse;
+    private  long CaisseCNAS;
+
+    private String NiveauEtude;
+    private LocalDate DateEntree;
+
+
+
 
 
