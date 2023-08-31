@@ -26,5 +26,22 @@ public class StatusService {
         return statusRepository.findById(id);
     }
 
+    public Status CreateStatus(Status St) {
+        return statusRepository.save(St);
+    }
+
+    public Status updateStatus(String id, Status updatedStatus) {
+        Status existingStatus = statusRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Status not found"));
+
+        existingStatus.setStatusDesignation(updatedStatus.getStatusDesignation());
+        existingStatus.setStatusDesignationAr(updatedStatus.getStatusDesignationAr());
+
+        return statusRepository.save(existingStatus);
+    }
+
+    public void deleteStatus(String id) {
+        statusRepository.deleteById(id);
+    }
 
 }
