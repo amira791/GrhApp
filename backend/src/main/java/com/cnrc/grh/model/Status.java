@@ -1,22 +1,26 @@
 package com.cnrc.grh.model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
-import com.cnrc.grh.model.Employe; // Import the Employee model
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Entity
+@Table(name = "STATUT")
+@NoArgsConstructor
 
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name = "CODE_STATUT")
+    private String id;
+    @Column(name = "LIB_STATUT")
     private String StatusDesignation;
+    @Column(name = "LIB_STATUT_AR")
+    private String StatusDesignationAr;
 
-    // Other fields
-
-    @OneToMany(mappedBy = "status") // One-to-Many relationship with Employee
-    private List<Employe> employes;   // Optional: To access employees from the collective
-
+    public Status(String StatusDesignation, String StatusDesignationAr) {
+        this.StatusDesignation = StatusDesignation;
+        this.StatusDesignationAr = StatusDesignationAr;
+    }
 }

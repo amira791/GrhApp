@@ -1,23 +1,24 @@
 // Employee.java (Model)
 package com.cnrc.grh.model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import  com.cnrc.grh.model.*;
+
 import java.time.LocalDate;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.ManyToOne;
-import com.cnrc.grh.model.Collectif;
-import com.cnrc.grh.model.Status;
-import com.cnrc.grh.model.Diplome;
-import com.cnrc.grh.model.*;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employe {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "MAT")
     private Long id;
+
     private String nom;
     private String prenom;
     private String NomJeuneFille;
