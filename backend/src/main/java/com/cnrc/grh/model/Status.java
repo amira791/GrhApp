@@ -23,8 +23,5 @@ public class Status {
     @Column(name = "LIB_STATUT_AR")
     private String StatusDesignationAr;
 
-//    public Status(String StatusDesignation, String StatusDesignationAr) {
-//        this.StatusDesignation = StatusDesignation;
-//        this.StatusDesignationAr = StatusDesignationAr;
-//    }
+
 }

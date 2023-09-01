@@ -30,7 +30,7 @@ public class Employe {
     private long NumTelephone;
     private long NSS;
     private String Adresse;
-    private long CaisseCNAS;
+    private long CaisseCNAS;AGENCE_DAS
 
     private String NiveauEtude;
     private LocalDate DateEntree;
