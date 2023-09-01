@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "STATUT")
+@Table(name = "COLLECTIF")
 public class Collectif {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CODE_STATUT")
+    @Column(name = "CODE_COL")
     private String id;
-    @Column(name = "LIB_STATUT")
-    private String StatusDesignation;
-    @Column(name = "LIB_STATUT_AR")
-    private String StatusDesignationAr;
+    @Column(name = "LIB_COL")
+    private String CollectifDesignation;
+    @Column(name = "LIB_COL_AR")
+    private String CollectifDesignationAr;
 
 
 }

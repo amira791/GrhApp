@@ -42,7 +42,7 @@ public class CategorieController {
     }
 
     @DeleteMapping("/DeleteCategorie/{id}")
-    public void deleteStatus(@PathVariable String id) {
+    public void deleteCollectif(@PathVariable String id) {
         CatSer.deleteCategorie(id);
     }
 
