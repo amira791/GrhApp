@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 
 public class Categorie {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CODE_CAT")
     private String id;
     @Column(name = "LIB_CAT")
