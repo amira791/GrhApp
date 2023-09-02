@@ -31,7 +31,7 @@ public class CollectifController {
     }
 
     @PostMapping("/CreateCollectif")
-    public void createStatus(@RequestBody Collectif Col) {
+    public void createCollectif(@RequestBody Collectif Col) {
         System.out.println("oooooooooooooooooo");
         ColSer.CreateCollectif(Col);
     }
