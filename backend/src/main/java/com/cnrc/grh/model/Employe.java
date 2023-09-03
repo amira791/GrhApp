@@ -22,10 +22,16 @@ public class Employe {
     private String id;
     @Column(name = "NOM")
     private String Nom;
+    @Column(name = "NOM_AR")
+    private String NomAr;
     @Column(name = "PRE")
     private String Prenom;
+    @Column(name = "PRE_Ar")
+    private String PrenomAr;
     @Column(name = "NJFILLE")
     private String NomJeuneF;
+    @Column(name = "ADR_Ar")
+    private String AdrAr;
     @Column(name = "ADR")
     private String Adr;
     @Column(name = "CODE_UNITE")
@@ -60,6 +66,8 @@ public class Employe {
     private Date DateNaissance;
     @Column(name = "LIEU_NAI")
     private String LieuNaissance;
+    @Column(name = "LIEU_NAI_Ar")
+    private String LieuNaissanceAr;
     @Column(name = "MODE_PAYE")
     private String ModePaiement;
     @Column(name = "NUM_COMPTE")
@@ -78,6 +86,19 @@ public class Employe {
     private String Handicape;
     @Column(name = "NIVEAU_ETUDE")
     private String NiveauEtude;
+    @Column(name = "NUM_CN")
+    private String NumCN;
+    @Column(name = "SITUATION_MILITAIRE")
+    private String SituationMulitaire;
+    @Column(name = "REF_DECISION")
+    private String RefDecision;
+    @Column(name = "MOTIF_SORTIE")
+    private String MotifSortie;
+    @Column(name = "NOTE")
+    private Float Note;
 
+
+    //Definir les relations
+    
 
 }
