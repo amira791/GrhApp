@@ -6,12 +6,8 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <TopNavBar />
-      <div className="content-container">
-        <Sidebar />
-        
+      <SideBar/>    
       </div>
-    </div>
   );
 }
 
