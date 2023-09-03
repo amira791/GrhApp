@@ -31,7 +31,7 @@ public class CategorieController {
     }
 
     @PostMapping("/CreateCategorie")
-    public void createStatus(@RequestBody Categorie Cat) {
+    public void createCategorie(@RequestBody Categorie Cat) {
         System.out.println("oooooooooooooooooo");
         CatSer.CreateCategorie(Cat);
     }
