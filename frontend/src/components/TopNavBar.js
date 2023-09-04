@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import SideBar from '../styling/TopNavBar.css';
+import SideBar from '../style/TopNavBar.css';
 
 
 function TopNavBar() {

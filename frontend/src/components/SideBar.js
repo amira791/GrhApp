@@ -1,6 +1,6 @@
 import react from "react";
 import '../App.css';
-import '../styling/SideBar.css';
+import '../style/SideBar.css';
 import {SideBarData} from './SideBarData'
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import logoImage from '../assets/logo.png';
