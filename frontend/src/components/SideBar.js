@@ -1,9 +1,9 @@
 import react from "react";
 import '../App.css';
-import '../Styling/SideBar.css';
+import '../styling/SideBar.css';
 import {SideBarData} from './SideBarData'
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import logoImage from '../Assets/logo.png';
+import logoImage from '../assets/logo.png';
 
 
 function SideBar ()
