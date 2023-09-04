@@ -1,12 +1,11 @@
 import React from 'react';
-import TopNavBar from './components/TopNavBar';
-import SideBar from './components/SideBar';
+import TopNavBar from './Components/TopNavBar';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <SideBar/>    
+      <TopNavBar/>    
       </div>
   );
 }
