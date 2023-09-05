@@ -1,11 +1,11 @@
 import React from 'react';
-import AjoutEmp01 from './pages/AjoutEmp01';
+import AjoutEmp02 from './pages/AjoutEmp02';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <AjoutEmp01/>    
+      <AjoutEmp02/>    
       </div>
   );
 }
