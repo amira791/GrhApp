@@ -1,11 +1,11 @@
 import React from 'react';
-import TopNavBar from './components/TopNavBar';
+import Stepper from './components/Stepper';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <TopNavBar/>    
+      <Stepper/>    
       </div>
   );
 }
