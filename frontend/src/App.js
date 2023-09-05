@@ -1,11 +1,11 @@
 import React from 'react';
-import Stepper from './components/Stepper';
+import Stepper04 from './components/Stepper04';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Stepper/>    
+      <Stepper04/>    
       </div>
   );
 }
