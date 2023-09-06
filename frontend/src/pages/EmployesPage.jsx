@@ -3,7 +3,7 @@
 import React from 'react';
 import SideBar from '../components/SideBar';
 import DataTable from '../components/DataTable';
-import '../style/DossierEmploye.css';
+import '../style/EmployesPage.css';
 import '../style/TopNavBar.css'
 import TopNavBar from '../components/TopNavBar';
 
