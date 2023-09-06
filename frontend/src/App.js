@@ -1,6 +1,6 @@
 import React from 'react';
-import SideBar from './components/SideBar';
 import DossierEmploye from './pages/DossierEmploye';
+import AjoutEmp01 from './pages/AjoutEmp01';
 import './App.css';
 
 function App() {
