@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 
-function AjoutEmp01() {
+function AjoutEmp02() {
   const [jsonData, setJsonData] = React.useState('');
   const [formData, setFormData] = React.useState({
     NiveauEtude: '',
@@ -60,7 +60,7 @@ function AjoutEmp01() {
     { value: "CDI/P", label: "CDI/P" },
     { value: "DEC", label: "DEC" },
   ];
-  const Categorie = [
+  const TypeStructure = [
     { value: "Bac", label: "Bac" },
     { value: "Bac + 2", label: "Bac + 2" },
     { value: "Bac + 3", label: "Bac + 3" },
@@ -223,15 +223,15 @@ function AjoutEmp01() {
                 ))}
               </Select>
               <Select
-                placeholder="Categorie.."
+                placeholder="Type Structure.."
                 size="md"
                 marginRight={4}
-                name="Unite"
-                value={formData.Categorie}
+                name="TypeStructure"
+                value={formData.TypeStructure}
                 onChange={handleInputChange}
                 maxW="31rem"
               >
-                {Categorie.map((option) => (
+                {TypeStructure.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -273,4 +273,4 @@ function AjoutEmp01() {
     </div>
   );
 }
-export default AjoutEmp01;
+export default AjoutEmp02;
