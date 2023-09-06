@@ -1,0 +1,15 @@
+
+
+.dossier-employe-container {
+    display: flex; 
+    align-items: stretch; 
+    margin-right: 0px;
+  }
+  
+
+  .content-container {
+    display: flex;
+    flex-grow: 1;
+    margin-top: 100px;
+  }
+  

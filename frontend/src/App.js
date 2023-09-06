@@ -1,11 +1,12 @@
 import React from 'react';
-import AjoutEmp02 from './pages/AjoutEmp02';
+import SideBar from './components/SideBar';
+import DossierEmploye from './pages/DossierEmploye';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <AjoutEmp02/>    
+      <DossierEmploye/>    
       </div>
   );
 }
