@@ -44,13 +44,13 @@ import {
     }
   
     return (
-      <Box maxW="100vh">
+      <Box  maxW="100vh">
         <Form onSubmit={handleSubmit}>
           <FormControl>
             <FormLabel>Motif d'absence</FormLabel>
             <Select
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => {
+                setCode(e.target.value);}} 
               placeholder='Selectionnez un motif'>
               {motif.map((m) => (
                 <option key={m.index} value={m.id}>{m.libelle}</option>

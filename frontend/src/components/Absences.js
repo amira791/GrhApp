@@ -49,7 +49,7 @@ import {
             {motif && <AbsencesTable motif={motif}/>}
             
             <Modal
-            
+             
               size="xl"
               initialFocusRef={initialRef}
               finalFocusRef={finalRef}
