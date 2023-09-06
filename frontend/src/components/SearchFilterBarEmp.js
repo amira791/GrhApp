@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
 import { Box, Select } from '@chakra-ui/react'; 
+import { Formik, Form, Field } from "formik";
+import '../style/SearchFilterEmp.css'
 
-const [selectedFilter, setSelectedFilter] = useState(""); // Initialize with an initial value if needed
-const [selectedFilterValue, setSelectedFilterValue] = useState(""); // Initialize with an initial value if needed
 
 
 
 const FilterBy = [
+  { value: "", label: "FilterBy.." },
   { value: "Collectif", label: "Collectif.." },
   { value: "Unite", label: "Unite" },
   { value: "Structure", label: "Structure" },
@@ -19,6 +20,7 @@ const FilterBy = [
 
 const FilterValue  = {
   Collectif: [
+    { value: "", label: "FilterValue.." },
     { value: "", label: "Collectif.." },
     { value: "Siege", label: "Siege" },
     { value: "Antenne Locale", label: "Antenne Locale" },
@@ -71,37 +73,50 @@ const FilterValue  = {
 };
 
 const SearchFilterBarEmp = () => {
-  const [selectedFilterBy, setSelectedFilterBy] = useState("");
+  const [selectedFiltre, setSelectedFiltre] = useState("");
+  const [selected, setSelected] = useState("");
   const handleClick=()=>{
     console.log("hello") ;
 
   }
- 
+
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" padding="1rem">
-      <Select
-        placeholder="Filtrer par..."
-        value={selectedFilter}
-        onChange={(e) => onSelectFilter(e.target.value)}
-      >
-        {FilterBy.map((filter) => (
-          <option key={filter.value} value={filter.value}>
-            {filter.label}
-          </option>
-        ))}
-      </Select>
-      <Select
-        placeholder="Valeur..."
-        value={selectedFilterValue}
-        onChange={(e) => onSelectFilterValue(e.target.value)}
-      >
-        {FilterValue[selectedFilter]?.map((value) => (
-          <option key={value.value} value={value.value}>
-            {value.label}
-          </option>
-        ))}
-      </Select>
-    </Box>
+    <div className="filtrage">
+
+  <Formik
+    initialValues={{Collectif: "", Unite: "" , Structure :"", Status :"", PosteTravail :"", Etat :""}}
+    onSubmit={(values, { setSubmitting }) => {
+      setTimeout(() => {
+        console.log(JSON.stringify(values, null, 2));
+        setSubmitting(false);
+      }, 400);
+    }}
+  >
+    {({ isSubmitting }) => (
+      <Form>
+        <Field as="select" name="f" className="FilterBy" onClick={(e) => setSelectedFiltre(e.target.value)}
+        >
+          {FilterBy.map((f) => (
+            <option key={f.value} value={f.value}>
+              {f.label}
+            </option>
+          ))}
+        </Field>
+        <Field as="select" name="fv" className="FilterValue" >
+          {selectedFiltre? FilterValue[selectedFiltre].map((fv) => (
+            <option key={fv.value} value={fv.value}>
+              {fv.label}
+            </option>
+          )) : null }
+        </Field>
+        <button type="submit" disabled={isSubmitting} onClick={handleClick} className="btnsubmit">
+          Filtrer
+        </button>
+      </Form>
+    )}
+  </Formik>
+
+  </div>
   );
 };
 

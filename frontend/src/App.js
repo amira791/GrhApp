@@ -11,10 +11,40 @@
 // import DossierPage from './pages/DossierEmploye'
 // import Statistiques from './pages/Statistiques';
 
+
 // //styles
 // import './style/App.css'
 // import MouvementsPage from './pages/MouvementsPage';
+// import ParametresPage from './pages/ParametresPage'
+// import PrestationsPage from './pages/PrestationsPage'
 
+
+
+
+
+
+// // const router = createBrowserRouter(
+// //   createRoutesFromElements(
+// //     <Route path="/" >
+// //       <Route path="welecome" element={<WelcomePage />} />
+// //       <Route path="main" element={<MainLayout />}>
+// //         <Route path="stats" element={<Statistiques />} />
+// //         <Route path="employes" element={<EmpolyesPage />} />
+// //         <Route path="dossier" element={<DossierPage />}/>
+// //         <Route path='mouvements' element={<MouvementsPage/>}/>
+// //       </Route>
+// //     </Route>
+// //   )
+// // )
+
+
+// // function App() {
+// //   return (
+// //     <RouterProvider router={router} />
+// //   );
+// // }
+
+// // export default App;
 
 
 
@@ -23,10 +53,12 @@
 //     <Route path="/" >
 //       <Route path="welecome" element={<WelcomePage />} />
 //       <Route path="main" element={<MainLayout />}>
-//         <Route path="stats" element={<Statistiques />} />
+//         <Route path="statistiques" element={<Statistiques />} />
 //         <Route path="employes" element={<EmpolyesPage />} />
 //         <Route path="dossier" element={<DossierPage />}/>
 //         <Route path='mouvements' element={<MouvementsPage/>}/>
+//         <Route path='parametres' element={<ParametresPage/>}/>
+//         <Route path='prestations' element={<PrestationsPage/>}/>
 //       </Route>
 //     </Route>
 //   )
@@ -35,21 +67,21 @@
 
 // function App() {
 //   return (
-//     <RouterProvider router={router} />
+//     < RouterProvider router={router} />
 //   );
 // }
 
 // export default App;
 
 import React from 'react';
-import DossierEmploye from './pages/DossierEmploye';
+import SearchBar from './components/SearchBar';
 import SearchFilterBarEmp from './components/SearchFilterBarEmp';
 import './style/App.css';
 
 function App() {
   return (
     <div className="App">
-      <SearchFilterBarEmp/>    
+      <SearchBar/>    
       </div>
   );
 }

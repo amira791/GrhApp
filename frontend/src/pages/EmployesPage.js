@@ -5,18 +5,20 @@ import SideBar from '../components/SideBar';
 import DataTable from '../components/DataTable';
 import '../style/EmployesPage.css';
 import '../style/TopNavBar.css'
+import NavTab from '../components/NavTab';
 import TopNavBar from '../components/TopNavBar';
+import Absences from '../components/Absences';
+import Contrats from '../components/Contrats';
 
-function DossierEmploye() {
+function EmployePage() {
+ 
+  const tabs = [
+    { label: 'Absences', component: <Absences /> },
+    { label: 'Contrats', component: <Contrats /> },
+  ];
   return (
-    <div>
-      <TopNavBar/> 
-    <div className="dossier-employe-container">
-      <SideBar/> 
-      <DataTable />
-     </div>
-    </div>
-  );
+     <NavTab tabs={tabs}/> 
+  )
 }
 
-export default DossierEmploye;
+export default EmployePage;
