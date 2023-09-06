@@ -13,6 +13,8 @@ import Statistiques from './pages/Statistiques';
 //styles
 import './style/App.css'
 import MouvementsPage from './pages/MouvementsPage';
+import ParametresPage from './pages/ParametresPage'
+import PrestationsPage from './pages/PrestationsPage'
 
 
 
@@ -22,10 +24,12 @@ const router = createBrowserRouter(
     <Route path="/" >
       <Route path="welecome" element={<WelcomePage />} />
       <Route path="main" element={<MainLayout />}>
-        <Route path="stats" element={<Statistiques />} />
+        <Route path="statistiques" element={<Statistiques />} />
         <Route path="employes" element={<EmpolyesPage />} />
         <Route path="dossier" element={<DossierPage />}/>
         <Route path='mouvements' element={<MouvementsPage/>}/>
+        <Route path='parametres' element={<ParametresPage/>}/>
+        <Route path='prestations' element={<PrestationsPage/>}/>
       </Route>
     </Route>
   )

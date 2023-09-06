@@ -9,13 +9,9 @@ import TopNavBar from '../components/TopNavBar';
 
 function DossierEmploye() {
   return (
-    <div>
-      <TopNavBar/> 
-    <div className="dossier-employe-container">
-      <SideBar/> 
+    
       <DataTable />
-     </div>
-    </div>
+     
   );
 }
 
