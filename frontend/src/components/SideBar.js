@@ -12,7 +12,7 @@ import logoImage from '../assets/logo.png';
 function SideBar() {
   return (
     <div>
-      <div className="top-navbar">
+      {/* <div className="top-navbar">
         <div className="left-section">
           <div className="user-info">
             <FontAwesomeIcon icon={faUser} />
@@ -29,7 +29,7 @@ function SideBar() {
             <span>Logout</span>
           </div>
         </div>
-      </div>
+      </div> */}
     
       <div className="SideBar">
         <div className="logo">

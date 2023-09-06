@@ -1,15 +1,7 @@
-
-
+/* DossierEmploye.css */
 .dossier-employe-container {
-    display: flex; 
-    align-items: stretch; 
-    margin-right: 0px;
-  }
-  
-
-  .content-container {
-    display: flex;
-    flex-grow: 1;
-    margin-top: 100px;
-  }
+    display: grid;
+    grid-template-columns: 320px auto;
+    grid-gap: 16px; /* Adjust the gap between SideBar and DataTable as needed */
+ }
   

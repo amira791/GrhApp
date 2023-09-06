@@ -65,8 +65,8 @@ export default function DataTable() {
   };
 
   return (
-    <TableContainer p="30px">
-      <Table variant='simple'>
+    <TableContainer p="30px"  marginTop="200px" >
+      <Table variant='simple' >
         <Thead>
           <Tr>
             <Th onClick={() => handleColumnHeaderClick('matricule')}>
@@ -109,10 +109,15 @@ export default function DataTable() {
           </Tr>
         </Thead>
         <Tbody>
-          {employe.map((e) => (
-            <Tr key={e.id}>
-              <Td>{e.matricule}</Td>
-              <Td>{e.nomPrenom}</Td>
+          {initialRows.map((initialRows) => (
+            <Tr key={initialRows.id}>
+              <Td>{initialRows.matricule}</Td>
+              <Td>{initialRows.nomPrenom}</Td>
+              <Td>{initialRows.poste}</Td>
+              <Td>{initialRows.direction}</Td>
+              <Td>{initialRows.matricule}</Td>
+              <Td>{initialRows.etat}</Td>
+              
               {/* <Td>{e.prenom}</Td> */}
               {/* <Td>{row.direction}</Td>
               <Td>{row.anciennite}</Td>  
