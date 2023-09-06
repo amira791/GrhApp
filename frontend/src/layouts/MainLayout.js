@@ -9,9 +9,7 @@ export default function MainLayout() {
       <GridItem as="aside"
         colSpan="1"
         rowSpan="auto"
-        bg="teal.400"
-        minH="100vh"
-        p="10px"
+      
       >
         <SideBar/>
       </GridItem>

@@ -156,7 +156,7 @@ export default function AbsencesTable({ motif }) {
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
-              {/* <Th>Actions</Th> */}
+             
             </Tr>
           </Thead>
           <Tbody>
@@ -166,7 +166,7 @@ export default function AbsencesTable({ motif }) {
                   <Td>{new Date(r.id.dateDebut).toLocaleDateString()}</Td>
                   <Td>{new Date(r.id.dateDebut).toLocaleDateString()}</Td>
                   <Td>{r.nbAbsence}</Td>
-                  <Td>{r.id.code}</Td>
+                  <Td>{r.id.motifAbs.libelle}</Td>
                   <Td><Badge ml='1' fontSize='0.8em' colorScheme={r.autorisee === 'T' ? 'green' : 'red'}>
                     {r.autorisee === 'T' ? 'Oui' : 'Non'}
                   </Badge></Td>
@@ -228,7 +228,7 @@ export default function AbsencesTable({ motif }) {
                   <FormControl isRequired >
                     <FormLabel>Date de fin</FormLabel>
                     <Input
-                      defaultValue={selectedRow.dateFin}
+                  
                       value={dateFin}
                       onChange={(e) => setDateFin(e.target.value)}
                       name='dateFin'
