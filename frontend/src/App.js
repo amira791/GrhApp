@@ -1,12 +1,12 @@
 import React from 'react';
-import TopNavBar from './components/TopNavBar';
 import SideBar from './components/SideBar';
+import DossierEmploye from './pages/DossierEmploye';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <SideBar/>    
+      <DossierEmploye/>    
       </div>
   );
 }

@@ -6,22 +6,22 @@ import { useEffect, useState } from 'react';
 export default function DataTable() {
   const [employe,setEmploye] = useState([]);
 
-  // // Use the useEffect hook to fetch data from the API when the component mounts
-  // useEffect(() => {
-  //   // Define the API endpoint URL
-  //   const apiUrl = 'http://localhost:8089/Employe/EmployeAll';
+  // Use the useEffect hook to fetch data from the API when the component mounts
+  useEffect(() => {
+    // Define the API endpoint URL
+    const apiUrl = 'http://localhost:8089/Employe/EmployeAll';
 
-  //   // Fetch data from the API using the fetch() function
-  //   fetch(apiUrl)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       // Update the state variable with the fetched data
-  //       setEmploye(result);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []); // The empty array [] means this effect will run once when the component mounts
+    // Fetch data from the API using the fetch() function
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((result) => {
+        // Update the state variable with the fetched data
+        setEmploye(result);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); // The empty array [] means this effect will run once when the component mounts
 
 
   
@@ -65,8 +65,8 @@ export default function DataTable() {
   };
 
   return (
-    <TableContainer p="30px"  marginTop="200px" >
-      <Table variant='simple' >
+    <TableContainer p="30px">
+      <Table variant='simple'>
         <Thead>
           <Tr>
             <Th onClick={() => handleColumnHeaderClick('matricule')}>
@@ -109,16 +109,11 @@ export default function DataTable() {
           </Tr>
         </Thead>
         <Tbody>
-          {initialRows.map((initialRows) => (
-            <Tr key={initialRows.id}>
-              <Td>{initialRows.matricule}</Td>
-              <Td>{initialRows.nomPrenom}</Td>
-              <Td>{initialRows.poste}</Td>
-              <Td>{initialRows.direction}</Td>
-              <Td>{initialRows.matricule}</Td>
-              <Td>{initialRows.etat}</Td>
-              
-              {/* <Td>{e.prenom}</Td> */}
+          {employe.map((e) => (
+            <Tr key={e.id}>
+              <Td>{e.id}</Td>
+              <Td>{e.nom}</Td>
+              <Td>{e.prenom}</Td>
               {/* <Td>{row.direction}</Td>
               <Td>{row.anciennite}</Td>  
               <Td> <Badge ml='1' fontSize='0.8em' colorScheme='green'>{row.etat}</Badge></Td> */}

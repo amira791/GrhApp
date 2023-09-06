@@ -1,0 +1,7 @@
+/* DossierEmploye.css */
+.dossier-employe-container {
+    display: grid;
+    grid-template-columns: 320px auto;
+    grid-gap: 16px; /* Adjust the gap between SideBar and DataTable as needed */
+ }
+  
