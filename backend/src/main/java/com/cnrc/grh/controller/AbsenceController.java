@@ -1,7 +1,7 @@
 package com.cnrc.grh.controller;
 
 import com.cnrc.grh.model.Absence;
-import com.cnrc.grh.model.MotifAbs;
+import com.cnrc.grh.model.Motifabs;
 import com.cnrc.grh.service.AbsenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,19 +24,19 @@ public class AbsenceController {
 
     // gestion des motifs
     @GetMapping("Motifs/all")
-    public List<MotifAbs> getMotifs() {
+    public List<Motifabs> getMotifs() {
         return absSer.getMotifList();
     }
     @GetMapping("Motifs/{id}")
-    public MotifAbs getMotif(@PathVariable String id) {
+    public Motifabs getMotif(@PathVariable String id) {
         return absSer.getMotifById(id);
     }
     @PostMapping("Motifs/new")
-    public void addMotif(@RequestBody MotifAbs motif) {
+    public void addMotif(@RequestBody Motifabs motif) {
         absSer.createMotif(motif);
     }
     @PutMapping("Motifs/update/{id}")
-    public void updateMotif(@PathVariable String id, @RequestBody MotifAbs updatedMotif) {
+    public void updateMotif(@PathVariable String id, @RequestBody Motifabs updatedMotif) {
         absSer.updateMotif(id, updatedMotif);
     }
     @DeleteMapping("Motifs/delete/{id}")
@@ -58,7 +58,7 @@ public class AbsenceController {
     @PostMapping("/new")
     public void addAbsence(@RequestBody Absence abs) {
         Absence.AbsenceId id = new Absence.AbsenceId();
-        id.setCode(abs.getId().getCode());
+//        id.setCode(abs.getId().getCode());
         id.setMatricule(abs.getId().getMatricule());
         id.setDateDebut(abs.getId().getDateDebut());
         id.setDateFin(abs.getId().getDateFin());
@@ -66,6 +66,7 @@ public class AbsenceController {
         absence.setId(id);
         absence.setNbAbsence(abs.getNbAbsence());
         absence.setAutorisee(abs.getAutorisee());
+        System.out.println("2ssssssssss"+absence);
         absSer.createAbsence(absence);
     }
     @PutMapping("/update/{code}/{dateDebut}/{dateFin}/{matricule}")
@@ -76,7 +77,7 @@ public class AbsenceController {
                               @RequestBody Absence updatedAbsence) {
 
         Absence.AbsenceId id = new Absence.AbsenceId();
-        id.setCode(code);
+//        id.setCode(code);
         id.setDateDebut(dateDebut);
         id.setDateFin(dateFin);
         id.setMatricule(matricule);
@@ -88,7 +89,7 @@ public class AbsenceController {
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
                               @PathVariable String matricule) {
         Absence.AbsenceId id = new Absence.AbsenceId();
-        id.setCode(code);
+//        id.setCode(code);
         id.setDateDebut(dateDebut);
         id.setDateFin(dateFin);
         id.setMatricule(matricule);

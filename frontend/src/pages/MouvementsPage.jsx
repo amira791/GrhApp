@@ -1,6 +1,5 @@
-import Mutations from '../components/Mutations';
+import Mutations from '../components/Mutations'
 import NavTab from '../components/ui/NavTab';
-
 export default function MouvementsPage() {
     const tabs = [
         { label: 'Mutation inter structure', component: <Mutations /> },
@@ -9,6 +8,6 @@ export default function MouvementsPage() {
       return (
         <div>
          <NavTab tabs={tabs}/> 
-          </div>
+        </div>
       )
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 @Data
 @Entity
@@ -18,14 +19,17 @@ public class Absence implements Serializable {
     @Data
     public static class AbsenceId implements Serializable {
 
-        @Column(name = "CODE_ABS")
-        private String code;
+        @ManyToOne(fetch =FetchType.LAZY , optional = false)
+        @JoinColumn(name = "CODE_ABS", referencedColumnName = "CODE_ABSENCE")
+        private Motifabs motifAbs;
+
         @Column(name = "DATE_DEBUT")
         private Date dateDebut;
         @Column(name = "DATE_FIN")
         private Date dateFin;
         @Column(name = "MAT")
         private String matricule;
+
     }
 
     @EmbeddedId

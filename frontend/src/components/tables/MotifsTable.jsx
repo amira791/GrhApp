@@ -1,18 +1,19 @@
 import { AddIcon } from '@chakra-ui/icons';
 import {
+    Box, Button,
     Modal,
     ModalBody, ModalCloseButton,
     ModalContent, ModalHeader,
     ModalOverlay,
-    useDisclosure,
-    Box, Button, HStack, Table,
+    Table,
     TableContainer,
     Tbody,
     Td,
     Thead,
-    Tr
+    Tr,
+    useDisclosure
 } from '@chakra-ui/react';
-import React, { useRef,useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useMotifs from '../../hooks/useMotifs';
 import MotifForm from '../forms/MotifForm';
 

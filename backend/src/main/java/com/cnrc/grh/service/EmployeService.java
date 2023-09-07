@@ -31,11 +31,27 @@ public class EmployeService {
         return employeRepository.save(Emp);
     }
 
-    public Employe updateEmploye(String id, Employe updatedEmploye) {
+    public Employe updateEmploye
+
+
+            (String id, Employe updatedEmploye) {
         Employe existingEmploye = employeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employe not found"));
 
         existingEmploye.setNom(updatedEmploye.getNom());
+        existingEmploye.setPrenom(updatedEmploye.getPrenom());
+        existingEmploye.setAdr(updatedEmploye.getAdr());
+        existingEmploye.setAdrAr(updatedEmploye.getAdrAr());
+        existingEmploye.setCodeAgence(updatedEmploye.getCodeAgence());
+        existingEmploye.setCodeCollectif(updatedEmploye.getCodeCollectif());
+        existingEmploye.setCodeCategorie(updatedEmploye.getCodeCategorie());
+        existingEmploye.setCodePoste(updatedEmploye.getCodePoste());
+        existingEmploye.setCodeStatus(updatedEmploye.getCodeStatus());
+        existingEmploye.setCodeStructure(updatedEmploye.getCodeStructure());
+        existingEmploye.setCodeUnite(updatedEmploye.getCodeUnite());
+        existingEmploye.setCodeWilaya(updatedEmploye.getCodeWilaya());
+        existingEmploye.setDateEntree(updatedEmploye.getDateEntree());
+        existingEmploye.setDateNaissance(updatedEmploye.getDateNaissance());
 
 
         return employeRepository.save(existingEmploye);

@@ -1,16 +1,25 @@
 // grid-template-columns: 320px auto; /* Adjust the width of SideBar as needed */
-
+// DossierEmploye.js
 import React from 'react';
-import DataTable from '../components/tables/DataTable';
 import '../style/EmployesPage.css';
-import '../style/TopNavBar.css';
+import DataTable from '../components/tables/DataTable'
+import AjouterEmp01 from '../components/AjoutEmp01'
+import AjouterEmp02 from '../components/AjoutEmp02'
+import AjouterEmp03 from '../components/AjoutEmp03'
+import AjouterEmp04 from '../components/AjoutEmp04'
 
-export default function EmployesPage() {
+
+function EmployePage() {
+ 
   return (
-    
-      <DataTable />
-     
-  );
+    <>    
+     <AjouterEmp01/>
+    {/*  <AjouterEmp02/>
+     <AjouterEmp03/>
+     <AjouterEmp04/> */}
+     {/* <DataTable /> */}
+     </>
+  )
 }
 
-
+export default EmployePage;

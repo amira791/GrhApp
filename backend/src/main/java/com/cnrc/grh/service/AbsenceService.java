@@ -1,7 +1,7 @@
 package com.cnrc.grh.service;
 
 import com.cnrc.grh.model.Absence;
-import com.cnrc.grh.model.MotifAbs;
+import com.cnrc.grh.model.Motifabs;
 import com.cnrc.grh.repository.AbsenceRepository;
 import com.cnrc.grh.repository.MotifAbsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +24,15 @@ public class AbsenceService {
 
     //gestion des motifs
 
-    public MotifAbs getMotifById(String id) { return motifAbsRepository.findById(id).orElse(null);}
-    public List<MotifAbs> getMotifList() {return motifAbsRepository.findAll();}
+    public Motifabs getMotifById(String id) { return motifAbsRepository.findById(id).orElse(null);}
+    public List<Motifabs> getMotifList() {return motifAbsRepository.findAll();}
 
-    public void createMotif(MotifAbs motif) { motifAbsRepository.save(motif);}
+    public void createMotif(Motifabs motif) { motifAbsRepository.save(motif);}
 
     public void deleteMotif(String id) { motifAbsRepository.deleteById(id);}
 
-    public void updateMotif(String id , MotifAbs updatedMotif){
-        MotifAbs motif = motifAbsRepository.findById(id).orElse(null);
+    public void updateMotif(String id , Motifabs updatedMotif){
+        Motifabs motif = motifAbsRepository.findById(id).orElse(null);
         motif.setLibelle(updatedMotif.getLibelle());
         motifAbsRepository.save(motif);
     }

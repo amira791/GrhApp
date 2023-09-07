@@ -6,10 +6,6 @@ import MainLayout from './components/layouts/MainLayout';
 //styles
 import './style/App.css';
 
-// components
-import Absences from './components/Absences';
-// import Contrats from './components/Contrats';
-
 
 //pages
 import DossierPage from './pages/DossierPage'
@@ -20,10 +16,6 @@ import PrestationsPage from './pages/PrestationsPage';
 import StatistiquesPage from './pages/StatistiquesPage';
 import WelcomePage from './pages/WelcomePage';
 
-
-//loaders
-import absencesLoader from './components/Absences';
-import contratsLoader from './components/Contrats';
 
 
 const router = createBrowserRouter(
@@ -45,7 +37,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <RouterProvider router={router} />
+   <RouterProvider router={router}/>
   );
 }
 

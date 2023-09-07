@@ -1,5 +1,4 @@
 import Absences from '../components/Absences';
-import Contrats from '../components/Contrats';
 import NavTab from '../components/ui/NavTab';
 
 export default function DossierPage() {

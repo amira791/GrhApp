@@ -16,7 +16,6 @@ import { React, useRef, useState, useEffect } from 'react'
   
   
   // components
-import NewAbsence from './NewAbsence'
 import AbsencesTable from './tables/AbsencesTable'
 import useAbsences from '../hooks/useAbsences'
 import useMotifs from '../hooks/useMotifs'
