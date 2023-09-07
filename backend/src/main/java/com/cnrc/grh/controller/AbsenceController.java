@@ -1,5 +1,6 @@
 package com.cnrc.grh.controller;
 
+import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.model.Absence;
 import com.cnrc.grh.model.Motifabs;
 import com.cnrc.grh.service.AbsenceService;
@@ -58,7 +59,7 @@ public class AbsenceController {
     @PostMapping("/new")
     public void addAbsence(@RequestBody Absence abs) {
         Absence.AbsenceId id = new Absence.AbsenceId();
-//        id.setCode(abs.getId().getCode());
+        id.setCode(abs.getId().getCode());
         id.setMatricule(abs.getId().getMatricule());
         id.setDateDebut(abs.getId().getDateDebut());
         id.setDateFin(abs.getId().getDateFin());
@@ -66,22 +67,23 @@ public class AbsenceController {
         absence.setId(id);
         absence.setNbAbsence(abs.getNbAbsence());
         absence.setAutorisee(abs.getAutorisee());
-        System.out.println("2ssssssssss"+absence);
+
         absSer.createAbsence(absence);
     }
+
     @PutMapping("/update/{code}/{dateDebut}/{dateFin}/{matricule}")
     public void updateAbsence(@PathVariable String code,
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateDebut,
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
-                              @PathVariable String matricule,
-                              @RequestBody Absence updatedAbsence) {
+                              @PathVariable String matricule ,
+                              @RequestBody AbsenceRequest updatedAbsence) {
 
-        Absence.AbsenceId id = new Absence.AbsenceId();
-//        id.setCode(code);
-        id.setDateDebut(dateDebut);
-        id.setDateFin(dateFin);
-        id.setMatricule(matricule);
-        absSer.updateAbsence(id ,updatedAbsence);
+         Absence.AbsenceId id = new Absence.AbsenceId();
+         id.setCode(code);
+         id.setDateDebut(dateDebut);
+         id.setDateFin(dateFin);
+         id.setMatricule(matricule);
+         absSer.updateAbsence(id ,updatedAbsence);
     }
     @DeleteMapping("/delete/{code}/{dateDebut}/{dateFin}/{matricule}")
     public void deleteAbsence(@PathVariable String code,
@@ -89,7 +91,7 @@ public class AbsenceController {
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
                               @PathVariable String matricule) {
         Absence.AbsenceId id = new Absence.AbsenceId();
-//        id.setCode(code);
+        id.setCode(code);
         id.setDateDebut(dateDebut);
         id.setDateFin(dateFin);
         id.setMatricule(matricule);

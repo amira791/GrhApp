@@ -1,5 +1,6 @@
 package com.cnrc.grh.service;
 
+import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.model.Absence;
 import com.cnrc.grh.model.Motifabs;
 import com.cnrc.grh.repository.AbsenceRepository;
@@ -24,7 +25,7 @@ public class AbsenceService {
 
     //gestion des motifs
 
-    public Motifabs getMotifById(String id) { return motifAbsRepository.findById(id).orElse(null);}
+    public Motifabs getMotifById(String id) { return motifAbsRepository.findById(id).orElseThrow();}
     public List<Motifabs> getMotifList() {return motifAbsRepository.findAll();}
 
     public void createMotif(Motifabs motif) { motifAbsRepository.save(motif);}
@@ -32,8 +33,9 @@ public class AbsenceService {
     public void deleteMotif(String id) { motifAbsRepository.deleteById(id);}
 
     public void updateMotif(String id , Motifabs updatedMotif){
-        Motifabs motif = motifAbsRepository.findById(id).orElse(null);
+        Motifabs motif = getMotifById(id);
         motif.setLibelle(updatedMotif.getLibelle());
+        motif.setLibelleAr(updatedMotif.getLibelleAr());
         motifAbsRepository.save(motif);
     }
 
@@ -44,16 +46,14 @@ public class AbsenceService {
     public Optional<Absence> getAbsenceById(Absence.AbsenceId id) {return absenceRepository.findById(id);}
     public void createAbsence(Absence absence){ absenceRepository.save(absence); }
 
-    public void updateAbsence(Absence.AbsenceId id, Absence updatedAbsence) {
-        deleteAbsence(id);
-        Absence absence = new Absence();
-        absence.setId(updatedAbsence.getId());
-        absence.setNbAbsence(updatedAbsence.getNbAbsence());
+    public void updateAbsence(Absence.AbsenceId id, AbsenceRequest updatedAbsence) {
+        Absence absence = getAbsenceById(id).orElseThrow();
+        absence.setNbAbsence(updatedAbsence.getNbrAbsence());
         absence.setAutorisee(updatedAbsence.getAutorisee());
         absenceRepository.save(absence);
     }
     public void deleteAbsence(Absence.AbsenceId id) { absenceRepository.deleteById(id); }
 
-    }
+}
 
 
