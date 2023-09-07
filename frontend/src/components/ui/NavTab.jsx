@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Tabs, TabList, Tab, TabPanels, TabPanel, TabIndicator } from '@chakra-ui/react';
 import { AttachmentIcon } from '@chakra-ui/icons';
 

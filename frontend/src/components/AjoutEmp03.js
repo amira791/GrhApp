@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Stepper from '../components/Stepper03';
-import { Input, Stack, Flex, Select } from '@chakra-ui/react';
+import  { useState, useEffect } from 'react';
+
 import {
+  Button, ButtonGroup,
+  Input, Stack, Flex, Select,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+
+
+// components 
+import Stepper from './ui/Stepper03';
+
 
 function AjoutEmp03() {
   const [jsonData, setJsonData] = useState('');

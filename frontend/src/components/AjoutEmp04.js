@@ -1,28 +1,13 @@
-import React from 'react';
-import Stepper from '../components/Stepper04';
-import { Input, Stack, Flex, Select } from '@chakra-ui/react';
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-} from '@chakra-ui/react';
-import {
-    List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-    UnorderedList,
-  } from '@chakra-ui/react';
-  import { Button, ButtonGroup, InputGroup, InputLeftElement } from '@chakra-ui/react'; // Import InputGroup and InputLeftElement
-  import { PhoneIcon } from '@chakra-ui/icons'; // Import PhoneIcon
-
+import { PhoneIcon } from '@chakra-ui/icons'; // Import PhoneIcon
+import { Button, ButtonGroup, Flex, Input, InputGroup, InputLeftElement, Stack } from '@chakra-ui/react';
+import { useState } from 'react';
+// components
+import Stepper from './ui/Stepper04';
 
 
 function AjoutEmp04() {
-  const [jsonData, setJsonData] = React.useState('');
-  const [formData, setFormData] = React.useState({
+  const [jsonData, setJsonData] = useState('');
+  const [formData, setFormData] = useState({
     NumTel: '',
     GroupeSanguin: '',
     SituationMulitaire: '',

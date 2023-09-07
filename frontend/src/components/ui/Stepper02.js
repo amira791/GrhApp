@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   Step,
   StepDescription,
@@ -22,7 +22,7 @@ const steps = [
 
 function Example() {
   const { activeStep } = useSteps({
-    index: 3,
+    index: 2,
     count: steps.length,
   });
 

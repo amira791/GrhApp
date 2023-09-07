@@ -1,25 +1,20 @@
-import React from 'react';
-import Stepper from '../components/Stepper01';
-import { Input, Stack, Flex, Select } from '@chakra-ui/react';
 import {
+  Input, Stack, Flex, Select,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Button, ButtonGroup
 } from '@chakra-ui/react';
-import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-} from '@chakra-ui/react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import { useState } from 'react';
+
+// components
+import Stepper from './ui/Stepper01';
 
 function AjoutEmp01() {
-  const [jsonData, setJsonData] = React.useState('');
-  const [formData, setFormData] = React.useState({
+  const [jsonData, setJsonData] = useState('');
+  const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
     NomJeuneFille: '',

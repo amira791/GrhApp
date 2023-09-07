@@ -1,14 +1,10 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBell, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import '../style/App.css';
-import '../style/SideBar.css';
-import '../style/TopNavBar.css';
-import { SideBarData } from './SideBarData';
-import logoImage from '../assets/logo.png';
-import { NavLink } from 'react-router-dom';
-import { Link as ChakraLink, Icon } from "@chakra-ui/react";
 
+import { NavLink } from 'react-router-dom';
+import { SideBarData } from './SideBarData';
+import logoImage from '../../assets/logo.png';
+import '../../style/App.css';
+import '../../style/SideBar.css';
+import '../../style/TopNavBar.css';
 
 
 

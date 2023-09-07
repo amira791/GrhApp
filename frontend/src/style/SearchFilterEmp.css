@@ -1,0 +1,100 @@
+.filtrage{
+    position: absolute;
+    width: 600px;
+    height: 70px;
+    margin-left: 20px;
+    margin-top: 100px; 
+    background: #58d6d7;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    }
+    
+    /* .filtrage h3{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 52px;
+    color: #053070;
+    margin-top: 5px;
+    margin-left: 10px;
+    
+    } */
+    
+    
+    .FilterBy , .FilterValue {
+    width: 150px;
+    height: 40px;
+    margin-left: 40px ;
+    margin-top:0px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 40px;
+    color: #374957;
+    background: #FFFFFF;
+    border-radius: 15px;
+    
+    }
+    .btnsubmit{
+      margin-left: 100px;
+      margin-top: 5px;
+      height: 40px;
+      width:90px; 
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    background: #E3FAFC;
+    color: #374957;
+    border-radius: 15px;
+    }
+    
+    
+    @media screen and (max-width: 8px) {
+      .filtrage{
+    
+        width: 550px;
+        height: 300px;
+        margin-left: 150px;
+        margin-top: 50px;
+          
+    }
+    .filtrage h3 {
+      font-size: 25px;
+    }
+    }
+    @media screen and (max-width: 490px) {
+      .filtrage{
+    
+        width: 300px;
+        height: 300px;
+        margin-left: 150px;
+        margin-top: 10px;
+          
+    }
+    /* .filtrage h3 {
+      font-size: 18px;
+      margin-top: 15px;
+    
+    } */
+    .communefiltre , .typefiltre ,  .wilayafiltre {
+      width: 150px;
+      height: 30px;
+      font-size: 12px;
+      margin-left: 75px;
+    }
+    .btnsubmit{
+      height: 30px;
+      width:80px;
+      font-size: 12px;
+      margin-left: 110px;
+    
+    }
+    }

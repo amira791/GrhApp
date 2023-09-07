@@ -6,4 +6,4 @@ export default function Statistiques(){
       <h1>Dashboard</h1>
     )
     
-    }
+}

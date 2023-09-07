@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   Step,
   StepDescription,
@@ -22,14 +22,14 @@ const steps = [
 
 function Example() {
   const { activeStep } = useSteps({
-    index: 1,
+    index: 3,
     count: steps.length,
   });
 
   return (
     <Stepper size='lg' colorScheme='green' index={activeStep}>
       {steps.map((step, index) => (
-        <Step key={index} style={{ padding: '50px', margin: '0px' }}> {/* Adjust padding and margin here */}
+        <Step key={index} style={{ padding: '40px', margin: '0px' }}> {/* Adjust padding and margin here */}
           <StepIndicator>
             <StepStatus
               complete={<StepIcon />}
