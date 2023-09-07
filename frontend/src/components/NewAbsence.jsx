@@ -1,10 +1,15 @@
 import {
-    Box, Button, Checkbox, Select,
-    FormControl, FormHelperText, FormLabel,
-    Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack
-  } from '@chakra-ui/react'
-  import { Form } from 'react-router-dom'
-  import { useEffect, useState } from 'react';
+  Box, Button, Checkbox,
+  FormControl, FormHelperText, FormLabel,
+  HStack,
+  Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput, NumberInputField, NumberInputStepper,
+  Select
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { Form } from 'react-router-dom';
   
   
   export default function NewAbsence({ onClose, motif }) {

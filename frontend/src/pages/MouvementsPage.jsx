@@ -1,5 +1,5 @@
 import Mutations from '../components/Mutations';
-import NavTab from '../components/NavTab';
+import NavTab from '../components/ui/NavTab';
 
 export default function MouvementsPage() {
     const tabs = [

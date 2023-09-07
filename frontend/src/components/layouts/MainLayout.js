@@ -1,7 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import {Outlet }from 'react-router-dom'
-import TopNavBar from '../components/TopNavBar'
-import SideBar from "../components/SideBar";
+import TopNavBar from '../ui/TopNavBar'
+import SideBar from '../ui/SideBar'
 
 export default function MainLayout() {
   return (
