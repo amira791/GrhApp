@@ -1,11 +1,12 @@
 import React from 'react';
 import '../style/WelcomePage.css'; 
+import { Grid, GridItem, VStack  , Text , Image, ButtonGroup, Button} from '@chakra-ui/react';
 
 const WelcomePage = () => {
   return (
     <div className="welcome-container">
       <div className="logo">
-        <img src={require('../assets/logo.png')} alt="Logo" />
+        <img src={require('../assets/LogoCNRC.png')} alt="Logo" />
       </div>
       <div className="content">
         <h1>Welcome to Our App</h1>
