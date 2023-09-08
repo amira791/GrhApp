@@ -8,18 +8,17 @@ function TopNavBar() {
     <div className="top-navbar">
       <div className="left-section">
         <div className="user-info">
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={faUser} color='white' size='xl' />
           <span>Username</span>
         </div>
       </div>
       <div className="right-section">
         <div className="notification">
-          <FontAwesomeIcon icon={faBell} />
-          <span>Notifications</span>
+          <FontAwesomeIcon icon={faBell} color='white' size='xl' />
         </div>
         <div className="logout">
-          <FontAwesomeIcon icon={faSignOutAlt} />
           <span>Logout</span>
+          <FontAwesomeIcon icon={faSignOutAlt} />  
         </div>
       </div>
     </div>

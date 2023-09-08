@@ -5,17 +5,20 @@ import SideBar from '../ui/SideBar'
 
 export default function MainLayout() {
   return (
-    <Grid w="100%" templateColumns="repeat(6,1fr)" bg="gray.50">
+    <Grid  templateColumns="repeat(7,1fr)" bg="whiteAlpha.200">
       <GridItem as="aside"
         colSpan="1"
-        rowSpan="auto"
-      
+        w="270px"
+        maxH="100vw"
+        overflowY="hidden"
+        overflowX="auto"
+        position="sticky"
       >
         <SideBar/>
       </GridItem>
       <GridItem
         as="main"
-        colSpan="5"
+        colSpan="6"
       >
         <TopNavBar />
         <Outlet />
