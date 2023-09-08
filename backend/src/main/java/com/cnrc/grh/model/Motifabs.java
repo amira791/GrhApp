@@ -16,8 +16,8 @@ public class Motifabs {
     private String id;
     @Column(name="LIB_ABSENCE")
     private String libelle;
-
-
+    @Column(name = "LIB_ABSENCE_AR")
+    private String libelleAr;
 
 }
 
