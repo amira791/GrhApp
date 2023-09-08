@@ -35,17 +35,13 @@
   
   }
   
-  .SideBarList .row:hover {
-      cursor: pointer;
-      background-color: #58d6d7;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      transform: scale(1.02);
+  .SideBarList .row:hover, .SideBarList .active {
+    cursor: pointer;
+    background-color: #58d6d7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
   }
-  
-  .SideBarList #active {
-      background-color: #709f9f;
-  }
-  
+
   .row #icon {
       flex: 10%;
       display: list-item;
@@ -67,11 +63,16 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+
   }
     
     .logo img {
       max-width: 100%; /* Ensure the logo image doesn't exceed its container */
     }
+#sidebar-logo {
+        width: 500px; /* Adjust the width and height as needed */
+        height: 100px;
+      }
     
   
   
