@@ -15,6 +15,8 @@ import ParametresPage from './pages/ParametresPage';
 import PrestationsPage from './pages/PrestationsPage';
 import StatistiquesPage from './pages/StatistiquesPage';
 import WelcomePage from './pages/WelcomePage';
+import Absences from './components/Absences';
+import Contrats from './components/Contrats';
 
 
 
@@ -25,8 +27,8 @@ const router = createBrowserRouter(
       <Route path="main" element={<MainLayout />}>
         <Route path="statistiques" element={<StatistiquesPage />} />
         <Route path="employes" element={<EmpolyesPage />} />
-        <Route path="dossier" element={<DossierPage/>}>
-        </Route>
+        <Route path="dossier" element={<DossierPage/>}/>
+
         <Route path='mouvements' element={<MouvementsPage/>}/>
         <Route path='parametres' element={<ParametresPage/>}/>
         <Route path='prestations' element={<PrestationsPage/>}/>
