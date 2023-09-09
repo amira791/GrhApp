@@ -1,6 +1,7 @@
 package com.cnrc.grh.controller;
 
 import com.cnrc.grh.model.Contrat;
+import com.cnrc.grh.model.MotifContrat;
 import com.cnrc.grh.model.TypeContrat;
 import com.cnrc.grh.service.ContratService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,23 @@ import java.util.List;
 @RequestMapping("/Contrats")
 public class ContratController {
     private ContratService service;
+
     @Autowired
     private ContratService contratService;
 
-    // gestion des types de contrats
-    @GetMapping("/types")
+    /************************************************************************************************************************/
+    /****** gestion des motifs de contrats*****/
+    @GetMapping("/motifs/all")
+    public List<MotifContrat> getMotifContrats(){
+        return contratService.getMotifContratList();
+    }
+    @GetMapping("/motifs/{id}")
+    public MotifContrat getMotifContrat(@PathVariable String id){
+        return contratService.getMotifContratById(id);
+    }
+    /************************************************************************************************************************/
+    /***** gestion des types de contrats****/
+    @GetMapping("/types/all")
     public List<TypeContrat> getTypeContrats(){
         return contratService.getTypeContratList();
     }
@@ -30,8 +43,18 @@ public class ContratController {
         contratService.createTypeContrat(type);
     }
 
+    @PutMapping("types/update/{id}")
+    public void updateTypeContrat(@PathVariable String id, @RequestBody TypeContrat type){
+        contratService.updateTypeContrat(id, type);
+    }
 
-    // gestion des contrats
+   @DeleteMapping("types/{id}")
+   public void deleteTypeContrat(@PathVariable String id){
+       contratService.deleteTypeContrat(id);
+   }
+
+   /*************************************************************************************************************************/
+    /******* gestion des contrats ******/
 
     @GetMapping("/all")
     public List<Contrat> getAllContrats(){
@@ -44,8 +67,7 @@ public class ContratController {
     }
 
     @PostMapping("new")
-    public void createContrat(@RequestBody Contrat contrat){
-        contratService.createContrat(contrat);
+    public void createContrat(@RequestBody Contrat contrat){contratService.createContrat(contrat);
     }
 
     @PutMapping("update/{id}")

@@ -6,18 +6,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "TYPE_CONTRAT")
-public class TypeContrat {
+@Data
+@Table(name = "MOTIF_FIN_CONTRAT")
+public class MotifContrat {
     @Id
-    @Column(name = "CODE_TYPE_CONTRAT")
+    @Column(name = "CODE_MOTIF_FIN_CONTRAT")
     private String id;
-    @Column(name = "LIB_TYPE_CONTRAT")
+    @Column(name = "LIB_MOTIF_FIN_CONTRAT")
     private String libelle;
-    @Column(name = "LIB_TYPE_CONTRAT_AR")
+    @Column(name = "LIB_MOTIF_FIN_CONTRAT_AR")
     private String libelleAr;
-    @Column(name = "NATURE")
-    private String nature;
-    // add a column for fichier
 }
