@@ -32,19 +32,30 @@ public class AbsenceService {
     public void createMotif(Motifabs motif) {
 
         if(motifAbsRepository.existsById(motif.getId())){
-            throw new AlreadyExistsException("Le contrat avec l'id :" + motif.getId() +"existe deja");
+            throw new AlreadyExistsException("Le motif avec l'id :" + motif.getId() +"existe deja");
         }
         else motifAbsRepository.save(motif);}
 
-    public void deleteMotif(String id) { motifAbsRepository.deleteById(id);}
-
     public void updateMotif(String id , Motifabs updatedMotif){
-        Motifabs motif = getMotifById(id);
-        motif.setLibelle(updatedMotif.getLibelle());
-        motif.setLibelleAr(updatedMotif.getLibelleAr());
-        motifAbsRepository.save(motif);
+
+        if (motifAbsRepository.existsById(id)){
+            Motifabs motif = getMotifById(id);
+            motif.setLibelle(updatedMotif.getLibelle());
+            motif.setLibelleAr(updatedMotif.getLibelleAr());
+            motifAbsRepository.save(motif);
+        }else{
+            throw new RuntimeException("motif non trouvee");
+        }
+
     }
 
+    public void deleteMotif(String id) {
+        if (motifAbsRepository.existsById(id)){
+            motifAbsRepository.deleteById(id);
+        }else{
+            throw new RuntimeException("motif non trouvee");
+        }
+    }
 
     //gestion des absences
 
@@ -53,17 +64,27 @@ public class AbsenceService {
     public Optional<Absence> getAbsenceById(Absence.AbsenceId id) {return absenceRepository.findById(id);}
     public void createAbsence(Absence absence){
         if(absenceRepository.existsById(absence.getId())){
-            throw new AlreadyExistsException("Le contrat avec l'id :" + absence.getId() +"existe deja");
+            throw new AlreadyExistsException("L'absence avec l'id :" + absence.getId() +"existe deja");
         }
         else absenceRepository.save(absence); }
 
-    public void updateAbsence(Absence.AbsenceId id, AbsenceRequest updatedAbsence) {
-        Absence absence = getAbsenceById(id).orElseThrow();
-        absence.setNbAbsence(updatedAbsence.getNbrAbsence());
-        absence.setAutorisee(updatedAbsence.getAutorisee());
-        absenceRepository.save(absence);
+    public void updateAbsence(Absence.AbsenceId id, Absence updatedAbsence) {
+        if(absenceRepository.existsById(id)) {
+
+            Absence absence = getAbsenceById(id).orElseThrow();
+            absence.setNbAbsence(updatedAbsence.getNbAbsence());
+            absence.setAutorisee(updatedAbsence.getAutorisee());
+            absenceRepository.save(absence);
+        }else throw new AlreadyExistsException("L'absence avec l'id :" + id + "n'existe pas");
     }
-    public void deleteAbsence(Absence.AbsenceId id) { absenceRepository.deleteById(id); }
+    public void deleteAbsence(Absence.AbsenceId id) {
+        System.out.println(absenceRepository.existsById(id));
+        if (absenceRepository.existsById(id)){
+            absenceRepository.deleteById(id);
+        }else{
+            throw new RuntimeException("absence non trouvee");
+        }
+    }
 
 }
 
