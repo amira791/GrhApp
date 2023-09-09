@@ -85,7 +85,8 @@ export default function useAbsences() {
   };
   
   const deleteAbsence = (id) => {
-    fetch(`http://localhost:8089/Absences/delete/${id.code}/${id.dateDebut}/${id.dateDebut}/${id.matricule}`, {
+    console.log(id)
+    fetch(`http://localhost:8089/Absences/delete/${id.code}/${id.dateDebut}/${id.dateFin}/${id.matricule}`, {
       method: 'DELETE',
     })
       .then(() => {

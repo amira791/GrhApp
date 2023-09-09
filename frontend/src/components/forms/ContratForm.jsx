@@ -23,6 +23,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
     const [dateDebut, setDateDebut] = useState(initialData.dateDebut);
     const [dateFin, setDateFin] = useState(initialData.dateFin);
     const [duree, setDuree] = useState(initialData.duree);
+    console.log(initialData.type+"this is the inial value")
     const [type ,setType]= useState(initialData.type);
     const [motif,setMotif] = useState(initialData.motif)
 
