@@ -1,13 +1,12 @@
-package com.cnrc.grh.service;
+package com.cnrc.grh.service.dossierEmploye;
 
 import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.Request.AlreadyExistsException;
-import com.cnrc.grh.model.Absence;
-import com.cnrc.grh.model.Motifabs;
-import com.cnrc.grh.repository.AbsenceRepository;
-import com.cnrc.grh.repository.MotifAbsRepository;
+import com.cnrc.grh.model.dossierEmploye.Absence;
+import com.cnrc.grh.model.dossierEmploye.Motifabs;
+import com.cnrc.grh.repository.dossierEmploye.AbsenceRepository;
+import com.cnrc.grh.repository.dossierEmploye.MotifAbsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

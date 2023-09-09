@@ -1,12 +1,12 @@
-package com.cnrc.grh.service;
+package com.cnrc.grh.service.dossierEmploye;
 
 import com.cnrc.grh.Request.AlreadyExistsException;
-import com.cnrc.grh.model.Contrat;
-import com.cnrc.grh.model.MotifContrat;
-import com.cnrc.grh.model.TypeContrat;
-import com.cnrc.grh.repository.ContratRepository;
-import com.cnrc.grh.repository.MotifContratRepository;
-import com.cnrc.grh.repository.TypeContratRepository;
+import com.cnrc.grh.model.dossierEmploye.Contrat;
+import com.cnrc.grh.model.dossierEmploye.MotifContrat;
+import com.cnrc.grh.model.dossierEmploye.TypeContrat;
+import com.cnrc.grh.repository.dossierEmploye.ContratRepository;
+import com.cnrc.grh.repository.dossierEmploye.MotifContratRepository;
+import com.cnrc.grh.repository.dossierEmploye.TypeContratRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +27,27 @@ public class ContratService {
     }
 
     // gestion des motifs de contrat
-    // maybe we need later to create and modify them
 
     public List<MotifContrat> getMotifContratList() {return motifContratRepository.findAll();}
 
     public MotifContrat getMotifContratById(String id) {return motifContratRepository.findById(id).orElseThrow(() -> new RuntimeException("Motif de contrat non trouvé"));}
 
+    public void createMotifContrat(MotifContrat motif) {
+        if(motifContratRepository.existsById(motif.getId())) {
+            throw new AlreadyExistsException("le type de contrat existe deja ");
+        }
+        else motifContratRepository.save(motif);
+    }
+
+    public void updateMotifContrat(String id, MotifContrat updatedMotifContrat) {
+        MotifContrat oldMotifContrat = motifContratRepository.findById(id).orElseThrow(() -> new RuntimeException("Type de contrat non trouvé"));
+        oldMotifContrat.setLibelle(updatedMotifContrat.getLibelle());
+        oldMotifContrat.setLibelleAr(updatedMotifContrat.getLibelleAr());
+        motifContratRepository.save(oldMotifContrat);
+    }
+    public void deleteMotifContrat(String id) {
+        motifContratRepository.deleteById(id);
+    }
 
     // gestion des types de contrats
     public List<TypeContrat> getTypeContratList() {return typeContratRepository.findAll();}
@@ -74,6 +89,7 @@ public class ContratService {
         contratRepository.save(contrat);
     }
     public void deleteContrat(String id) {contratRepository.deleteById(id);}
+
 
 
 }

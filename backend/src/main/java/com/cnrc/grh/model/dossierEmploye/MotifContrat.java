@@ -1,4 +1,4 @@
-package com.cnrc.grh.model;
+package com.cnrc.grh.model.dossierEmploye;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

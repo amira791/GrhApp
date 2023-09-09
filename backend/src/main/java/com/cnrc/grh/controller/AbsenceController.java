@@ -1,9 +1,9 @@
 package com.cnrc.grh.controller;
 
 import com.cnrc.grh.Request.AbsenceRequest;
-import com.cnrc.grh.model.Absence;
-import com.cnrc.grh.model.Motifabs;
-import com.cnrc.grh.service.AbsenceService;
+import com.cnrc.grh.model.dossierEmploye.Absence;
+import com.cnrc.grh.model.dossierEmploye.Motifabs;
+import com.cnrc.grh.service.dossierEmploye.AbsenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;

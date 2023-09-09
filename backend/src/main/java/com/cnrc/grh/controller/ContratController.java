@@ -1,9 +1,9 @@
 package com.cnrc.grh.controller;
 
-import com.cnrc.grh.model.Contrat;
-import com.cnrc.grh.model.MotifContrat;
-import com.cnrc.grh.model.TypeContrat;
-import com.cnrc.grh.service.ContratService;
+import com.cnrc.grh.model.dossierEmploye.Contrat;
+import com.cnrc.grh.model.dossierEmploye.MotifContrat;
+import com.cnrc.grh.model.dossierEmploye.TypeContrat;
+import com.cnrc.grh.service.dossierEmploye.ContratService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +26,20 @@ public class ContratController {
     @GetMapping("/motifs/{id}")
     public MotifContrat getMotifContrat(@PathVariable String id){
         return contratService.getMotifContratById(id);
+    }
+
+    @PostMapping("motifs/new")
+    public void createMotifContrat(@RequestBody MotifContrat motif){
+        contratService.createMotifContrat(motif);
+    }
+    @PutMapping("motifs/update/{id}")
+    public void updateMotifContrat(@PathVariable String id, @RequestBody MotifContrat motif){
+        contratService.updateMotifContrat(id, motif);
+    }
+
+    @DeleteMapping("motifs/{id}")
+    public void deleteMotifContrat(@PathVariable String id){
+        contratService.deleteMotifContrat(id);
     }
     /************************************************************************************************************************/
     /***** gestion des types de contrats****/
