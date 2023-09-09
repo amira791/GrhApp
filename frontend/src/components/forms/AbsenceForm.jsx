@@ -11,13 +11,13 @@ import {
 import { useEffect, useState } from 'react';
 import { Form , useNavigate} from 'react-router-dom';
 import useAbsences from '../../hooks/useAbsences';
-import useMotifs from '../../hooks/useMotifs';
+import useMotifsAbs from '../../hooks/useMotifsAbs';
 
 export default function AbsenceForm({ initialData, forModification, onClose }) {
     
     const navigate = useNavigate();
-    const { motifs, fetchAllMotifs } = useMotifs()
-    const { error,loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
+    const { motifsAbs, fetchAllMotifsAbs } = useMotifsAbs()
+    const { loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
     const [code, setCode] = useState(initialData.id.code)
     const [matricule, setMatricule] = useState(initialData.id.matricule);
     const [dateDebut, setDateDebut] = useState(initialData.id.dateDebut);
@@ -26,7 +26,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
     const [autorisee, setAutorisee] = useState(initialData.autorisee);
 
     useEffect(() => {
-        fetchAllMotifs()
+        fetchAllMotifsAbs()
     }, [])
 
     const handleSubmit = async (event) => {
@@ -86,7 +86,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                     // so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setCode(e.target.value) }}
                     placeholder='Selectionnez un motif'>
-                    {motifs.map((m , index) => (
+                    {motifsAbs.map((m , index) => (
                         <option key={index} value={m.id}>{m.libelle}</option>
                     ))}
                 </Select>

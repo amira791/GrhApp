@@ -22,6 +22,7 @@ export default function useAbsences() {
       .catch((error) => {
         setError(error);
         setLoading(false);
+        
       });
   };
 
@@ -43,6 +44,12 @@ export default function useAbsences() {
       })
       .catch((error) => {
         setError(error);
+        toast({
+          title: 'Une erreur est survenue',
+          description: error.message,
+          status: 'error',
+          duration: 5000,
+        })
       });
   };
 
@@ -68,6 +75,12 @@ export default function useAbsences() {
       })
       .catch((error) => {
         setError(error);
+        toast({
+          title: 'Une erreur est survenue',
+          description: error.message,
+          status: 'error',
+          duration: 5000,
+        })
       });
   };
   
@@ -87,6 +100,12 @@ export default function useAbsences() {
       })
       .catch((error) => {
         setError(error);
+        toast({
+          title: 'Une erreur est survenue',
+          description: error.message,
+          status: 'error',
+          duration: 5000,
+        })
       });
   };
 
