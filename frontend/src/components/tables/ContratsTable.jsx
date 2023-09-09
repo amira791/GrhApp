@@ -1,90 +1,112 @@
-import { TriangleUpIcon, TriangleDownIcon, EditIcon } from '@chakra-ui/icons';
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import {
-  Box, Button, Checkbox, Select,
-  FormControl, FormHelperText, FormLabel,
-  Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack
-  , Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton,
-  Table, Thead, Tbody, Tr, Th, Td, TableContainer, Badge, useDisclosure
+  Badge,
+  Box,
+  Modal,
+  ModalBody, ModalCloseButton,
+  ModalContent, ModalHeader,
+  ModalOverlay,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure
 } from '@chakra-ui/react';
-import { Form } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react';
+import { useRef, useState ,useEffect } from 'react'
+import useTableSort from '../../hooks/useTableSort';
+import AbsenceForm from '../forms/AbsenceForm';
+import ContratForm from '../forms/ContratForm';
+import useTypesCntr from '../../hooks/useTypesCntr';
 
-export default function ContratsTable() {
+export default function ContratsTable({contarts , motifs }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const initialRef = useRef(null)
+  const finalRef = useRef(null)
+  const initialSortColumn = 'Matricule';
+  const initialSortDirection = 'asc'; 
+  const { sortBy, sortDirection, handleColumnHeaderClick } = useTableSort(
+    contarts,
+    initialSortColumn,
+    initialSortDirection
+  );
 
-    const [rows, setRows] = useState([]);
+  const [data,setData] = useState(null)
+  const {types , fetchAllTypes} = useTypesCntr()
+
+  const handleRowClick = (row) => {
+      setData(row)
+      onOpen();
+    };
+
     useEffect(() => {
-
-        fetch('http://localhost:8089/Contrats/all')
-          .then((response) => response.json())
-          .then((result) => {
-            setRows(result);
-            console.log(rows);
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }, []); // The empty array [] means this effect will run once when the component mounts
-    
+        fetchAllTypes()
+      }, []);
 
   return (
-   <>
-    <TableContainer p="30px">
+    <>
+      <TableContainer p="30px" overflow="auto">
         <Table variant='simple'>
           <Thead>
             <Tr>
-              <Th onClick={() => handleColumnHeaderClick('Numero contrat')}>
-                Numero contrat
-                {sortBy === 'Numero contrat' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
-              </Th>
-
-              <Th onClick={() => handleColumnHeaderClick('Date de debut')}>
-                Date de debut
-                {sortBy === 'Date de debut' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
-              </Th>
-
-              <Th onClick={() => handleColumnHeaderClick('Date de fin')}>
-                Date de fin
-                {sortBy === 'Date de fin' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
-              </Th>
-
               <Th onClick={() => handleColumnHeaderClick('Matricule')}>
                 Matricule
                 {sortBy === 'Matricule' && (
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
-
+              <Th onClick={() => handleColumnHeaderClick('Numero')}>
+                Numero
+                {sortBy === 'Numero' && (
+                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
+                )}
+              </Th>
+              <Th onClick={() => handleColumnHeaderClick('Date de debut')}>
+                Date de debut
+                {sortBy === 'Date de debut' && (
+                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
+                )}
+              </Th>
+              <Th onClick={() => handleColumnHeaderClick('Date de fin')}>
+                Date de fin
+                {sortBy === 'Date de fin' && (
+                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
+                )}
+              </Th>
+              <Th onClick={() => handleColumnHeaderClick('Duree')}>
+                Duree
+                {sortBy === 'Duree' && (
+                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
+                )}
+              </Th>
               <Th onClick={() => handleColumnHeaderClick('Type')}>
-                Type 
+                Type
                 {sortBy === 'Type' && (
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
-
               <Th onClick={() => handleColumnHeaderClick('Motif')}>
                 Motif 
                 {sortBy === 'Motif' && (
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
+              
              
             </Tr>
           </Thead>
           <Tbody>
-            {rows.map((r, index) => (
-                <Tr  key={index} onClick={() => handleRowClick(r)} style={{ cursor: 'pointer' }}>
-                  <Td>{r.id}</Td>
-                  <Td>{new Date(r.id.dateDebut).toLocaleDateString()}</Td>
-                  <Td>{new Date(r.id.dateFin).toLocaleDateString()}</Td>
-                  <Td>{r.matricule}</Td>
-                  <Td>{r.type}</Td>
-                  <Td>{r.motif}</Td>
+          {contarts.map((c, index) => (
+            <Tr  key={index} onClick={() => handleRowClick(c)} style={{ cursor: 'pointer' }}>
+                  <Td>{c.matricule}</Td>
+                  <Td>{c.id}</Td>
+                  <Td>{new Date(c.dateDebut).toLocaleDateString()}</Td>
+                  <Td>{new Date(c.dateFin).toLocaleDateString()}</Td>
+                  <Td>{c.duree} mois</Td>
+                  <Td>{c.type }</Td>
+                  <Td>{motifs.find((m) => m.id === c.motif)?.libelle || "No matching libelle"}</Td>
                 </Tr>
             ))}
 
@@ -92,6 +114,28 @@ export default function ContratsTable() {
           </Tbody>
         </Table>
       </TableContainer>
-   </>
-  )
+
+    
+        <Modal
+          initialFocusRef={initialRef}
+          finalFocusRef={finalRef}
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Modifier un contrat</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <Box maxW="100vh">
+                <ContratForm initialData={data} forModification={true} onClose={onClose}/>
+              </Box>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      
+
+
+    </>
+  );
 }

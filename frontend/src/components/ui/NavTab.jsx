@@ -1,6 +1,7 @@
 
 import { Text ,Tabs, TabList, Tab, TabPanels, TabPanel, TabIndicator } from '@chakra-ui/react';
 import { AttachmentIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom'
 
 export default function NavTab({ tabs }) {
   const selected = { color: 'teal.700', bg: '#E3FAFC' };
@@ -9,8 +10,11 @@ export default function NavTab({ tabs }) {
     <Tabs size="md" variant='enclosed'>
       <TabList>
         {tabs.map((tab, index) => (
-          <Tab key={index} _selected={selected}>
-            <AttachmentIcon mr="10px" boxSize="6"/>
+          <Tab 
+          key={index}
+          _selected={selected}
+         
+          ><AttachmentIcon mr="10px" boxSize="6"/>
             <Text fontSize="18px"> {tab.label} </Text>
           </Tab>
         ))}
