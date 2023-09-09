@@ -15,6 +15,9 @@ public class TypeContrat {
     private String id;
     @Column(name = "LIB_TYPE_CONTRAT")
     private String libelle;
+    @Column(name = "LIB_TYPE_CONTRAT_AR")
+    private String libelleAr;
     @Column(name = "NATURE")
     private String nature;
+    // add a column for fichier
 }

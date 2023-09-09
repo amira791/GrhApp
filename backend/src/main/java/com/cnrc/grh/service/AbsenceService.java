@@ -1,11 +1,13 @@
 package com.cnrc.grh.service;
 
 import com.cnrc.grh.Request.AbsenceRequest;
+import com.cnrc.grh.Request.AlreadyExistsException;
 import com.cnrc.grh.model.Absence;
 import com.cnrc.grh.model.Motifabs;
 import com.cnrc.grh.repository.AbsenceRepository;
 import com.cnrc.grh.repository.MotifAbsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,12 @@ public class AbsenceService {
     public Motifabs getMotifById(String id) { return motifAbsRepository.findById(id).orElseThrow();}
     public List<Motifabs> getMotifList() {return motifAbsRepository.findAll();}
 
-    public void createMotif(Motifabs motif) { motifAbsRepository.save(motif);}
+    public void createMotif(Motifabs motif) {
+
+        if(motifAbsRepository.existsById(motif.getId())){
+            throw new AlreadyExistsException("Le contrat avec l'id :" + motif.getId() +"existe deja");
+        }
+        else motifAbsRepository.save(motif);}
 
     public void deleteMotif(String id) { motifAbsRepository.deleteById(id);}
 
@@ -42,9 +49,14 @@ public class AbsenceService {
 
     //gestion des absences
 
+
     public List<Absence> getAbsencesList() { return absenceRepository.findAll();}
     public Optional<Absence> getAbsenceById(Absence.AbsenceId id) {return absenceRepository.findById(id);}
-    public void createAbsence(Absence absence){ absenceRepository.save(absence); }
+    public void createAbsence(Absence absence){
+        if(absenceRepository.existsById(absence.getId())){
+            throw new AlreadyExistsException("Le contrat avec l'id :" + absence.getId() +"existe deja");
+        }
+        else absenceRepository.save(absence); }
 
     public void updateAbsence(Absence.AbsenceId id, AbsenceRequest updatedAbsence) {
         Absence absence = getAbsenceById(id).orElseThrow();
