@@ -8,16 +8,16 @@ import {
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
 import useMotifsAbs from '../../hooks/useMotifsAbs';
+import useMotifsCntr from '../../hooks/useMotifsCntr';
 
-export default function MotifForm({ useFunction ,initialData , forModification , onClose}) {
-  const { addNewMotif ,deleteMotif , updateMotif}= useFunction()
+export default function MotifCntrForm({ initialData , forModification , onClose}) {
+  const { addNewMotif ,deleteMotif , updateMotif}= useMotifsCntr()
  
   const [formData, setFormData] = useState(initialData);
  
 
   const handleSubmit = async (event) => { 
     event.preventDefault();
-    console.log(formData)
     addNewMotif(formData)
   }
 
@@ -28,10 +28,8 @@ export default function MotifForm({ useFunction ,initialData , forModification ,
   }
 
   const handleDelete = async (event) => {
-
     event.preventDefault();
     deleteMotif(formData.id) 
-
   }
 
   const handleChange = (e) => {
@@ -51,11 +49,7 @@ export default function MotifForm({ useFunction ,initialData , forModification ,
         name="id"
         type="text"
         value={formData.id}
-        onChange={(e) => {
-          if (!forModification) {
-            handleChange(e);
-          }
-        }}
+        onChange={handleChange}
       />
     </FormControl>
 

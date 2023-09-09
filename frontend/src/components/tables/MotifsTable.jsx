@@ -14,19 +14,19 @@ import {
     useDisclosure
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
-import useMotifs from '../../hooks/useMotifs';
+import useMotifsAbs from '../../hooks/useMotifsAbs';
 import MotifForm from '../forms/MotifForm';
 
-export default function MotifsTable() {
+export default function MotifsTable({useFunction ,motifs}) {
     const [forModification,setForModification]= useState(false);
-    const {motifs ,fetchAllMotifs} = useMotifs()
+    // const { motifs,fetchAllMotifsAbs} = useMotifsAbs()
     const {isOpen,onClose ,onOpen } = useDisclosure()
     const initialRef = useRef(null)
     const finalRef = useRef(null)
     const [data,setData] = useState('')
 
     useEffect(()=>{
-        fetchAllMotifs()
+        // fetchAllMotifsAbs()
     },[])
 
     
@@ -92,12 +92,13 @@ export default function MotifsTable() {
             forModification={forModification}
             initialData={data}
             onClose={onClose}
+            useFunction={useFunction}
             />
    
         </Box>
       </ModalBody>
     </ModalContent>
-    </Modal>
+</Modal>
   
 </>
     )

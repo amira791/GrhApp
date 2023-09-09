@@ -10,7 +10,8 @@ import {
   useDisclosure,
   HStack,
   Spinner,
-  Skeleton
+  Skeleton,
+  useToast
 } from '@chakra-ui/react'
 import { AddIcon, QuestionIcon } from '@chakra-ui/icons'
 import { React, useRef, useState, useEffect } from 'react'
@@ -19,19 +20,21 @@ import { React, useRef, useState, useEffect } from 'react'
   // components
 import AbsencesTable from './tables/AbsencesTable'
 import useAbsences from '../hooks/useAbsences'
-import useMotifs from '../hooks/useMotifs'
+import useMotifsAbs from '../hooks/useMotifsAbs'
 import MotifsTable from './tables/MotifsTable'
 import AbsenceForm from './forms/AbsenceForm'
   
   export default function Absences() {
+    const [isMotif,setIsMotif]=useState(false) 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const initialRef = useRef(null)
+    const finalRef = useRef(null)
     const { absences, loading, error, fetchAllAbsences } = useAbsences();
-    const { motifs , fetchAllMotifs } = useMotifs()
+    const { motifsAbs , fetchAllMotifsAbs } = useMotifsAbs()
+    const toast = useToast()
     const data ={
       id:{
-        motifAbs : {
-          id: '',
-          libelle : ''
-        },
+        code : '',
         matricule: '',
         dateDebut : '',
         dateFin: ''
@@ -39,17 +42,12 @@ import AbsenceForm from './forms/AbsenceForm'
       nbAbsence : 0 ,
       autorisee : 'F'
     }
-    
     useEffect(() => {
      fetchAllAbsences(); 
-     fetchAllMotifs();
-    }, []);
+     fetchAllMotifsAbs();
 
-      
-      const [isMotif,setIsMotif]=useState(false) 
-      const { isOpen, onOpen, onClose } = useDisclosure()
-      const initialRef = useRef(null)
-      const finalRef = useRef(null)
+    }, [!isOpen]);
+
     
   
     return(
@@ -70,15 +68,18 @@ import AbsenceForm from './forms/AbsenceForm'
             >Ajouter une absence</Button>
 
           </HStack>
-
-           
-            {error && <Text>Une erreur est survenue:  {error.message}</Text>}
-            {!error && 
-                <Skeleton height="100vh" isLoaded={!loading}>
-                  <AbsencesTable absences={absences}  motifs={motifs}/>
-                </Skeleton>
-            }
+    
+          {error &&   toast({  title: 'Une erreur est survenue',
+                                 description: error.message,
+                                 status: 'error',
+                                 duration: 5000,})}
+          {!error && 
+          <Skeleton height="100vh" isLoaded={!loading}>
             
+            <AbsencesTable absences={absences}  motifs={motifsAbs}/>
+          </Skeleton>
+          }
+
             <Modal
               size="xl"
               initialFocusRef={initialRef}
@@ -91,8 +92,8 @@ import AbsenceForm from './forms/AbsenceForm'
                 <ModalHeader>{ isMotif ? 'Consulter motif':'Saisir une absence'}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
-                 {motifs && !isMotif && <AbsenceForm initialData={data} onClose={onClose} forModification={false}/>}
-                 {motifs && isMotif && <MotifsTable/>}
+                 {!isMotif && <AbsenceForm initialData={data} onClose={onClose} forModification={false}/>}
+                 {motifsAbs && isMotif && <MotifsTable useFunction={useMotifsAbs}/>}
                 </ModalBody>
               </ModalContent>
             </Modal>
