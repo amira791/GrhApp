@@ -95,8 +95,10 @@ public class ContratService {
         contrat.setMotif(updatedContrat.getMotif());
         contratRepository.save(contrat);
     }
-    public void deleteContrat(String id) {contratRepository.deleteById(id);}
 
 
+   public  void imprimerContrat (){
 
+
+   }
 }

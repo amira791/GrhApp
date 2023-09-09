@@ -7,7 +7,12 @@ import com.cnrc.grh.service.dossierEmploye.ContratService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import com.cnrc.grh.service.Documents.ContratPrinting;
+
+import static org.antlr.v4.runtime.misc.Utils.readFile;
 
 @RestController
 @RequestMapping("/Contrats")
@@ -16,6 +21,16 @@ public class ContratController {
 
     @Autowired
     private ContratService contratService;
+
+    @GetMapping("/Contrats/print")
+    public void imprimerContrat() {
+        try {
+            String fileContent = Arrays.toString(readFile("C:/Users/dell/Desktop/hola.txt"));
+            System.out.println("File Content:\n" + fileContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /************************************************************************************************************************/
     /****** gestion des motifs de contrats*****/
@@ -89,8 +104,4 @@ public class ContratController {
         contratService.updateContrat(id, contrat);
     }
 
-    @DeleteMapping("delete/{id}")
-    public void deleteContrat(@PathVariable String id){
-        contratService.deleteContrat(id);
-    }
 }
