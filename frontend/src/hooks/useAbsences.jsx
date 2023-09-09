@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useToast } from '@chakra-ui/react'
+
 
 export default function useAbsences() {
   const [absences, setAbsences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const toast = useToast()
  
   const fetchAllAbsences = () => {
     setLoading(true);
@@ -28,7 +32,14 @@ export default function useAbsences() {
       body: JSON.stringify(absence),
     })
       .then(() => {
-        console.log('New absence added');
+        toast({
+          title: 'Absence ajoutee',
+          description: "L'absence a ete ajoutee avec succes",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        
       })
       .catch((error) => {
         setError(error);
@@ -46,7 +57,14 @@ export default function useAbsences() {
       body: JSON.stringify(updatedData),
     })
       .then(() => {
-        console.log('Absence modified');
+        toast({
+          title: 'Absence modifiee',
+          description: "L'absence a ete modifiee avec succes",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        
       })
       .catch((error) => {
         setError(error);
@@ -58,7 +76,14 @@ export default function useAbsences() {
       method: 'DELETE',
     })
       .then(() => {
-        console.log('Absence deleted');
+        toast({
+          title: 'Absence supprimee',
+          description: "L'absence a ete suprimee avec succes",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+       
       })
       .catch((error) => {
         setError(error);

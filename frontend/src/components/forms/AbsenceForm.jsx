@@ -42,9 +42,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             autorisee: autorisee
         };
         console.log(absence)
-        addNewAbsence(absence)
-        {! error && navigate('/main/dossier');}
-        
+        addNewAbsence(absence) 
+        onClose()  
     }
 
     const handleUpdate = async (event) => {
@@ -61,7 +60,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
 
         console.log(data)
         updateAbsence(data);
-
+        onClose() 
     }
 
     const handleDelete = async (event) => {
@@ -74,16 +73,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             dateFin: dateFin + "T00:00:00.000+00:00"
         };
         deleteAbsence(id)
-        navigate('/main/dossier');
+        onClose() 
     }
-
-    //   const handleChange = (name, value) => {
-    //     setFormData({
-    //       ...formData,
-    //       [name]: value,
-    //     });
-    //   };
-
 
 
     return (

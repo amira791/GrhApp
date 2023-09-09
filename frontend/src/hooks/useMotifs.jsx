@@ -1,9 +1,11 @@
+import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export default function useMotifs() {
   const [motifs, setMotifs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const toast = useToast()
 
   const fetchAllMotifs = () => {
     setLoading(true);
@@ -20,6 +22,25 @@ export default function useMotifs() {
         setLoading(false);
       });
   };
+  const addNewMotif = (motif) => {
+    fetch('http://localhost:8089/Absences/Motifs/new', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(motif),
+    })
+      .then(() => {
+        toast({
+          title: 'Motif ajoute',
+          description: "Le motif a ete ajoute avec succes",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
 
 
   const updateMotif = (id , motif) => {
@@ -29,7 +50,14 @@ export default function useMotifs() {
       body: JSON.stringify(motif),
     })
       .then(() => {
-        console.log('Motif modified');
+        toast({
+          title: 'Motif modifie',
+          description: "Le motif a ete modifie avec succes",
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        
       })
       .catch((error) => {
         setError(error);
@@ -41,7 +69,13 @@ export default function useMotifs() {
       method: 'DELETE',
     })
       .then(() => {
-        console.log('Motif deleted');
+        toast({
+          title: 'Motif supprime',
+          description: "Le motif a ete suprime avec succes",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
       })
       .catch((error) => {
         setError(error);
@@ -49,20 +83,7 @@ export default function useMotifs() {
   };
 
 
-  const addNewMotif = (motif) => {
-    fetch('http://localhost:8089/Absences/Motifs/new', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(motif),
-    })
-      .then(() => {
-        console.log('New motif added');
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  };
-
+ 
   return {
     motifs,
     loading,

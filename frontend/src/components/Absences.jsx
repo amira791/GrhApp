@@ -24,6 +24,10 @@ import MotifsTable from './tables/MotifsTable'
 import AbsenceForm from './forms/AbsenceForm'
   
   export default function Absences() {
+    const [isMotif,setIsMotif]=useState(false) 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const initialRef = useRef(null)
+    const finalRef = useRef(null)
     const { absences, loading, error, fetchAllAbsences } = useAbsences();
     const { motifs , fetchAllMotifs } = useMotifs()
     const data ={
@@ -39,17 +43,11 @@ import AbsenceForm from './forms/AbsenceForm'
       nbAbsence : 0 ,
       autorisee : 'F'
     }
-    
     useEffect(() => {
      fetchAllAbsences(); 
      fetchAllMotifs();
-    }, []);
+    }, [!isOpen]);
 
-      
-      const [isMotif,setIsMotif]=useState(false) 
-      const { isOpen, onOpen, onClose } = useDisclosure()
-      const initialRef = useRef(null)
-      const finalRef = useRef(null)
     
   
     return(

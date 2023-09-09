@@ -41,7 +41,7 @@ export default function AbsencesTable({absences , motifs }) {
 
   return (
     <>
-      <TableContainer p="30px">
+      <TableContainer p="30px" overflow="auto">
         <Table variant='simple'>
           <Thead>
             <Tr>
