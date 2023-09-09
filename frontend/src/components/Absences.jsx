@@ -10,6 +10,7 @@ import {
   useDisclosure,
   HStack,
   Spinner,
+  Skeleton
 } from '@chakra-ui/react'
 import { AddIcon, QuestionIcon } from '@chakra-ui/icons'
 import { React, useRef, useState, useEffect } from 'react'
@@ -70,9 +71,13 @@ import AbsenceForm from './forms/AbsenceForm'
 
           </HStack>
 
-            {loading && <Spinner thickness='4px'speed='0.65s' emptyColor='gray.200' color='teal.500' size='xl'/>}
-            {error && <Text>Une erreur est survenue {error.message}</Text>}
-            { absences &&   <AbsencesTable absences={absences}  motifs={motifs}/>}
+           
+            {error && <Text>Une erreur est survenue:  {error.message}</Text>}
+            {!error && 
+                <Skeleton height="100vh" isLoaded={!loading}>
+                  <AbsencesTable absences={absences}  motifs={motifs}/>
+                </Skeleton>
+            }
             
             <Modal
               size="xl"

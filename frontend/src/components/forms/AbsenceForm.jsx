@@ -9,13 +9,15 @@ import {
     Select
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form , useNavigate} from 'react-router-dom';
 import useAbsences from '../../hooks/useAbsences';
 import useMotifs from '../../hooks/useMotifs';
 
 export default function AbsenceForm({ initialData, forModification, onClose }) {
+    
+    const navigate = useNavigate();
     const { motifs, fetchAllMotifs } = useMotifs()
-    const { addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
+    const { error,loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
     const [code, setCode] = useState(initialData.id.code)
     const [matricule, setMatricule] = useState(initialData.id.matricule);
     const [dateDebut, setDateDebut] = useState(initialData.id.dateDebut);
@@ -41,6 +43,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
         };
         console.log(absence)
         addNewAbsence(absence)
+        {! error && navigate('/main/dossier');}
+        
     }
 
     const handleUpdate = async (event) => {
@@ -70,7 +74,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             dateFin: dateFin + "T00:00:00.000+00:00"
         };
         deleteAbsence(id)
-
+        navigate('/main/dossier');
     }
 
     //   const handleChange = (name, value) => {
@@ -91,8 +95,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                     // so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setCode(e.target.value) }}
                     placeholder='Selectionnez un motif'>
-                    {motifs.map((m) => (
-                        <option key={m.index} value={m.id}>{m.libelle}</option>
+                    {motifs.map((m , index) => (
+                        <option key={index} value={m.id}>{m.libelle}</option>
                     ))}
                 </Select>
 
@@ -165,7 +169,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                 {forModification && <Button onClick={handleDelete} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
                 {/* show Cancel button in case of addition of new absence */}
                 {!forModification && <Button onClick={onClose}>Cancel</Button>}
-                <Button colorScheme="teal" type="submit">Enregistrer</Button>
+                <Button isLoading={loading} colorScheme="teal" type="submit">Enregistrer</Button>
             </HStack>
         </Form>
     )

@@ -4,7 +4,7 @@ export default function useAbsences() {
   const [absences, setAbsences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+ 
   const fetchAllAbsences = () => {
     setLoading(true);
     setError(null);

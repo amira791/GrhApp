@@ -1,13 +1,12 @@
 .welcome-container {
+    height: 100vh;
+    width: 100vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
   }
-  
-  .logo img {
-    width: 50px;
-  }
+
   
   .content {
     flex: 1;
@@ -54,5 +53,12 @@
     cursor: pointer; /* Show a pointer cursor on hover */
     border-radius: 10px;
   }
+
+.logo img {
+  height: 100px;
+  width: auto;
+  max-height: 100vh;
+  max-width:100vh;
+} 
   
   
