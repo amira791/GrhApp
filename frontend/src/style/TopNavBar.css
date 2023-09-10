@@ -6,8 +6,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #E3FAFC;
-    color: #045253;
+    background-color: #008080;
+    color: #ffffff;
     padding: 10px 20px;
     font-family: 'Poppins', sans-serif;
     margin-left: 0px; /* Add this line */
@@ -35,7 +35,7 @@
 
   .notification:hover, .logout:hover {
     cursor: pointer;
-    background-color: #E3FAFC;
+    background-color: #19B3B3;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
 

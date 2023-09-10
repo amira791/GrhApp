@@ -14,32 +14,31 @@ const FilterBy = [
   { value: "Structure", label: "Structure" },
   { value: "Status", label: "Status" },
   { value: "PosteTravail", label: "PosteTravail" },
-  { value: "Etat", label: "Etat" },
+
 
 ];
 
 const FilterValue  = {
   Collectif: [
-    { value: "", label: "FilterValue.." },
     { value: "", label: "Collectif.." },
-    { value: "Siege", label: "Siege" },
-    { value: "Antenne Locale", label: "Antenne Locale" },
+    { value: "01", label: "SIEGE" },
+    { value: "02", label: "ANTENNES  LOCALES" },
   ],
   Unite : [
-    { value: "", label: "Commune.." },
-    { value: "ADRAR", label: "ADRAR" },
-    { value: "CHLEF", label: "CHLEF" },
-    { value: "LAGHOUAT", label: "LAGHOUAT" },
-    { value: "OUM E -BOUAGHI", label: "OUM E -BOUAGHI" },
-    { value: "BATNA", label: "BATNA" },
-    { value: "BISKRA", label: "BISKRA" },
-    { value: "BECHAR", label: "BECHAR" },
-    { value: "BLIDA", label: "BLIDA" },
-    { value: "BOUIRA", label: "BOUIRA" },
-    { value: "TMANRASSET", label: "TAMANRASSET" },
-    { value: "TEBESSA", label: "TEBESSA" },
-    { value: "TLEMCEN", label: "TLEMCEN" },
-    { value: "TIARET", label: "TIARET" },
+    { value: "", label: "Unite.." },
+    { value: "01", label: "ADRAR" },
+    { value: "02", label: "CHLEF" },
+    { value: "03", label: "LAGHOUAT" },
+    { value: "04", label: "OUM E -BOUAGHI" },
+    { value: "05", label: "BATNA" },
+    { value: "06", label: "BISKRA" },
+    { value: "07", label: "BECHAR" },
+    { value: "08", label: "BLIDA" },
+    { value: "09", label: "BOUIRA" },
+    { value: "10", label: "TAMANRASSET" },
+    { value: "11", label: "TEBESSA" },
+    { value: "12", label: "TLEMCEN" },
+    { value: "13", label: "TIARET" },
   ],
   Structure : [
     { value: "", label: "Structure.." },
@@ -59,66 +58,71 @@ const FilterValue  = {
   ],
    PosteTravail: [
     { value: "", label: "PosteTravail.." },
-    { value: " Directeur", label: " Directeur" },
-    { value: "Ingenieur", label: "Ingenieur" },
-    { value: " Sous Directrice", label: "Sous Directrice" },
+    { value: " 01", label: " Ingenieur" },
+    { value: " 02", label: "Agent Securite" },
+    { value: "03", label: "DGRH" },
+    { value: " 04", label: "Agent Protection" },
+    { value: " 05", label: "Financier" },
   ],
-  Etat: [
-    { value: "", label: "Etat.." },
-    { value: " Actif", label: " Actif" },
-    { value: "Inactif", label: "Inactif" },
-    { value: "MiseEnDispo", label: "MiseEnDispo" },
-    { value: "FinFonction", label: "FinFonction" },
-  ],
+
 };
-
-const SearchFilterBarEmp = () => {
+const SearchFilterBarEmp = ({ onFilter }) => {
   const [selectedFiltre, setSelectedFiltre] = useState("");
-  const [selected, setSelected] = useState("");
-  const handleClick=()=>{
-    console.log("hello") ;
+  const [selectedValue, setSelectedValue] = useState(""); // Add this line
 
-  }
+  const handleClick = () => {
+    // Collect the selected filter values
+    const selectedFilter = {
+      filtre: selectedFiltre,
+      value: selectedValue,
+    };
+
+    // Pass the selected filter values to the onFilter callback
+    onFilter(selectedFilter);
+  };
+
+  // ... Rest of your component
 
   return (
     <div className="filtrage">
-
-  <Formik
-    initialValues={{Collectif: "", Unite: "" , Structure :"", Status :"", PosteTravail :"", Etat :""}}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-      }, 400);
-    }}
-  >
-    {({ isSubmitting }) => (
-      <Form>
-        <Field as="select" name="f" className="FilterBy" onClick={(e) => setSelectedFiltre(e.target.value)}
-        >
-          {FilterBy.map((f) => (
-            <option key={f.value} value={f.value}>
-              {f.label}
-            </option>
-          ))}
-        </Field>
-        <Field as="select" name="fv" className="FilterValue" >
-          {selectedFiltre? FilterValue[selectedFiltre].map((fv) => (
-            <option key={fv.value} value={fv.value}>
-              {fv.label}
-            </option>
-          )) : null }
-        </Field>
-        <button type="submit" disabled={isSubmitting} onClick={handleClick} className="btnsubmit">
-          Filtrer
-        </button>
-      </Form>
-    )}
-  </Formik>
-
-  </div>
+      <Formik
+        initialValues={{ filtre: "", value: "" }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            console.log(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <Field as="select" name="filtre" className="FilterBy" onClick={(e) => setSelectedFiltre(e.target.value)}>
+              {FilterBy.map((f) => (
+                <option key={f.value} value={f.value}>
+                  {f.label}
+                </option>
+              ))}
+            </Field>
+            <Field as="select" name="value" className="FilterValue" onClick={(e) => setSelectedValue(e.target.value)}>
+              {selectedFiltre ? FilterValue[selectedFiltre].map((fv) => (
+                <option key={fv.value} value={fv.value}>
+                  {fv.label}
+                </option>
+              )) : null}
+            </Field>
+            <button
+              type="button" // Change the type to "button" to prevent form submission
+              disabled={isSubmitting}
+              onClick={handleClick} // Call handleClick on button click
+              className="btnsubmit"
+            >
+              Filtrer
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
-
 
 export default SearchFilterBarEmp;
