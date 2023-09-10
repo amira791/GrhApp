@@ -1,4 +1,4 @@
-package com.cnrc.grh.controller;
+package com.cnrc.grh.controller.dossierEmploye;
 
 import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.model.dossierEmploye.Absence;
@@ -76,7 +76,7 @@ public class AbsenceController {
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateDebut,
                               @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
                               @PathVariable String matricule ,
-                              @RequestBody AbsenceRequest updatedAbsence) {
+                              @RequestBody Absence updatedAbsence) {
 
          Absence.AbsenceId id = new Absence.AbsenceId();
          id.setCode(code);
@@ -95,7 +95,7 @@ public class AbsenceController {
         id.setDateDebut(dateDebut);
         id.setDateFin(dateFin);
         id.setMatricule(matricule);
-
+        System.out.println(id + "this is the id im going to delete");
         absSer.deleteAbsence(id);
     }
 

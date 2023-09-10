@@ -46,7 +46,10 @@ public class ContratService {
         motifContratRepository.save(oldMotifContrat);
     }
     public void deleteMotifContrat(String id) {
-        motifContratRepository.deleteById(id);
+        if (motifContratRepository.existsById(id)) {
+            motifContratRepository.deleteById(id);
+        }else throw new RuntimeException("Type de contrat non trouv");
+
     }
 
     // gestion des types de contrats
@@ -67,7 +70,11 @@ public class ContratService {
         typeContrat.setNature(updatedTypeContrat.getNature());
         typeContratRepository.save(typeContrat);
     }
-    public void deleteTypeContrat(String id) {typeContratRepository.deleteById(id);}
+    public void deleteTypeContrat(String id) {
+
+        if (typeContratRepository.existsById(id)) typeContratRepository.deleteById(id);
+        else throw new RuntimeException("Type de contrat non trouvé");
+    }
 
     // gestion des contrats
     public List<Contrat> getContratList() {return contratRepository.findAll();}

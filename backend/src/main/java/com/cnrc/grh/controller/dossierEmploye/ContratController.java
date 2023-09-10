@@ -1,4 +1,4 @@
-package com.cnrc.grh.controller;
+package com.cnrc.grh.controller.dossierEmploye;
 
 import com.cnrc.grh.model.dossierEmploye.Contrat;
 import com.cnrc.grh.model.dossierEmploye.MotifContrat;
