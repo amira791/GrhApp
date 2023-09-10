@@ -9,53 +9,46 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react';
-
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // components 
 import Stepper from './ui/Stepper03';
 
 
 function AjoutEmp03() {
+
   const [jsonData, setJsonData] = useState('');
-  const [formData, setFormData] = useState({
-    ModePaiement: '',
-    ModeReglement: '',
-    Categorie: '',
-    AgenceVirement: '',
-    CodeRibIban: '',
-    NumCompte: '',
-    Ech: '',
-    IEP: '',
-    SalaireBase: '',
-    AnneeSecteur: '',
-    AnneeHSecteur: '',
-    MajIep: '',
-    // Add more state variables as needed
-  });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const formDataFromPrevStep = location.state?.formData;
+
+  const [formData, setFormData] = useState(formDataFromPrevStep);
 
   const Categorie = [
-    { value: "Marié", label: "Marié" },
-    { value: "pacsé", label: "Pacsé" },
-    { value: "Divorcé", label: "Divorcé" },
+    { value: "01", label: "Ingenieur" },
+    { value: "02", label: "SousTraitance" },
+    { value: "03", label: "Consultant" },
+    { value: "04", label: "Analyste" },
   ];
 
   const calculerSalaireBase = () => {
-    const echelon = parseFloat(formData.Ech);
-    const iep = parseFloat(formData.IEP);
     // Modify this calculation logic based on your requirements
+    const echelon = parseFloat(formData.echelon);
+    const iep = parseFloat(formData.tauxIEP);
     const salaireBaseCalcule = echelon + iep + 10000;
     setFormData({
       ...formData,
-      SalaireBase: salaireBaseCalcule.toString(),
+      salBas: salaireBaseCalcule.toString(),
     });
   };
-
   useEffect(() => {
     calculerSalaireBase();
-  }, [formData.Categorie, formData.Ech, formData.IEP]);
+  }, [formData.Categorie, formData.echelon, formData.tauxIEP]);
 
-  // Define a function to handle form field changes
-  const handleInputChange = (event) => {
+   // Define a function to handle form field changes
+   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
@@ -72,16 +65,19 @@ function AjoutEmp03() {
   };
 
   const handleNextClick = () => {
-    const dataInJsonFormat = JSON.stringify(formData, null, 2);
-    setJsonData(dataInJsonFormat);
-    // If you want to download it as a .json file
-    const blob = new Blob([dataInJsonFormat], { type: 'application/json' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'formData.json';
-    link.click();
-  };
+    // console.log('formData before navigation:', formData);
+    // console.log('Path:', '/main/AjoutEmp03');
+    // console.log('location.state before navigation:', location.state);
+  
 
+      const dataInJsonFormat = JSON.stringify(formData, null, 2);
+      setJsonData(dataInJsonFormat);
+    
+      // Use navigate function to go to the next route
+      console.log('formData before navigation:', formData); // Check the formData
+      navigate('/main/AjoutEmp04', { state: { formData } });
+
+  };
   return (
     <div>
       <Stepper /> {/* Include your existing Stepper component here */}
@@ -94,24 +90,24 @@ function AjoutEmp03() {
                 placeholder="Mode de paiement"
                 size="md"
                 marginRight={4}
-                name="ModePaiement"
-                value={formData.ModePaiement}
+                name="modePaiement"
+                value={formData.modePaiement}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Mode de reglement"
                 size="md"
                 marginRight={4}
-                name="ModeReglement"
-                value={formData.ModeReglement}
-                onChange={handleInputChange}
+                // name="ModeReglement"
+                // value={formData.ModeReglement}
+                // onChange={handleInputChange}
               />
               <Select
                 placeholder="Categorie.."
                 size="md"
                 marginRight={4}
-                name="Categorie"
-                value={formData.Categorie}
+                name="categorie"
+                value={formData.categorie}
                 onChange={handleInputChange}
                 maxW="31rem"
               >
@@ -126,24 +122,24 @@ function AjoutEmp03() {
               <Input
                 placeholder="Agence de virement"
                 size="md"
-                name="AgenceVirement"
+                name="CodeAgence"
                 marginRight={4}
-                value={formData.AgenceVirement}
+                value={formData.CodeAgence}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Code RIB/IBAN"
                 size="md"
                 marginRight={4}
-                name="CodeRibIban"
-                value={formData.CodeRibIban}
+                name="codeRIB"
+                value={formData.codeRIB}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Numero de compte"
                 size="md"
-                name="NumCompte"
-                value={formData.NumCompte}
+                name="numCompte"
+                value={formData.numCompte}
                 onChange={handleInputChange}
               />
             </Flex>
@@ -151,25 +147,25 @@ function AjoutEmp03() {
               <Input
                 placeholder="Echllon"
                 size="md"
-                name="Ech"
+                name="echelon"
                 marginRight={4}
-                value={formData.Ech}
+                value={formData.ech}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Taux IEP"
                 size="md"
                 marginRight={4}
-                name="IEP"
-                value={formData.IEP}
+                name="tauxIEP"
+                value={formData.tauxIEP}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Salaire de base"
                 size="md"
-                name="SalaireBase"
+                name="salBas"
                 label= "Salaire de base"
-                value={formData.SalaireBase}
+                value={formData.salBas}
                 readOnly
               />
             </Flex>
@@ -178,9 +174,9 @@ function AjoutEmp03() {
                 <NumberInputField
                   placeholder="Nb annees dans le secteur"
                   w="500px"
-                  name="AnneeSecteur"
-                  value={formData.AnneeSecteur}
-                  onChange={handleInputChange}
+                  // name="AnneeSecteur"
+                  // value={formData.AnneeSecteur}
+                  // onChange={handleInputChange}
                 />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -192,8 +188,8 @@ function AjoutEmp03() {
                   placeholder="Nb annees hors le secteur"
                   name="AnneeHSecteur"
                   w="500px"
-                  value={formData.AnneeHSecteur}
-                  onChange={handleInputChange}
+                  // value={formData.AnneeHSecteur}
+                  // onChange={handleInputChange}
                 />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -204,19 +200,24 @@ function AjoutEmp03() {
                 placeholder="Mois de MAJ IEP"
                 size="md"
                 maxW="33rem"
-                name="MajIep"
-                value={formData.MajIep}
+                name="moiIEP"
+                value={formData.moiIEP}
                 onChange={handleInputChange}
               />
             </Flex>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <ButtonGroup variant="outline" spacing="6" marginX={20}>
+              <NavLink to="/main/employes" activeClassName="active">
                 <Button>Cancel</Button>
-                <Button
-                  colorScheme="blue"
+              </NavLink>
+              <NavLink to="/main/AjoutEmp02" activeClassName="active">
+              <Button>Previous</Button>
+              </NavLink>
+              <Button
+                  colorScheme="teal"
                   onClick={handleNextClick}
                   variant="outline"
-                  _hover={{ color: 'white', bg: 'blue' }}
+                  _hover={{ color: 'white', bg: 'teal' }}
                 >
                   Next
                 </Button>

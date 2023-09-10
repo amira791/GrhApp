@@ -26,11 +26,11 @@ public class Employe {
     private String NomAr;
     @Column(name = "PRE")
     private String Prenom;
-    @Column(name = "PRE_Ar")
+    @Column(name = "PRE_AR")
     private String PrenomAr;
     @Column(name = "NJFILLE")
     private String NomJeuneF;
-    @Column(name = "ADR_Ar")
+    @Column(name = "ADR_AR")
     private String AdrAr;
     @Column(name = "ADR")
     private String Adr;
@@ -66,7 +66,7 @@ public class Employe {
     private Date DateNaissance;
     @Column(name = "LIEU_NAI")
     private String LieuNaissance;
-    @Column(name = "LIEU_NAI_Ar")
+    @Column(name = "LIEU_NAI_AR")
     private String LieuNaissanceAr;
     @Column(name = "MODE_PAYE")
     private String ModePaiement;
@@ -96,9 +96,27 @@ public class Employe {
     private String MotifSortie;
     @Column(name = "NOTE")
     private Float Note;
+    @Column(name = "ACTIVITE")
+    private String Etat;
+    @Column(name = "ENF_ALL")
+    private String ENbEnfant;
+    @Column(name = "DIPLOME")
+    private String diplome;
+    @Column(name = "CODE_CLASSE")
+    private String CaisseCNAS;
+    @Column(name = "CODE_SOUS_CLASSE")
+    private String CodeTypeStructure;
+    @Column(name = "CODE_RIB")
+    private String CodeRIB;
+    @Column(name = "CODE_IBAN")
+    private String CodeIBAN;
+    @Column(name = "MOI_IEP")
+    private String MoiIEP;
+    @Column(name = "TAUX_IEP")
+    private Float TauxIEP;
 
 
     //Definir les relations
-    
+
 
 }

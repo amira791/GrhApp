@@ -3,20 +3,16 @@ import { Button, ButtonGroup, Flex, Input, InputGroup, InputLeftElement, Stack }
 import { useState } from 'react';
 // components
 import Stepper from './ui/Stepper04';
-
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useNavigate, useLocation, location } from 'react-router-dom';
 
 function AjoutEmp04() {
-  const [jsonData, setJsonData] = useState('');
-  const [formData, setFormData] = useState({
-    NumTel: '',
-    GroupeSanguin: '',
-    SituationMulitaire: '',
-    NumNational: '',
-    DateDelivrance: '',
-    LieuDelivrance: '',
-    // Add more state variables as needed
-  });
 
+  const location = useLocation(); // Use useLocation to access the location object
+  const formDataFromPrevStep = location.state?.formData; // Access formData from the previous step (AjoutEmp03)
+  const [jsonData, setJsonData] = useState('');
+  const [formData, setFormData] = useState(formDataFromPrevStep || {});
 
   // Define a function to handle form field changes
   const handleInputChange = (event) => {
@@ -26,7 +22,7 @@ function AjoutEmp04() {
       [name]: value,
     });
 
-    // Convert the updated form data to JSON and set it in the state
+ // Convert the updated form data to JSON and set it in the state
     const dataInJsonFormat = JSON.stringify(
       { ...formData, [name]: value },
       null,
@@ -35,17 +31,29 @@ function AjoutEmp04() {
     setJsonData(dataInJsonFormat);
   };
 
- 
-    const handleNextClick = () => {
-        const dataInJsonFormat = JSON.stringify(formData, null, 2);
-        setJsonData(dataInJsonFormat);
-        // If you want to download it as a .json file
-        const blob = new Blob([dataInJsonFormat], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'formData.json';
-        link.click();
-      };
+  const handleNextClick = () => {
+    // Perform any final operations with formData before sending it to the server
+
+    // Example: Sending formData to the server
+    fetch('http://localhost:8089/Employe/CreateEmploye', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData), 
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the server as needed
+        console.log('Employe created:', data);
+
+        // You can navigate to a success page or perform other actions here
+      })
+      .catch((error) => {
+        console.error('Error creating Employe:', error);
+        // Handle errors as needed
+      });
+  };
 
 
   return (
@@ -61,23 +69,23 @@ function AjoutEmp04() {
                 <PhoneIcon color='gray.300' />
                 </InputLeftElement>
                 <Input type='tel' placeholder='Num de telephoner' marginRight={4}
-                name="NumTel"
-                value={formData.NumTel}
+                name="numTelephon"
+                value={formData.numTelephonl}
                 onChange={handleInputChange} />
                  </InputGroup>
               <Input
                 placeholder="Groupe Sanguin"
                 size="md"
                 marginRight={4}
-                name="GroupeSanguin"
-                value={formData.GroupeSanguin}
+                name="groupeSanguin"
+                value={formData.groupeSanguin}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Situation Mulitaire"
                 size="md"
-                name="SituationMulitaire"
-                value={formData.SituationMulitaire}
+                name="situationMulitaire"
+                value={formData.situationMulitaire}
                 onChange={handleInputChange}
               />
             </Flex>
@@ -87,8 +95,8 @@ function AjoutEmp04() {
                 size="md"
                 marginRight={4}
                 maxW="30rem"
-                name="NumNational"
-                value={formData.NumNational}
+                name="numCN"
+                value={formData.numCN}
                 onChange={handleInputChange}
               />
               <Input
@@ -96,29 +104,57 @@ function AjoutEmp04() {
                 size="md"
                 type="date"
                 marginRight={4}
-                name="DateDelivrance"
-                value={formData.DateDelivrance}
-                onChange={handleInputChange}
+                // name="DateDelivrance"
+                // value={formData.DateDelivrance}
+                // onChange={handleInputChange}
               />
               <Input
                 placeholder="Lieu de delivrance"
                 size="md"
-                name="LieuDelivrance"
-                value={formData.LieuDelivrance}
+                // name="LieuDelivrance"
+                // value={formData.LieuDelivrance}
+                // onChange={handleInputChange}
+              />
+            </Flex>
+            <Flex direction="row" marginX={20}>
+            <Input
+                placeholder="nomJeuneFille"
+                size="md"
+                marginRight={4}
+                maxW="30rem"
+                name="nomJeuneFille"
+                value={formData.nomJeuneFille}
                 onChange={handleInputChange}
               />
+               <Input
+                placeholder="Adr"
+                size="md"
+                marginRight={4}
+                maxW="30rem"
+                name="adr"
+                value={formData.adr}
+                onChange={handleInputChange}
+              />
+   
             </Flex>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <ButtonGroup variant="outline" spacing="6" marginX={20}>
+              <NavLink to="/main/employes" activeClassName="active">
                 <Button>Cancel</Button>
+                </NavLink>
+                <NavLink to="/main/AjoutEmp03" activeClassName="active">
+                <Button>Previous</Button>
+                </NavLink>
+                <NavLink to="/main/employes" activeClassName="active">
                 <Button
-                  colorScheme="blue"
+                  colorScheme="teal"
                   onClick={handleNextClick}
                   variant="outline"
-                  _hover={{ color: 'white', bg: 'blue' }}
+                  _hover={{ color: 'white', bg: 'teal' }}
                 >
-                  Next
+                 DONE
                 </Button>
+                </NavLink>
               </ButtonGroup>
             </div>
           </Stack>

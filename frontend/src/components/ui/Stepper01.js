@@ -27,9 +27,9 @@ function Example() {
   });
 
   return (
-    <Stepper size='lg' colorScheme='green' index={activeStep}>
+    <Stepper size='lg' colorScheme='teal' index={activeStep}>
       {steps.map((step, index) => (
-        <Step key={index} style={{ padding: '50px', margin: '0px' }}> {/* Adjust padding and margin here */}
+        <Step key={index} style={{ padding: '30px', margin: '0px', marginTop:'20px' }}> {/* Adjust padding and margin here */}
           <StepIndicator>
             <StepStatus
               complete={<StepIcon />}

@@ -15,6 +15,7 @@ function TopNavBar() {
       <div className="right-section">
         <div className="notification">
           <FontAwesomeIcon icon={faBell} color='white'  />
+          <span>Notification</span>
         </div>
         <div className="logout">
           <span>Logout</span>

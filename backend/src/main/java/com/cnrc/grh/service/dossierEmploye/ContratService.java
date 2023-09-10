@@ -48,7 +48,7 @@ public class ContratService {
     public void deleteMotifContrat(String id) {
         if (motifContratRepository.existsById(id)) {
             motifContratRepository.deleteById(id);
-        }else throw new RuntimeException("Type de contrat non trouv");
+        }else throw new RuntimeException("Motif de contrat non trouv");
 
     }
 
@@ -95,8 +95,10 @@ public class ContratService {
         contrat.setMotif(updatedContrat.getMotif());
         contratRepository.save(contrat);
     }
-    public void deleteContrat(String id) {contratRepository.deleteById(id);}
 
 
+   public  void imprimerContrat (){
 
+
+   }
 }

@@ -73,6 +73,10 @@
       margin-left: 8px;
       max-width: 100%; 
     }
+#sidebar-logo {
+        width: 500px; /* Adjust the width and height as needed */
+        height: 100px;
+      }
     
   
   

@@ -1,39 +1,95 @@
+import React, { useState } from 'react';
 import {
-  Input, Stack, Flex, Select,
+  Input,
+  Stack,
+  Flex,
+  Select,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Button, ButtonGroup
+  Button,
+  ButtonGroup,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 // components
 import Stepper from './ui/Stepper01';
 
 function AjoutEmp01() {
   const [jsonData, setJsonData] = useState('');
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    id: '',
+    situationFamiliale: '',
+    situationMulitaire: '',
+    lieuNaissanceAr: '',
+    refDecision: '',
+    motifSortie: '',
+    prenomAr: '',
+    categorie: '',
+    salBase: '',
+    dateSortie: '',
+    lieuNaissance: '',
+    nomJeuneF: '',
+    nomAr: '',
+    numCompte: '',
+    groupeSanguin: '',
+    handicape: '',
+    note: '',
+    nss: '',
+    modePaiement: '',
+    echelon: '',
+    numTelephone: '',
+    numCN: '',
+    nationalite: '',
+    niveauEtude: '',
+    sexe: '',
+    etat: '',
     nom: '',
     prenom: '',
-    NomJeuneFille: '',
-    DateNaissance: '',
-    LieuNaissance: '',
-    Nationalite: '',
-    // Add more state variables as needed
+    categorie: '',
+    codePoste: '',
+    codeStatus: '',
+    codeUnite: '',
+    adr: '',
+    codeAgence: '',
+    codeStructure: '',
+    dateEntree: '',
+    dateNaissance: '',
+    codeCollectif: '',
+    adrAr: '',
+    codeWilaya: '',
+    nbEnfant: '',
+    diplome: '',
+    caisseCNAS: '',
+    codeTypeStructure: '',
+    codeRIB: '',
+    codeIBAN: '',
+    moiIEP: '',
+    tauxIEP: '',
   });
+
   const SituationFamiliale = [
-    { value: "Marié", label: "Marié" },
-    { value: "pacsé", label: "Pacsé" },
-    { value: "Divorcé", label: "Divorcé" },
-    { value: "Séparé", label: "Séparé" },
-    { value: "Célibataire", label: "Célibataire" },
-    { value: "Veuf", label: "Veuf" },
+    { value: 'M', label: 'Marié' },
+    { value: 'P', label: 'Pacsé' },
+    { value: 'D', label: 'Divorcé' },
+    { value: 'S', label: 'Séparé' },
+    { value: 'C', label: 'Célibataire' },
+    { value: 'V', label: 'Veuf' },
   ];
+
   const Sexe = [
-    { value: "Féminin", label: "Féminin" },
-    { value: "Masculin", label: "Masculin" },
+    { value: 'F', label: 'Féminin' },
+    { value: 'M', label: 'Masculin' },
+  ];
+
+  const Etat = [
+    { value: 'Actif', label: 'Actif' },
+    { value: 'FinFonction', label: 'FinFonction' },
+    { value: 'MiseEnDispo', label: 'MiseEnDispo' },
+    { value: 'Depart', label: 'Depart' },
   ];
 
   // Define a function to handle form field changes
@@ -45,26 +101,18 @@ function AjoutEmp01() {
     });
 
     // Convert the updated form data to JSON and set it in the state
-    const dataInJsonFormat = JSON.stringify(
-      { ...formData, [name]: value },
-      null,
-      2
-    );
+    const dataInJsonFormat = JSON.stringify({ ...formData, [name]: value }, null, 2);
     setJsonData(dataInJsonFormat);
   };
 
- 
-    const handleNextClick = () => {
-        const dataInJsonFormat = JSON.stringify(formData, null, 2);
-        setJsonData(dataInJsonFormat);
-        // If you want to download it as a .json file
-        const blob = new Blob([dataInJsonFormat], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'formData.json';
-        link.click();
-      };
+  const handleNextClick = () => {
+    const dataInJsonFormat = JSON.stringify(formData, null, 2);
+    setJsonData(dataInJsonFormat);
 
+    // Use navigate function to go to the next route
+    navigate('/main/AjoutEmp02', { state: { formData } });
+    console.log(formData);
+  };
 
   return (
     <div>
@@ -74,6 +122,14 @@ function AjoutEmp01() {
         <div>
           <Stack spacing={20} marginTop="3rem">
             <Flex direction="row" marginX={20}>
+              <Input
+                placeholder="Matricule"
+                size="md"
+                marginRight={4}
+                name="id"
+                value={formData.id}
+                onChange={handleInputChange}
+              />
               <Input
                 placeholder="Nom"
                 size="md"
@@ -85,16 +141,8 @@ function AjoutEmp01() {
               <Input
                 placeholder="Prenom"
                 size="md"
-                marginRight={4}
                 name="prenom"
                 value={formData.prenom}
-                onChange={handleInputChange}
-              />
-              <Input
-                placeholder="NomJeuneFille"
-                size="md"
-                name="NomJeuneFille"
-                value={formData.NomJeuneFille}
                 onChange={handleInputChange}
               />
             </Flex>
@@ -104,23 +152,23 @@ function AjoutEmp01() {
                 size="md"
                 type="date"
                 marginRight={4}
-                name="DateNaissance"
-                value={formData.DateNaissance}
+                name="dateNaissance"
+                value={formData.dateNaissance}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Lieu Naissance"
                 size="md"
                 marginRight={4}
-                name="LieuNaissance"
-                value={formData.LieuNaissance}
+                name="lieuNaissance"
+                value={formData.lieuNaissance}
                 onChange={handleInputChange}
               />
               <Input
                 placeholder="Nationalite"
                 size="md"
-                name="Nationalite"
-                value={formData.Nationalite}
+                name="nationalite"
+                value={formData.nationalite}
                 onChange={handleInputChange}
               />
             </Flex>
@@ -129,8 +177,8 @@ function AjoutEmp01() {
                 placeholder="Situation Familiale.."
                 size="md"
                 marginRight={4}
-                name="SituationFamiliale"
-                value={formData.SituationFamiliale}
+                name="situationFamiliale"
+                value={formData.situationFamiliale}
                 onChange={handleInputChange}
                 maxW="31rem"
               >
@@ -144,8 +192,8 @@ function AjoutEmp01() {
                 placeholder="Sexe.."
                 size="md"
                 marginRight={4}
-                name="Sexe"
-                value={formData.Sexe}
+                name="sexe"
+                value={formData.sexe}
                 onChange={handleInputChange}
                 maxW="32rem"
               >
@@ -158,8 +206,8 @@ function AjoutEmp01() {
               <NumberInput size="md">
                 <NumberInputField
                   placeholder="NbEnfants"
-                  name="NbEnfants"
-                  value={formData.NbEnfants}
+                  name="nbEnfant"
+                  value={formData.nbEnfant}
                   onChange={handleInputChange}
                 />
                 <NumberInputStepper>
@@ -169,41 +217,33 @@ function AjoutEmp01() {
               </NumberInput>
             </Flex>
             <Flex direction="row" marginX={20}>
-              <Input
-                placeholder="NSS"
+              <Select
+                placeholder="Etat.."
                 size="md"
                 marginRight={4}
-                maxW="33rem"
-                name="NSS"
-                value={formData.NSS}
+                name="etat"
+                value={formData.etat}
                 onChange={handleInputChange}
-              />
-              <Input
-                placeholder="Caisse CNAS"
-                size="md"
-                marginRight={4}
-                maxW="60rem"
-                name="CaisseCNAS"
-                value={formData.CaisseCNAS}
-                onChange={handleInputChange}
-              />
-              <Input
-                placeholder="Adr"
-                size="md"
-                marginRight={4}
-                name="Adr"
-                value={formData.Adr}
-                onChange={handleInputChange}
-              />
+                maxW="31rem"
+              >
+                {Etat.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+              {/* Add more fields here */}
             </Flex>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <ButtonGroup variant="outline" spacing="6" marginX={20}>
-                <Button>Cancel</Button>
+                <NavLink to="/main/employes" activeClassName="active">
+                  <Button>Cancel</Button>
+                </NavLink>
                 <Button
-                  colorScheme="blue"
+                  colorScheme="teal"
                   onClick={handleNextClick}
                   variant="outline"
-                  _hover={{ color: 'white', bg: 'blue' }}
+                  _hover={{ color: 'white', bg: 'teal' }}
                 >
                   Next
                 </Button>
@@ -212,8 +252,8 @@ function AjoutEmp01() {
           </Stack>
         </div>
       </form>
-   
     </div>
   );
 }
+
 export default AjoutEmp01;
