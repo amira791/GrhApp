@@ -1,4 +1,7 @@
 import {
+ 
+    Alert,
+    AlertIcon,
   Text,
   Button,
   Modal,
@@ -68,10 +71,9 @@ import AbsenceForm from './forms/AbsenceForm'
 
           </HStack>
     
-          {error ?   toast({  title: 'Une erreur est survenue',
-                                 description: error.message,
-                                 status: 'error',
-                                 duration: 5000,})
+          {error ?  <Alert status='error' variant='left-accent'>
+                        <AlertIcon />{error.message}
+                      </Alert>
            :
           <Skeleton height="100vh" isLoaded={!loading}>
             
@@ -91,7 +93,7 @@ import AbsenceForm from './forms/AbsenceForm'
                 <ModalHeader>{ isMotif ? 'Consulter motif':'Saisir une absence'}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
-                 {!isMotif && <AbsenceForm initialData={data} Close={onClose} forModification={false}/>}
+                 {!isMotif && <AbsenceForm initialData={data} onClose={onClose} forModification={false}/>}
                  {motifsAbs && isMotif && <MotifsTable useFunction={useMotifsAbs} motifs={motifsAbs}/>}
                 </ModalBody>
               </ModalContent>

@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   Modal,
   ModalOverlay,
@@ -61,11 +63,10 @@ export default function Contrats() {
 
   </HStack>
 
-    {error &&   toast({  title: 'Une erreur est survenue',
-                                 description: error.message,
-                                 status: 'error',
-                                 duration: 5000,})}
-       {!error && 
+    {error?  <Alert status='error' variant='left-accent'>
+                  <AlertIcon />{error.message}
+              </Alert>
+      : 
           <Skeleton height="100vh" isLoaded={!loading}>
             <ContratsTable contarts={contrats} motifs={motifs}/>
           </Skeleton>

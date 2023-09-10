@@ -52,8 +52,8 @@ export default function useContrats() {
       });
   };
 
-  const updateContrat = (id ,data) => {
-    fetch(`http://localhost:8089/Contrats/update/${id}`,
+  const updateContrat = (data) => {
+    fetch(`http://localhost:8089/Contrats/update/${data.id}`,
      { method: 'PUT',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(data),

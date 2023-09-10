@@ -66,13 +66,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
     
     .logo img {
-      
+      margin-top: 8px;
       margin-left: 8px;
-      max-width: 100%; /* Ensure the logo image doesn't exceed its container */
+      max-width: 100%; 
     }
     
   

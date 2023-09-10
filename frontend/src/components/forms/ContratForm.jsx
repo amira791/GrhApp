@@ -42,8 +42,8 @@ export default function ContratForm({ initialData, forModification, onClose }) {
         const contrat = {     
             id: id,
             matricule: matricule,
-            dateDebut: dateDebut + "T00:00:00.000+00:00",
-            dateFin: dateFin + "T00:00:00.000+00:00",
+            dateDebut: dateDebut ,
+            dateFin: dateFin,
             duree: duree,
             type: type,
             motif : motif
@@ -54,9 +54,11 @@ export default function ContratForm({ initialData, forModification, onClose }) {
     }
 
     const handleUpdate = async (event) => {
-        const data = {     
-            dateDebut: dateDebut + "T00:00:00.000+00:00",
-            dateFin: dateFin + "T00:00:00.000+00:00",
+        const data = { 
+            id : id ,    
+            dateDebut: dateDebut,
+            dateFin: dateFin ,
+            matricule: matricule,
             duree: duree,
             type: type,
             motif : motif
@@ -64,7 +66,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
 
         event.preventDefault();
         console.log(data)
-        updateContrat(id ,data);
+        updateContrat(data);
         onClose() 
     }
 

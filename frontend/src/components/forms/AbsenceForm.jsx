@@ -21,7 +21,7 @@ import { Form } from 'react-router-dom';
 import useAbsences from '../../hooks/useAbsences';
 import useMotifsAbs from '../../hooks/useMotifsAbs';
 
-export default function AbsenceForm({ initialData, forModification, Close }) {
+export default function AbsenceForm({ initialData, forModification, onClose }) {
     
     const { motifsAbs, fetchAllMotifsAbs } = useMotifsAbs()
     const { loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
@@ -32,8 +32,8 @@ export default function AbsenceForm({ initialData, forModification, Close }) {
     const [nbAbsence, setNbAbsence] = useState(initialData.nbAbsence);
     const [autorisee, setAutorisee] = useState(initialData.autorisee);
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = useRef()
+    // const { isOpen, onOpen, onClose } = useDisclosure()
+    // const cancelRef = useRef()
 
     useEffect(() => {
         fetchAllMotifsAbs()
@@ -53,7 +53,7 @@ export default function AbsenceForm({ initialData, forModification, Close }) {
         };
         console.log(absence)
         addNewAbsence(absence) 
-        Close()  
+        onClose()  
     }
 
     const handleUpdate = async (event) => {
@@ -70,7 +70,7 @@ export default function AbsenceForm({ initialData, forModification, Close }) {
 
         console.log(data)
         updateAbsence(data);
-        Close() 
+        onClose()
     }
 
     const handleDelete = async (event) => {
@@ -167,13 +167,13 @@ export default function AbsenceForm({ initialData, forModification, Close }) {
 
             <HStack mt="5px" gap="10px" justifyContent="flex-end">
                 {/*  show delete button only in case of modification */}
-                {forModification && <Button onClick={onOpen} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
+                {forModification && <Button onClick={handleDelete} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
                 {/* show Cancel button in case of addition of new absence */}
-                {!forModification && <Button onClick={Close}>Cancel</Button>}
+                {!forModification && <Button onClick={onClose}>Cancel</Button>}
                 <Button isLoading={loading} colorScheme="teal" type="submit">Enregistrer</Button>
             </HStack>
 
-        <AlertDialog
+        {/* <AlertDialog
             isOpen={isOpen}
             leastDestructiveRef={cancelRef}
             onClose={onClose}
@@ -198,7 +198,7 @@ export default function AbsenceForm({ initialData, forModification, Close }) {
                 </AlertDialogFooter>
             </AlertDialogContent>
             </AlertDialogOverlay>
-        </AlertDialog>
+        </AlertDialog> */}
    </Form>
 
     )
