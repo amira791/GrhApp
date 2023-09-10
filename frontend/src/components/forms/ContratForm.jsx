@@ -101,8 +101,10 @@ export default function ContratForm({ initialData, forModification, onClose }) {
             <FormControl>
               <FormLabel>Type de contrat</FormLabel>
                 <Select
+                  
                     onChange={(e) => setType(e.target.value) }
                     placeholder='Selectionnez un type'>
+                        <default >{initialData.type}</default>
                     {types.map((t , index) => (
                         <option key={index} value={t.id}>{t.libelle}</option>
                     ))}
@@ -150,14 +152,13 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                 </Select>
             </FormControl>
 
-            <HStack mt="5px" gap="10px" justifyContent="flex-end">
+            <HStack mt="5px" gap="10px" alignContent="center" justifyContent="flex-end">
                 {forModification && <Button onClick={onClose}>Imprimer</Button>}
                 <Spacer/>
-                {/*  show delete button only in case of modification */}
-                {forModification && <Button onClick={handleDelete} colorScheme='red'>Supprimer</Button>}
+            
                 {/* show Cancel button in case of addition of new absence */}
-                {!forModification && <Button onClick={onClose}>Cancel</Button>}
-                <Button isLoading={loading} colorScheme="teal" type="submit">Enregistrer</Button>
+                <Button onClick={onClose} variant="outline" colorScheme='teal'>Cancel</Button>
+                <Button isLoading={loading} colorScheme="teal" type="submit" >Enregistrer</Button>
             </HStack>
         </Form>
     )

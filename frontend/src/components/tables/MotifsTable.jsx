@@ -1,10 +1,12 @@
 import { AddIcon } from '@chakra-ui/icons';
 import {
     Box, Button,
+    HStack,
     Modal,
     ModalBody, ModalCloseButton,
     ModalContent, ModalHeader,
     ModalOverlay,
+    Spacer,
     Table,
     TableContainer,
     Tbody,
@@ -25,9 +27,9 @@ export default function MotifsTable({useFunction ,motifs}) {
     const finalRef = useRef(null)
     const [data,setData] = useState('')
 
-    useEffect(()=>{
-        // fetchAllMotifsAbs()
-    },[])
+    // useEffect(()=>{
+    //    fetchAllMotifsAbs()
+    // },[])
 
     
   const handleRowClick = (row) => {
@@ -36,6 +38,7 @@ export default function MotifsTable({useFunction ,motifs}) {
      setData(row)
      onOpen()
   };
+
  const handleClick= () => {
     console.log("im clicked button")
     onOpen()
@@ -45,10 +48,13 @@ export default function MotifsTable({useFunction ,motifs}) {
     return (
 <>
         <Box maxW="100vh">
+        <HStack>
+        <Spacer/>    
         <Button 
          mb="5px" colorScheme="teal" leftIcon={<AddIcon/>}
          onClick={handleClick}
         >Ajouter un motif</Button>
+        </HStack>
         <TableContainer>
             <Table variant="simple">
                 <Thead bg="teal.100">
@@ -91,7 +97,7 @@ export default function MotifsTable({useFunction ,motifs}) {
           <MotifForm 
             forModification={forModification}
             initialData={data}
-            onClose={onClose}
+            Close={onClose}
             useFunction={useFunction}
             />
    

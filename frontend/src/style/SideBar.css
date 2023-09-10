@@ -1,7 +1,7 @@
 .SideBar {
   height: 100%;
   width: 270px;
-  background-color: white;
+  background-color: #008080;
   position: sticky;
 }
   
@@ -24,7 +24,7 @@
       list-style-type: none;
       display: flex;
       flex-direction: row;
-      color: #374957;
+      color: white;
       justify-content: flex-start;
       font-family: 'Poppins', sans-serif;
       align-items: center; /* Vertically center the contents */
@@ -39,7 +39,7 @@
       padding-left: 8px;
       width: 230px;
       cursor: pointer;
-      background-color: #58d6d7;
+      background-color: #19B3B3;
       box-shadow: 0 0 10px rgba(0, 251, 255, 0.24);
       /* transform: scale(1.02); */
   }
@@ -52,7 +52,7 @@
     width: 230px;
     padding-left: 15px;
     font-weight: bold;
-    background-color:#58d6d7 ;
+    background-color:#19B3B3 ;
     border-radius: 8px;
     display: flex;
     align-items: center; 
