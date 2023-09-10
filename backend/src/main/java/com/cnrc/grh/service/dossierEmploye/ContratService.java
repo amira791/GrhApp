@@ -48,7 +48,7 @@ public class ContratService {
     public void deleteMotifContrat(String id) {
         if (motifContratRepository.existsById(id)) {
             motifContratRepository.deleteById(id);
-        }else throw new RuntimeException("Type de contrat non trouv");
+        }else throw new RuntimeException("Motif de contrat non trouv");
 
     }
 

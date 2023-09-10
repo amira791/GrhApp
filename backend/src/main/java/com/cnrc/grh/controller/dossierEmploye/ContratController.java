@@ -52,7 +52,7 @@ public class ContratController {
         contratService.updateMotifContrat(id, motif);
     }
 
-    @DeleteMapping("motifs/{id}")
+    @DeleteMapping("motifs/delete/{id}")
     public void deleteMotifContrat(@PathVariable String id){
         contratService.deleteMotifContrat(id);
     }
