@@ -1,6 +1,6 @@
-package com.cnrc.grh.repository;
+package com.cnrc.grh.repository.dossierEmploye;
 
-import com.cnrc.grh.model.Absence;
+import com.cnrc.grh.model.dossierEmploye.Absence;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

@@ -1,36 +1,49 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
   Button,
   FormControl, FormLabel,
   HStack,
   Input,
+  useDisclosure
 } from '@chakra-ui/react';
-import { useRef ,useState } from 'react';
+import { useState , useRef} from 'react';
 import { Form } from 'react-router-dom';
-import useMotifs from '../../hooks/useMotifs';
+import useMotifsAbs from '../../hooks/useMotifsAbs';
 
-export default function MotifForm({ initialData , forModification , onClose}) {
-  const { addNewMotif ,deleteMotif , updateMotif}= useMotifs()
+export default function MotifForm({ useFunction ,initialData , forModification , Close}) {
+  const { addNewMotif ,deleteMotif , updateMotif}= useFunction()
  
   const [formData, setFormData] = useState(initialData);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = useRef()
+
  
 
   const handleSubmit = async (event) => { 
     event.preventDefault();
+    console.log(formData)
     addNewMotif(formData)
+    Close()
   }
 
   const handleUpdate = async (event) => {
 
     event.preventDefault();
     updateMotif(formData.id,formData)
+    Close()
   }
 
   const handleDelete = async (event) => {
 
     event.preventDefault();
     deleteMotif(formData.id) 
-
+    onClose()
   }
 
   const handleChange = (e) => {
@@ -50,7 +63,11 @@ export default function MotifForm({ initialData , forModification , onClose}) {
         name="id"
         type="text"
         value={formData.id}
-        onChange={handleChange}
+        onChange={(e) => {
+          if (!forModification) {
+            handleChange(e);
+          }
+        }}
       />
     </FormControl>
 
@@ -73,12 +90,40 @@ export default function MotifForm({ initialData , forModification , onClose}) {
         onChange={handleChange}
       />
     </FormControl>
-    <HStack gap="10px" justifyContent="flex-end">
+    <HStack mt="5px" gap="10px" justifyContent="flex-end">
          
-          {forModification && <Button onClick={handleDelete} colorScheme='red' leftIcon={<CloseIcon/>}>Supprimer</Button>}
-          {!forModification && <Button onClick={onClose}>Cancel</Button>}
+          {forModification && <Button onClick={onOpen} colorScheme='red' leftIcon={<CloseIcon/>}>Supprimer</Button>}
+          {!forModification && <Button onClick={Close}>Cancel</Button>}
           <Button colorScheme="teal" type="submit">Save</Button>
     </HStack>
+
+
+    <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+        >
+            <AlertDialogOverlay>
+            <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                Supprimer absence
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                Êtes-vous sûr ? Vous ne pouvez pas annuler cette action par la suite
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                    Annuler
+                </Button>
+                <Button colorScheme='red' onClick={handleDelete} ml={3}>
+                    Supprimer
+                </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+            </AlertDialogOverlay>
+        </AlertDialog>
   </Form>
   );
 }

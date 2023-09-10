@@ -1,10 +1,12 @@
 import { AddIcon } from '@chakra-ui/icons';
 import {
     Box, Button,
+    HStack,
     Modal,
     ModalBody, ModalCloseButton,
     ModalContent, ModalHeader,
     ModalOverlay,
+    Spacer,
     Table,
     TableContainer,
     Tbody,
@@ -14,20 +16,20 @@ import {
     useDisclosure
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
-import useMotifs from '../../hooks/useMotifs';
+import useMotifsAbs from '../../hooks/useMotifsAbs';
 import MotifForm from '../forms/MotifForm';
 
-export default function MotifsTable() {
+export default function MotifsTable({useFunction ,motifs}) {
     const [forModification,setForModification]= useState(false);
-    const {motifs ,fetchAllMotifs} = useMotifs()
+    // const { motifs,fetchAllMotifsAbs} = useMotifsAbs()
     const {isOpen,onClose ,onOpen } = useDisclosure()
     const initialRef = useRef(null)
     const finalRef = useRef(null)
     const [data,setData] = useState('')
 
-    useEffect(()=>{
-        fetchAllMotifs()
-    },[])
+    // useEffect(()=>{
+    //    fetchAllMotifsAbs()
+    // },[])
 
     
   const handleRowClick = (row) => {
@@ -36,6 +38,7 @@ export default function MotifsTable() {
      setData(row)
      onOpen()
   };
+
  const handleClick= () => {
     console.log("im clicked button")
     onOpen()
@@ -45,10 +48,13 @@ export default function MotifsTable() {
     return (
 <>
         <Box maxW="100vh">
+        <HStack>
+        <Spacer/>    
         <Button 
          mb="5px" colorScheme="teal" leftIcon={<AddIcon/>}
          onClick={handleClick}
         >Ajouter un motif</Button>
+        </HStack>
         <TableContainer>
             <Table variant="simple">
                 <Thead bg="teal.100">
@@ -91,13 +97,14 @@ export default function MotifsTable() {
           <MotifForm 
             forModification={forModification}
             initialData={data}
-            onClose={onClose}
+            Close={onClose}
+            useFunction={useFunction}
             />
    
         </Box>
       </ModalBody>
     </ModalContent>
-    </Modal>
+</Modal>
   
 </>
     )

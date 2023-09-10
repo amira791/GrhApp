@@ -1,46 +1,42 @@
+import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react'
 
-
-export default function useAbsences() {
-  const [absences, setAbsences] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+export default function useMotifsAbs() {
+  const [motifsAbs, setMotifsAbs] = useState([]);
+  const [loadingM, setLoading] = useState(false);
+  const [errorM, setError] = useState(null);
   const toast = useToast()
- 
-  const fetchAllAbsences = () => {
+
+  const fetchAllMotifsAbs = () => {
     setLoading(true);
     setError(null);
 
-    fetch('http://localhost:8089/Absences/all')
+    fetch('http://localhost:8089/Absences/Motifs/all')
       .then((response) => response.json())
       .then((result) => {
-        setAbsences(result);
+        setMotifsAbs(result);
         setLoading(false);
       })
       .catch((error) => {
         setError(error);
         setLoading(false);
-        
       });
   };
-
-  const addNewAbsence = (absence) => {
-    fetch('http://localhost:8089/Absences/new', {
+  
+  const addNewMotif = (motif) => {
+    fetch('http://localhost:8089/Absences/Motifs/new', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(absence),
+      body: JSON.stringify(motif),
     })
       .then(() => {
         toast({
-          title: 'Absence ajoutee',
-          description: "L'absence a ete ajoutee avec succes",
+          title: 'Motif ajoute',
+          description: "Le motif a ete ajoute avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
         })
-        
       })
       .catch((error) => {
         setError(error);
@@ -53,20 +49,17 @@ export default function useAbsences() {
       });
   };
 
-  const updateAbsence = (data) => {
-    const updatedData = {
-      nbAbsence : data.nbAbsence,
-      autorisee : data.autorisee
-    }
-    fetch(`http://localhost:8089/Absences/update/${data.code}/${data.dateDebut}/${data.dateFin}/${data.matricule}`,
-     { method: 'PUT',
+
+  const updateMotif = (id , motif) => {
+    fetch(`http://localhost:8089/Absences/Motifs/update/${id}`, {
+      method: 'PUT',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(motif),
     })
       .then(() => {
         toast({
-          title: 'Absence modifiee',
-          description: "L'absence a ete modifiee avec succes",
+          title: 'Motif modifie',
+          description: "Le motif a ete modifie avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -84,20 +77,18 @@ export default function useAbsences() {
       });
   };
   
-  const deleteAbsence = (id) => {
-    console.log(id)
-    fetch(`http://localhost:8089/Absences/delete/${id.code}/${id.dateDebut}/${id.dateFin}/${id.matricule}`, {
+  const deleteMotif = (id) => {
+    fetch(`http://localhost:8089/Absences/Motifs/delete/${id}`, {
       method: 'DELETE',
     })
       .then(() => {
         toast({
-          title: 'Absence supprimee',
-          description: "L'absence a ete suprimee avec succes",
+          title: 'Motif supprime',
+          description: "Le motif a ete suprime avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
         })
-       
       })
       .catch((error) => {
         setError(error);
@@ -111,15 +102,15 @@ export default function useAbsences() {
   };
 
 
-
+ 
   return {
-    absences,
-    loading,
-    error,
-    fetchAllAbsences,
-    updateAbsence,
-    deleteAbsence,
-    addNewAbsence,
+    motifsAbs,
+    loadingM,
+    errorM,
+    fetchAllMotifsAbs,
+    updateMotif,
+    deleteMotif,
+    addNewMotif,
   };
 }
 

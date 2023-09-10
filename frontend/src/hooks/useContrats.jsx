@@ -2,40 +2,39 @@ import { useState } from 'react';
 import { useToast } from '@chakra-ui/react'
 
 
-export default function useAbsences() {
-  const [absences, setAbsences] = useState([]);
+export default function useContrats() {
+  const [contrats, setContrats] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const toast = useToast()
  
-  const fetchAllAbsences = () => {
+  const fetchAllContrats = () => {
     setLoading(true);
     setError(null);
 
-    fetch('http://localhost:8089/Absences/all')
+    fetch('http://localhost:8089/Contrats/all')
       .then((response) => response.json())
       .then((result) => {
-        setAbsences(result);
+        setContrats(result);
         setLoading(false);
       })
       .catch((error) => {
         setError(error);
         setLoading(false);
-        
       });
   };
 
-  const addNewAbsence = (absence) => {
-    fetch('http://localhost:8089/Absences/new', {
+  const addNewContrat = (Contrat) => {
+    fetch('http://localhost:8089/Contrats/new', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(absence),
+      body: JSON.stringify(Contrat),
     })
       .then(() => {
         toast({
-          title: 'Absence ajoutee',
-          description: "L'absence a ete ajoutee avec succes",
+          title: 'Contrat ajoutee',
+          description: "L'Contrat a ete ajoutee avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -53,20 +52,16 @@ export default function useAbsences() {
       });
   };
 
-  const updateAbsence = (data) => {
-    const updatedData = {
-      nbAbsence : data.nbAbsence,
-      autorisee : data.autorisee
-    }
-    fetch(`http://localhost:8089/Absences/update/${data.code}/${data.dateDebut}/${data.dateFin}/${data.matricule}`,
+  const updateContrat = (id ,data) => {
+    fetch(`http://localhost:8089/Contrats/update/${id}`,
      { method: 'PUT',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(data),
     })
       .then(() => {
         toast({
-          title: 'Absence modifiee',
-          description: "L'absence a ete modifiee avec succes",
+          title: 'Contrat modifiee',
+          description: "L'Contrat a ete modifiee avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -84,16 +79,15 @@ export default function useAbsences() {
       });
   };
   
-  const deleteAbsence = (id) => {
-    console.log(id)
-    fetch(`http://localhost:8089/Absences/delete/${id.code}/${id.dateDebut}/${id.dateFin}/${id.matricule}`, {
+  const deleteContrat = (id) => {
+    fetch(`http://localhost:8089/Contrats/delete/${id}`, {
       method: 'DELETE',
     })
       .then(() => {
         toast({
-          title: 'Absence supprimee',
-          description: "L'absence a ete suprimee avec succes",
-          status: 'success',
+          title: 'Contrat supprimee',
+          description: "L'Contrat a ete suprimee avec succes",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         })
@@ -113,13 +107,13 @@ export default function useAbsences() {
 
 
   return {
-    absences,
+    contrats,
     loading,
     error,
-    fetchAllAbsences,
-    updateAbsence,
-    deleteAbsence,
-    addNewAbsence,
+    fetchAllContrats,
+    updateContrat,
+    deleteContrat,
+    addNewContrat,
   };
 }
 

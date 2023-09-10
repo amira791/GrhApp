@@ -1,21 +1,30 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    AlertDialogCloseButton,
     Button, Checkbox,
     FormControl, FormHelperText, FormLabel,
     HStack,
     Input, NumberDecrementStepper,
     NumberIncrementStepper,
     NumberInput, NumberInputField, NumberInputStepper,
-    Select
+    Select,
+    useDisclosure
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState , useRef } from 'react';
 import { Form } from 'react-router-dom';
 import useAbsences from '../../hooks/useAbsences';
-import useMotifs from '../../hooks/useMotifs';
+import useMotifsAbs from '../../hooks/useMotifsAbs';
 
-export default function AbsenceForm({ initialData, forModification, onClose }) {
-    const { motifs, fetchAllMotifs } = useMotifs()
-    const { addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
+export default function AbsenceForm({ initialData, forModification, Close }) {
+    
+    const { motifsAbs, fetchAllMotifsAbs } = useMotifsAbs()
+    const { loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
     const [code, setCode] = useState(initialData.id.code)
     const [matricule, setMatricule] = useState(initialData.id.matricule);
     const [dateDebut, setDateDebut] = useState(initialData.id.dateDebut);
@@ -23,8 +32,11 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
     const [nbAbsence, setNbAbsence] = useState(initialData.nbAbsence);
     const [autorisee, setAutorisee] = useState(initialData.autorisee);
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = useRef()
+
     useEffect(() => {
-        fetchAllMotifs()
+        fetchAllMotifsAbs()
     }, [])
 
     const handleSubmit = async (event) => {
@@ -40,7 +52,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             autorisee: autorisee
         };
         console.log(absence)
-        addNewAbsence(absence)
+        addNewAbsence(absence) 
+        Close()  
     }
 
     const handleUpdate = async (event) => {
@@ -57,7 +70,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
 
         console.log(data)
         updateAbsence(data);
-
+        Close() 
     }
 
     const handleDelete = async (event) => {
@@ -70,16 +83,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             dateFin: dateFin + "T00:00:00.000+00:00"
         };
         deleteAbsence(id)
-
+        onClose() 
     }
-
-    //   const handleChange = (name, value) => {
-    //     setFormData({
-    //       ...formData,
-    //       [name]: value,
-    //     });
-    //   };
-
 
 
     return (
@@ -91,8 +96,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                     // so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setCode(e.target.value) }}
                     placeholder='Selectionnez un motif'>
-                    {motifs.map((m) => (
-                        <option key={m.index} value={m.id}>{m.libelle}</option>
+                    {motifsAbs.map((m , index) => (
+                        <option key={index} value={m.id}>{m.libelle}</option>
                     ))}
                 </Select>
 
@@ -160,13 +165,41 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                 >Absence Autorisee</Checkbox>
             </FormControl>
 
-            <HStack gap="10px" justifyContent="flex-end">
+            <HStack mt="5px" gap="10px" justifyContent="flex-end">
                 {/*  show delete button only in case of modification */}
-                {forModification && <Button onClick={handleDelete} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
+                {forModification && <Button onClick={onOpen} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
                 {/* show Cancel button in case of addition of new absence */}
-                {!forModification && <Button onClick={onClose}>Cancel</Button>}
-                <Button colorScheme="teal" type="submit">Enregistrer</Button>
+                {!forModification && <Button onClick={Close}>Cancel</Button>}
+                <Button isLoading={loading} colorScheme="teal" type="submit">Enregistrer</Button>
             </HStack>
-        </Form>
+
+        <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+        >
+            <AlertDialogOverlay>
+            <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                Supprimer absence
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                Êtes-vous sûr ? Vous ne pouvez pas annuler cette action par la suite
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                    Annuler
+                </Button>
+                <Button colorScheme='red' onClick={handleDelete} ml={3}>
+                    Supprimer
+                </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+            </AlertDialogOverlay>
+        </AlertDialog>
+   </Form>
+
     )
 }

@@ -38,10 +38,10 @@ export default function AbsencesTable({absences , motifs }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-
+  console.log("im in absence table hehehe")
   return (
     <>
-      <TableContainer p="30px">
+      <TableContainer p="30px" overflow="auto">
         <Table variant='simple'>
           <Thead>
             <Tr>
@@ -91,7 +91,7 @@ export default function AbsencesTable({absences , motifs }) {
                   <Td>{new Date(r.id.dateDebut).toLocaleDateString()}</Td>
                   <Td>{new Date(r.id.dateFin).toLocaleDateString()}</Td>
                   <Td>{r.nbAbsence}</Td>
-                  <Td>{motifs.find((m) => m.id === r.id.code)?.libelle || "No matching libelle"}</Td>
+                  <Td>{motifs?.find((m) => m.id === r.id.code)?.libelle || "No matching libelle"}</Td>
                   <Td><Badge ml='1' fontSize='0.8em' colorScheme={r.autorisee === 'T' ? 'green' : 'red'}>
                     {r.autorisee === 'T' ? 'Oui' : 'Non'}
                   </Badge></Td>
