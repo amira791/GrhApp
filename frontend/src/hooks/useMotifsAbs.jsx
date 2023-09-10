@@ -24,7 +24,7 @@ export default function useMotifsAbs() {
   };
   
   const addNewMotif = (motif) => {
-    fetch('http://localhost:8089/Absences/Motif/new', {
+    fetch('http://localhost:8089/Absences/Motifs/new', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(motif),
@@ -85,7 +85,7 @@ export default function useMotifsAbs() {
         toast({
           title: 'Motif supprime',
           description: "Le motif a ete suprime avec succes",
-          status: 'error',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         })

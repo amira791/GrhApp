@@ -93,7 +93,7 @@ export default function useAbsences() {
         toast({
           title: 'Absence supprimee',
           description: "L'absence a ete suprimee avec succes",
-          status: 'error',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         })

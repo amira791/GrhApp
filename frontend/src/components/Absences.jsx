@@ -45,7 +45,6 @@ import AbsenceForm from './forms/AbsenceForm'
     useEffect(() => {
      fetchAllAbsences(); 
      fetchAllMotifsAbs();
-
     }, [!isOpen]);
 
     
@@ -69,11 +68,11 @@ import AbsenceForm from './forms/AbsenceForm'
 
           </HStack>
     
-          {error &&   toast({  title: 'Une erreur est survenue',
+          {error ?   toast({  title: 'Une erreur est survenue',
                                  description: error.message,
                                  status: 'error',
-                                 duration: 5000,})}
-          {!error && 
+                                 duration: 5000,})
+           :
           <Skeleton height="100vh" isLoaded={!loading}>
             
             <AbsencesTable absences={absences}  motifs={motifsAbs}/>
@@ -92,8 +91,8 @@ import AbsenceForm from './forms/AbsenceForm'
                 <ModalHeader>{ isMotif ? 'Consulter motif':'Saisir une absence'}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
-                 {!isMotif && <AbsenceForm initialData={data} onClose={onClose} forModification={false}/>}
-                 {motifsAbs && isMotif && <MotifsTable useFunction={useMotifsAbs}/>}
+                 {!isMotif && <AbsenceForm initialData={data} Close={onClose} forModification={false}/>}
+                 {motifsAbs && isMotif && <MotifsTable useFunction={useMotifsAbs} motifs={motifsAbs}/>}
                 </ModalBody>
               </ModalContent>
             </Modal>

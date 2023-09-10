@@ -1,21 +1,28 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    AlertDialogCloseButton,
     Button, Checkbox,
     FormControl, FormHelperText, FormLabel,
     HStack,
     Input, NumberDecrementStepper,
     NumberIncrementStepper,
     NumberInput, NumberInputField, NumberInputStepper,
-    Select
+    Select,
+    useDisclosure
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { Form , useNavigate} from 'react-router-dom';
+import { useEffect, useState , useRef } from 'react';
+import { Form } from 'react-router-dom';
 import useAbsences from '../../hooks/useAbsences';
 import useMotifsAbs from '../../hooks/useMotifsAbs';
 
-export default function AbsenceForm({ initialData, forModification, onClose }) {
+export default function AbsenceForm({ initialData, forModification, Close }) {
     
-    const navigate = useNavigate();
     const { motifsAbs, fetchAllMotifsAbs } = useMotifsAbs()
     const { loading ,addNewAbsence, updateAbsence, deleteAbsence } = useAbsences()
     const [code, setCode] = useState(initialData.id.code)
@@ -24,6 +31,9 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
     const [dateFin, setDateFin] = useState(initialData.id.dateFin);
     const [nbAbsence, setNbAbsence] = useState(initialData.nbAbsence);
     const [autorisee, setAutorisee] = useState(initialData.autorisee);
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = useRef()
 
     useEffect(() => {
         fetchAllMotifsAbs()
@@ -43,7 +53,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
         };
         console.log(absence)
         addNewAbsence(absence) 
-        onClose()  
+        Close()  
     }
 
     const handleUpdate = async (event) => {
@@ -60,7 +70,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
 
         console.log(data)
         updateAbsence(data);
-        onClose() 
+        Close() 
     }
 
     const handleDelete = async (event) => {
@@ -155,13 +165,41 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                 >Absence Autorisee</Checkbox>
             </FormControl>
 
-            <HStack gap="10px" justifyContent="flex-end">
+            <HStack mt="5px" gap="10px" justifyContent="flex-end">
                 {/*  show delete button only in case of modification */}
-                {forModification && <Button onClick={handleDelete} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
+                {forModification && <Button onClick={onOpen} colorScheme='red' leftIcon={<CloseIcon />}>Supprimer</Button>}
                 {/* show Cancel button in case of addition of new absence */}
-                {!forModification && <Button onClick={onClose}>Cancel</Button>}
+                {!forModification && <Button onClick={Close}>Cancel</Button>}
                 <Button isLoading={loading} colorScheme="teal" type="submit">Enregistrer</Button>
             </HStack>
-        </Form>
+
+        <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+        >
+            <AlertDialogOverlay>
+            <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                Supprimer absence
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                Êtes-vous sûr ? Vous ne pouvez pas annuler cette action par la suite
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                    Annuler
+                </Button>
+                <Button colorScheme='red' onClick={handleDelete} ml={3}>
+                    Supprimer
+                </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+            </AlertDialogOverlay>
+        </AlertDialog>
+   </Form>
+
     )
 }
