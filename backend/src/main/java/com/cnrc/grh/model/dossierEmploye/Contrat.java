@@ -1,9 +1,6 @@
 package com.cnrc.grh.model.dossierEmploye;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,14 +16,18 @@ public class Contrat {
     private Date dateDebut;
     @Column(name = "DATE_FIN")
     private Date dateFin;
-    @Column(name = "MAT")
-    private String matricule;
+//    @Column(name = "MAT")
+//    private String matricule;
     // maybe we need unite de mesure for duree column
     @Column(name = "DUREE")
     private Float duree;
     @Column(name = "TYPE_CONTRAT")
     private String type;
-    @Column(name = "MOTIF")
-    private String motif;
+    // @Column(name = "MOTIF")
+    // private String motif;
+
+    @ManyToOne
+    @JoinColumn(name = "MAT", referencedColumnName = "MAT")
+    private EmplTemp emplTemp;
 
 }

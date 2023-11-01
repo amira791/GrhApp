@@ -20,6 +20,7 @@ import MotifsAbsTable from './tables/MotifsTable'
 import useMotifsCntr from '../hooks/useMotifsCntr'
 import useContrats from '../hooks/useContrats'
 
+
 export default function Contrats() {
   const [isMotif,setIsMotif]=useState(false) 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,14 +32,20 @@ export default function Contrats() {
   const toast = useToast()
 
   const data ={
-        id: '',
-        matricule: '',
-        dateDebut : '',
-        dateFin: '',
+        id: 'id',
+        dateDebut : 'datedebut',
+        dateFin: 'datefin',
         duree : 0 ,
-        type:'',
-        motif : ''
+        type:'type',
+        emplTemp : {
+          matricule : 'matricule',
+          nom : 'nom',
+          prenom : 'prenom'
+        }
   }
+
+ 
+  
   useEffect(() => {
     fetchAllContrats()
     fetchAllMotifs()
@@ -48,12 +55,13 @@ export default function Contrats() {
 <>
 
   <HStack justifyContent="flex-end" gap="10px">
-    <Button  
+    {/* <Button  
      leftIcon={<QuestionIcon/>}
      variant="outline" 
      colorScheme="teal" 
      onClick={() => {setIsMotif(true); onOpen();}}
-    >Consulter motifs</Button>
+    >Consulter motifs</Button> */}
+     
 
     <Button 
      leftIcon={<AddIcon/>}
@@ -68,7 +76,7 @@ export default function Contrats() {
               </Alert>
       : 
           <Skeleton height="100vh" isLoaded={!loading}>
-            <ContratsTable contarts={contrats} motifs={motifs}/>
+            <ContratsTable contrats={contrats} />
           </Skeleton>
       }
             
