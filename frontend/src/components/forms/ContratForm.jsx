@@ -121,20 +121,20 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                     type="text" />
             </FormControl>
 
-            <FormControl>
-                <FormLabel>Type de contrat</FormLabel>
-                <Select
-
-                    onChange={(e) => setType(e.target.key)}
-                    placeholder='Selectionnez un type'>
-                    <default>{initialData.type}</default>
-                    {types.map((t, index) => (
-                        <option key={index} value={t.id}>{t.libelle}</option>
-                    ))}
-                </Select>
-
-
-            </FormControl>
+            <FormControl isRequired>
+    <FormLabel>Type de contrat</FormLabel>
+    <Select
+        value={type} // Set the selected value using the value attribute
+        onChange={(e) => setType(e.target.value)}
+        placeholder='Selectionnez un type'
+    >
+        {types?.map((t, index) => (
+            <option key={index} value={t.id}>
+                {t.libelle}
+            </option>
+        ))}
+    </Select>
+</FormControl>
 
 
             <FormControl isRequired >
