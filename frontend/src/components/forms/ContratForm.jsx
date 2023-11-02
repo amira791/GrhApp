@@ -17,64 +17,69 @@ import useMotifsCntr from '../../hooks/useMotifsCntr'
 
 
 export default function ContratForm({ initialData, forModification, onClose }) {
-
+     console.log(initialData);
     const [id, setId] = useState(initialData.id)
-    const [matricule, setMatricule] = useState(initialData.matricule);
     const [dateDebut, setDateDebut] = useState(initialData.dateDebut);
     const [dateFin, setDateFin] = useState(initialData.dateFin);
     const [duree, setDuree] = useState(initialData.duree);
-    console.log(initialData.type+"this is the inial value")
-    const [type ,setType]= useState(initialData.type);
-    const [motif,setMotif] = useState(initialData.motif)
+    const [type, setType] = useState(initialData.type);
+    const [matricule, setMatricule] = useState(initialData.emplTemp.matricule);
+    const [nom, setNom] = useState(initialData.emplTemp.nom);
+    const [prenom, setPrenom] = useState(initialData.emplTemp.prenom);
+    // const [motif,setMotif] = useState(initialData.motif)
 
-    const{loading  , addNewContrat , updateContrat , deleteContrat} = useContrats() 
-    const{types ,fetchAllTypes } = useTypesCntr()
-    const{motifs ,fetchAllMotifs } = useMotifsCntr()
+    const { loading, addNewContrat, updateContrat, deleteContrat } = useContrats()
+    const { types, fetchAllTypes } = useTypesCntr()
+    // const{motifs ,fetchAllMotifs } = useMotifsCntr()
 
 
     useEffect(() => {
-        fetchAllMotifs()
+        // fetchAllMotifs()
         fetchAllTypes()
     }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const contrat = {     
+        const contrat = {
             id: id,
-            matricule: matricule,
-            dateDebut: dateDebut ,
+            dateDebut: dateDebut,
             dateFin: dateFin,
             duree: duree,
             type: type,
-            motif : motif
+            emplTemp: {
+                matricule: matricule,
+                nom: nom,
+                prenom: prenom,
+            }
+            // motif : motif
         };
         console.log(contrat)
         addNewContrat(contrat)
-        onClose()  
+        onClose()
     }
 
     const handleUpdate = async (event) => {
-        const data = { 
-            id : id ,    
+        const data = {
+            id: id,
             dateDebut: dateDebut,
-            dateFin: dateFin ,
+            dateFin: dateFin,
             matricule: matricule,
             duree: duree,
             type: type,
-            motif : motif
+            // motif : motif
         };
 
         event.preventDefault();
         console.log(data)
         updateContrat(data);
-        onClose() 
+        onClose()
     }
 
     const handleDelete = async (event) => {
         event.preventDefault();
         console.log(id)
         deleteContrat(id)
-        onClose() 
+        onClose()
     }
 
 
@@ -85,10 +90,10 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                 <FormLabel>Matricule</FormLabel>
                 <Input
                     value={matricule}
-                     // matricule cannot be modified
-                    onChange={(e) => {!forModification && setMatricule(e.target.value) }}
-                    type="text" />
-                <FormHelperText>Saisir le matricule de l'employe</FormHelperText>
+                    // matricule cannot be modified
+                    onChange={(e) => { !forModification && setMatricule(e.target.value) }}
+                    type="text" 
+                />
             </FormControl>
 
              <FormControl isRequired >
@@ -98,29 +103,45 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                     // id cannot be modified cuz it is the key of contrat
                     onChange={(e) => {!forModification && setId(e.target.value) }}
                     type="text" />
-                </FormControl>            
+             </FormControl>         
 
-            <FormControl>
-              <FormLabel>Type de contrat</FormLabel>
-                <Select
-                  
-                    onChange={(e) => setType(e.target.value) }
-                    placeholder='Selectionnez un type'>
-                        <default >{initialData.type}</default>
-                    {types?.map((t , index) => (
-                        <option key={index} value={t.id}>{t.libelle}</option>
-                    ))}
-                </Select>
-
-
+            <FormControl isRequired>
+                <FormLabel>Nom de l'employe</FormLabel>
+                <Input
+                    value={nom}
+                    onChange={(e) => { !forModification && setNom(e.target.value) }}
+                    type="text" />
             </FormControl>
 
-           
+            <FormControl isRequired>
+                <FormLabel>Prenom de l'employe</FormLabel>
+                <Input
+                    value={prenom}
+                    onChange={(e) => { !forModification && setPrenom(e.target.value) }}
+                    type="text" />
+            </FormControl>
+
+            <FormControl isRequired>
+    <FormLabel>Type de contrat</FormLabel>
+    <Select
+        value={type} // Set the selected value using the value attribute
+        onChange={(e) => setType(e.target.value)}
+        placeholder='Selectionnez un type'
+    >
+        {types?.map((t, index) => (
+            <option key={index} value={t.id}>
+                {t.libelle}
+            </option>
+        ))}
+    </Select>
+</FormControl>
+
+
             <FormControl isRequired >
                 <FormLabel>Date de debut</FormLabel>
                 <Input
                     value={dateDebut.split('T')[0]} // split to remove the time from date
-                    onChange={(e) => setDateDebut(e.target.value) }
+                    onChange={(e) => setDateDebut(e.target.value)}
                     type="date" />
             </FormControl>
 
@@ -128,7 +149,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                 <FormLabel>Date de fin</FormLabel>
                 <Input
                     value={dateFin.split('T')[0]}// split to remove the time from date
-                    onChange={(e) =>  setDateFin(e.target.value)}
+                    onChange={(e) => setDateFin(e.target.value)}
                     type="date" />
             </FormControl>
 
@@ -143,7 +164,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                 </NumberInput>
             </FormControl>
 
-            <FormControl>
+            {/* <FormControl>
               <FormLabel>Motif de contrat</FormLabel>
                 <Select
                     onChange={(e) => {!forModification && setMotif(e.target.value) }}
@@ -152,12 +173,12 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                         <option key={index} value={m.id}>{m.libelle}</option>
                     ))}
                 </Select>
-            </FormControl>
+            </FormControl> */}
 
             <HStack mt="5px" gap="10px" alignContent="center" justifyContent="flex-end">
                 {forModification && <Button onClick={onClose}>Imprimer</Button>}
-                <Spacer/>
-            
+                <Spacer />
+
                 {/* show Cancel button in case of addition of new absence */}
                 <Button onClick={onClose} variant="outline" colorScheme='teal'>Cancel</Button>
                 <Button isLoading={loading} colorScheme="teal" type="submit" >Enregistrer</Button>

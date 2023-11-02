@@ -21,14 +21,14 @@ import AbsenceForm from '../forms/AbsenceForm';
 import ContratForm from '../forms/ContratForm';
 import useTypesCntr from '../../hooks/useTypesCntr';
 
-export default function ContratsTable({contarts , motifs }) {
+export default function ContratsTable({contrats}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
   const initialSortColumn = 'Matricule';
   const initialSortDirection = 'asc'; 
   const { sortBy, sortDirection, handleColumnHeaderClick } = useTableSort(
-    contarts,
+    contrats,
     initialSortColumn,
     initialSortDirection
   );
@@ -87,26 +87,28 @@ export default function ContratsTable({contarts , motifs }) {
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
-              <Th onClick={() => handleColumnHeaderClick('Motif')}>
+              {/* <Th onClick={() => handleColumnHeaderClick('Motif')}>
                 Motif 
                 {sortBy === 'Motif' && (
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
-              </Th>
+              </Th> */}
               
              
             </Tr>
           </Thead>
           <Tbody>
-          {contarts.map((c, index) => (
+          {contrats.map((c, index) => (
             <Tr  key={index} onClick={() => handleRowClick(c)} style={{ cursor: 'pointer' }}>
-                  <Td>{c.matricule}</Td>
+                  <Td>{c.emplTemp?.matricule || "matricule"}</Td>
                   <Td>{c.id}</Td>
                   <Td>{new Date(c.dateDebut).toLocaleDateString()}</Td>
                   <Td>{new Date(c.dateFin).toLocaleDateString()}</Td>
                   <Td>{c.duree} mois</Td>
                   <Td>{c.type }</Td>
-                  
+
+                  {/* <Td>{motifs.find((m) => m.id === c.motif)?.libelle || "No matching libelle"}</Td> */}
+
                 </Tr>
             ))}
 

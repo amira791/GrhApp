@@ -34,7 +34,7 @@ export default function useContrats() {
       .then(() => {
         toast({
           title: 'Contrat ajoutee',
-          description: "L'Contrat a ete ajoutee avec succes",
+          description: "Le Contrat a ete ajoutee avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -61,7 +61,7 @@ export default function useContrats() {
       .then(() => {
         toast({
           title: 'Contrat modifiee',
-          description: "L'Contrat a ete modifiee avec succes",
+          description: "Le Contrat a ete modifiee avec succes",
           status: 'success',
           duration: 5000,
           isClosable: true,

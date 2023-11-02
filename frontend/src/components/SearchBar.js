@@ -4,7 +4,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 
 const StyledSearchBar = ({ placeholder, onChange }) => {
   return (
-    <InputGroup maxW ="400px" marginLeft={320} marginTop={79}>
+    <InputGroup maxW ="200px" marginLeft={290} marginTop={50}>
       <InputLeftElement pointerEvents="none" placeholder='Search'>
         <SearchIcon color="gray.300" />
       </InputLeftElement>
@@ -12,9 +12,9 @@ const StyledSearchBar = ({ placeholder, onChange }) => {
         type="text"
         placeholder={placeholder}
         onChange={(event) => onChange(event.target.value)}
-        size="md" // You can adjust the size as needed
-        borderRadius="full" // Makes it a rounded search bar
-        borderColor="gray.400" // Change the border color
+        size="md" 
+        borderRadius="full" 
+        borderColor="gray.400" 
       />
     </InputGroup>
   );

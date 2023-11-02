@@ -2,7 +2,7 @@
   height: 100%;
   width: 270px;
   background-color: #008080;
-  position: sticky;
+  position: fixed;
 }
   
   .SideBarList{

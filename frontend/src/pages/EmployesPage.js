@@ -173,12 +173,12 @@ const handleSearch = (query) => {
           <SearchFilterBarEmp onFilter={handleFilter} />
         </div>
 
-        <HStack spacing={4} marginTop={79} marginRight={10}>
+        <HStack spacing={4} marginTop={50} marginRight={5}marginLeft={50}>
         <Button leftIcon={<DownloadIcon />} variant="outline" colorScheme="teal" onClick={exportToExcel}>
   exporter la liste
 </Button>
 <NavLink to="/main/AjoutEmp01" activeClassName="active">
-  <Button leftIcon={<AddIcon />} colorScheme="teal">
+  <Button  leftIcon={<AddIcon />} colorScheme="teal" marginLeft={0}>
     Ajouter un employe
   </Button>
 </NavLink>

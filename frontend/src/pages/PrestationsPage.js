@@ -8,10 +8,11 @@ import AllocationFamiliale from '../components/AllocationFamiliale';
 
 export default function PrestationsPage() {
   const tabs = [
-    { label: 'Promotion', component: <Promotion /> },
+    
      { label: 'Prime', component: <Prime /> },
      { label: 'Allocation Familiale', component: <Remboursement /> },
      { label: 'Remboursement medicaux', component: <AllocationFamiliale /> },
+     { label: 'Promotion', component: <Promotion /> },
     // { label: 'Contrats', component: <Contrats /> },
   ];
   return (

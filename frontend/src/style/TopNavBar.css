@@ -1,7 +1,5 @@
 /* TopNavbar.css */
 
-/* TopNavbar.css */
-
 .top-navbar {
   display: flex;
   justify-content: space-between;
@@ -11,6 +9,7 @@
   padding: 10px 20px;
   font-family: 'Poppins', sans-serif;
   margin-left: 0px; /* Add this line */
+
 }
   
 .left-section, .right-section {
