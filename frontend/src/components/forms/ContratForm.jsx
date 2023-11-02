@@ -107,7 +107,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
                     onChange={(e) => setType(e.target.value) }
                     placeholder='Selectionnez un type'>
                         <default >{initialData.type}</default>
-                    {types.map((t , index) => (
+                    {types?.map((t , index) => (
                         <option key={index} value={t.id}>{t.libelle}</option>
                     ))}
                 </Select>

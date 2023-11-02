@@ -106,7 +106,7 @@ export default function ContratsTable({contarts , motifs }) {
                   <Td>{new Date(c.dateFin).toLocaleDateString()}</Td>
                   <Td>{c.duree} mois</Td>
                   <Td>{c.type }</Td>
-                  <Td>{motifs.find((m) => m.id === c.motif)?.libelle || "No matching libelle"}</Td>
+                  
                 </Tr>
             ))}
 

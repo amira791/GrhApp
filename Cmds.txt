@@ -1,0 +1,26 @@
+
+C:\grh\app\oracle\admin\xe\dpdump\
+
+cd C:\grh\app\oracle\product\11.2.0\server\bin
+
+impdp system@xe dumpfile=GRH_STAG.DMP   logfile=impdp.log schemas=grh_cnrc
+
+
+
+
+-- Create the user 
+create user GRH_CNRC identified by password
+  default tablespace GRH_DATA
+  temporary tablespace TEMP
+  profile DEFAULT
+  password expire
+  quota unlimited on grh_data
+  quota unlimited on users;
+-- Grant/Revoke role privileges 
+grant connect to GRH_CNRC;
+grant resource to GRH_CNRC;
+-- Grant/Revoke system privileges 
+grant create database link to GRH_CNRC;
+grant create synonym to GRH_CNRC;
+grant create view to GRH_CNRC;
+grant unlimited tablespace to GRH_CNRC;

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import com.cnrc.grh.service.Documents.ContratPrinting;
 
 import static org.antlr.v4.runtime.misc.Utils.readFile;
 
@@ -35,72 +34,76 @@ public class ContratController {
     /************************************************************************************************************************/
     /****** gestion des motifs de contrats*****/
     @GetMapping("/motifs/all")
-    public List<MotifContrat> getMotifContrats(){
+    public List<MotifContrat> getMotifContrats() {
         return contratService.getMotifContratList();
     }
+
     @GetMapping("/motifs/{id}")
-    public MotifContrat getMotifContrat(@PathVariable String id){
+    public MotifContrat getMotifContrat(@PathVariable String id) {
         return contratService.getMotifContratById(id);
     }
 
     @PostMapping("motifs/new")
-    public void createMotifContrat(@RequestBody MotifContrat motif){
+    public void createMotifContrat(@RequestBody MotifContrat motif) {
         contratService.createMotifContrat(motif);
     }
+
     @PutMapping("motifs/update/{id}")
-    public void updateMotifContrat(@PathVariable String id, @RequestBody MotifContrat motif){
+    public void updateMotifContrat(@PathVariable String id, @RequestBody MotifContrat motif) {
         contratService.updateMotifContrat(id, motif);
     }
 
     @DeleteMapping("motifs/delete/{id}")
-    public void deleteMotifContrat(@PathVariable String id){
+    public void deleteMotifContrat(@PathVariable String id) {
         contratService.deleteMotifContrat(id);
     }
     /************************************************************************************************************************/
     /***** gestion des types de contrats****/
     @GetMapping("/types/all")
-    public List<TypeContrat> getTypeContrats(){
+    public List<TypeContrat> getTypeContrats() {
         return contratService.getTypeContratList();
     }
+
     @GetMapping("/types/{id}")
-    public TypeContrat getTypeContrat(@PathVariable String id){
+    public TypeContrat getTypeContrat(@PathVariable String id) {
         return contratService.getTypeContratById(id);
     }
 
     @PostMapping("types/new")
-    public void createTypeContrat(@RequestBody TypeContrat type){
+    public void createTypeContrat(@RequestBody TypeContrat type) {
         contratService.createTypeContrat(type);
     }
 
     @PutMapping("types/update/{id}")
-    public void updateTypeContrat(@PathVariable String id, @RequestBody TypeContrat type){
+    public void updateTypeContrat(@PathVariable String id, @RequestBody TypeContrat type) {
         contratService.updateTypeContrat(id, type);
     }
 
-   @DeleteMapping("types/{id}")
-   public void deleteTypeContrat(@PathVariable String id){
-       contratService.deleteTypeContrat(id);
-   }
+    @DeleteMapping("types/{id}")
+    public void deleteTypeContrat(@PathVariable String id) {
+        contratService.deleteTypeContrat(id);
+    }
 
-   /*************************************************************************************************************************/
+    /*************************************************************************************************************************/
     /******* gestion des contrats ******/
 
     @GetMapping("/all")
-    public List<Contrat> getAllContrats(){
+    public List<Contrat> getAllContrats() {
         return contratService.getContratList();
     }
 
     @GetMapping("/{id}")
-    public Contrat getContrat(@PathVariable String id){
+    public Contrat getContrat(@PathVariable String id) {
         return contratService.getContratById(id);
     }
 
     @PostMapping("new")
-    public void createContrat(@RequestBody Contrat contrat){contratService.createContrat(contrat);
+    public void createContrat(@RequestBody Contrat contrat) {
+        contratService.createContrat(contrat);
     }
 
     @PutMapping("update/{id}")
-    public void updateContrat(@PathVariable String id, @RequestBody Contrat contrat){
+    public void updateContrat(@PathVariable String id, @RequestBody Contrat contrat) {
         contratService.updateContrat(id, contrat);
     }
 
