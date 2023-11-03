@@ -1,16 +1,21 @@
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
+import useJwt from './useJwt';
 
 export default function useMotifsCntr() {
   const [motifs, setmotifs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const toast = useToast()
+  const toast = useToast();
+  const {createHeaders} = useJwt();
 
   const fetchAllMotifs = () => {
     setLoading(true);
     setError(null);
-    fetch('http://localhost:8089/Contrats/motifs/all')
+    fetch('http://localhost:8089/Contrats/motifs/all', {
+      method: 'GET',
+      headers: createHeaders(), 
+    })
       .then((response) => response.json())
       .then((result) => {
         setmotifs(result);
@@ -25,7 +30,7 @@ export default function useMotifsCntr() {
   const addNewMotif = (motif) => {
     fetch('http://localhost:8089/Contrats/motifs/new', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(motif),
     })
       .then(() => {
@@ -52,7 +57,7 @@ export default function useMotifsCntr() {
   const updateMotif = (id , motif) => {
     fetch(`http://localhost:8089/Contrats/motifs/update/${id}`, {
       method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(motif),
     })
       .then(() => {
@@ -79,6 +84,7 @@ export default function useMotifsCntr() {
   const deleteMotif = (id) => {
     fetch(`http://localhost:8089/Contrats/motifs/delete/${id}`, {
       method: 'DELETE',
+      headers: createHeaders()
     })
       .then(() => {
         toast({
