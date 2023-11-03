@@ -1,16 +1,21 @@
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
+import useJwt from './useJwt';
 
 export default function useTypesCntr() {
   const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const toast = useToast()
+  const toast = useToast();
+  const {createHeaders} = useJwt();
 
   const fetchAllTypes = () => {
     setLoading(true);
     setError(null);
-    fetch('http://localhost:8089/Contrats/types/all')
+    fetch('http://localhost:8089/Contrats/types/all', {
+      method: 'GET',
+      headers: createHeaders(), 
+    })
       .then((response) => response.json())
       .then((result) => {
         setTypes(result);
@@ -25,7 +30,7 @@ export default function useTypesCntr() {
   const addNewType = (type) => {
     fetch('http://localhost:8089/Contrats/types/new', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(type),
     })
       .then(() => {
@@ -52,7 +57,7 @@ export default function useTypesCntr() {
   const updateType = (id , type) => {
     fetch(`http://localhost:8089/Contrats/types/update/${id}`, {
       method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(type),
     })
       .then(() => {
@@ -79,6 +84,7 @@ export default function useTypesCntr() {
   const deleteType = (id) => {
     fetch(`http://localhost:8089/Contrats/types/delete/${id}`, {
       method: 'DELETE',
+      headers : createHeaders()
     })
       .then(() => {
         toast({

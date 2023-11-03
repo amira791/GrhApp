@@ -33,14 +33,14 @@ export default function MotifsTable({useFunction ,motifs}) {
 
     
   const handleRowClick = (row) => {
-    console.log("im clicked row")
+  
      setForModification(true)
      setData(row)
      onOpen()
   };
 
  const handleClick= () => {
-    console.log("im clicked button")
+   
     onOpen()
     setForModification(false) 
 }

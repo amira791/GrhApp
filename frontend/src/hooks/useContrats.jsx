@@ -1,19 +1,45 @@
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react';
+import useJwt from './useJwt';
+
 
 
 export default function useContrats() {
   const [contrats, setContrats] = useState([]);
+  const [contrat, setContrat] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useJwt();
+ 
 
-  const toast = useToast()
+  const toast = useToast();
+
+  const fetchContratById =(id) =>{
+    setLoading(true);
+    setError(null);
+    fetch(`http://localhost:8089/Contrats/${id}`, {
+      method: 'GET',
+      headers: createHeaders(),
+    })
+    .then((response) => response.json())
+      .then((result) => {
+        setContrat(result);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }
  
   const fetchAllContrats = () => {
     setLoading(true);
     setError(null);
 
-    fetch('http://localhost:8089/Contrats/all')
+    fetch('http://localhost:8089/Contrats/all', {
+      method: 'GET',
+      headers: createHeaders(), 
+    })
       .then((response) => response.json())
       .then((result) => {
         setContrats(result);
@@ -28,7 +54,7 @@ export default function useContrats() {
   const addNewContrat = (Contrat) => {
     fetch('http://localhost:8089/Contrats/new', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(Contrat),
     })
       .then(() => {
@@ -53,9 +79,9 @@ export default function useContrats() {
   };
 
   const updateContrat = (data) => {
-    fetch(`http://localhost:8089/Contrats/update/${data.id}`,
-     { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+    fetch(`http://localhost:8089/Contrats/update/${data.id}`,{ 
+      method: 'PUT',
+      headers:createHeaders(),
       body: JSON.stringify(data),
     })
       .then(() => {
@@ -82,6 +108,7 @@ export default function useContrats() {
   const deleteContrat = (id) => {
     fetch(`http://localhost:8089/Contrats/delete/${id}`, {
       method: 'DELETE',
+      headers: createHeaders()
     })
       .then(() => {
         toast({
@@ -108,8 +135,10 @@ export default function useContrats() {
 
   return {
     contrats,
+    contrat,
     loading,
     error,
+    fetchContratById,
     fetchAllContrats,
     updateContrat,
     deleteContrat,

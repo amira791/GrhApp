@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react';
+import useJwt from './useJwt';
 
 
 export default function useAbsences() {
   const [absences, setAbsences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useJwt();
 
   const toast = useToast()
  
@@ -13,7 +15,10 @@ export default function useAbsences() {
     setLoading(true);
     setError(null);
 
-    fetch('http://localhost:8089/Absences/all')
+    fetch('http://localhost:8089/Absences/all', {
+      method: 'GET',
+      headers: createHeaders(), 
+    })
       .then((response) => response.json())
       .then((result) => {
         setAbsences(result);
@@ -29,7 +34,7 @@ export default function useAbsences() {
   const addNewAbsence = (absence) => {
     fetch('http://localhost:8089/Absences/new', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(absence),
     })
       .then(() => {
@@ -58,9 +63,9 @@ export default function useAbsences() {
       nbAbsence : data.nbAbsence,
       autorisee : data.autorisee
     }
-    fetch(`http://localhost:8089/Absences/update/${data.code}/${data.dateDebut}/${data.dateFin}/${data.matricule}`,
-     { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+    fetch(`http://localhost:8089/Absences/update/${data.code}/${data.dateDebut}/${data.dateFin}/${data.matricule}`,{ 
+      method: 'PUT',
+      headers: createHeaders(),
       body: JSON.stringify(updatedData),
     })
       .then(() => {
@@ -88,6 +93,7 @@ export default function useAbsences() {
     console.log(id)
     fetch(`http://localhost:8089/Absences/delete/${id.code}/${id.dateDebut}/${id.dateFin}/${id.matricule}`, {
       method: 'DELETE',
+      headers: createHeaders()
     })
       .then(() => {
         toast({

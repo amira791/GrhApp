@@ -1,17 +1,22 @@
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
+import useJwt from './useJwt';
 
 export default function useMotifsAbs() {
   const [motifsAbs, setMotifsAbs] = useState([]);
   const [loadingM, setLoading] = useState(false);
   const [errorM, setError] = useState(null);
-  const toast = useToast()
+  const toast = useToast();
+  const {createHeaders} = useJwt();
 
   const fetchAllMotifsAbs = () => {
     setLoading(true);
     setError(null);
 
-    fetch('http://localhost:8089/Absences/Motifs/all')
+    fetch('http://localhost:8089/Absences/Motifs/all', {
+      method: 'GET',
+      headers: createHeaders(), 
+    })
       .then((response) => response.json())
       .then((result) => {
         setMotifsAbs(result);
@@ -26,7 +31,7 @@ export default function useMotifsAbs() {
   const addNewMotif = (motif) => {
     fetch('http://localhost:8089/Absences/Motifs/new', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(motif),
     })
       .then(() => {
@@ -53,7 +58,7 @@ export default function useMotifsAbs() {
   const updateMotif = (id , motif) => {
     fetch(`http://localhost:8089/Absences/Motifs/update/${id}`, {
       method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+      headers: createHeaders(),
       body: JSON.stringify(motif),
     })
       .then(() => {
@@ -80,6 +85,7 @@ export default function useMotifsAbs() {
   const deleteMotif = (id) => {
     fetch(`http://localhost:8089/Absences/Motifs/delete/${id}`, {
       method: 'DELETE',
+      headers : createHeaders()
     })
       .then(() => {
         toast({
