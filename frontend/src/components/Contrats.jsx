@@ -27,29 +27,27 @@ export default function Contrats() {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
  
-  const {motifs ,fetchAllMotifs } = useMotifsCntr()
+  const { motifs ,fetchAllMotifs } = useMotifsCntr()
   const {contrats , error , loading , fetchAllContrats} = useContrats()
-  const toast = useToast()
-
+  
   const data ={
-        id: 'id',
-        dateDebut : 'datedebut',
-        dateFin: 'datefin',
-        duree : 0 ,
-        type:'type',
-        emplTemp : {
-          matricule : 'matricule',
-          nom : 'nom',
-          prenom : 'prenom'
-        }
+      id: 'id',
+      dateDebut : 'datedebut',
+      dateFin: 'datefin',
+      duree : 0 ,
+      type:'type',
+      emplTemp : {
+        matricule : 'matricule',
+        nom : 'nom',
+        prenom : 'prenom'
+      }
   }
 
- 
-  
-  useEffect(() => {
-    fetchAllContrats()
-    fetchAllMotifs()
-  }, [!isOpen]);
+    useEffect(() => {
+      fetchAllContrats()
+      fetchAllMotifs()
+    }, [!isOpen]);
+
 
   return (
 <>
@@ -71,14 +69,15 @@ export default function Contrats() {
 
   </HStack>
 
+
     {error?  <Alert status='error' variant='left-accent'>
                   <AlertIcon />{error.message}
               </Alert>
       : 
           <Skeleton height="100vh" isLoaded={!loading}>
-            <ContratsTable contrats={contrats} />
+            <ContratsTable contrats={contrats}/>
           </Skeleton>
-      }
+    }
             
     <Modal
         size="xl"

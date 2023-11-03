@@ -38,7 +38,7 @@ export default function AbsencesTable({absences , motifs }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  console.log("im in absence table hehehe")
+  
   return (
     <>
       <TableContainer p="30px" overflow="auto">

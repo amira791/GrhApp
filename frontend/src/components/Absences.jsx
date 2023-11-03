@@ -50,16 +50,7 @@ export default function Absences() {
     fetchAllMotifsAbs();
   }, [!isOpen]);
 
-  const blob = new Blob(['Blob content'], { type: 'text/plain' });
-
-  const reader = new FileReader();
   
-  reader.onload = function(event) {
-    const text = event.target.result;
-    console.log(text);
-  };
-  
-  reader.readAsText(blob);
   const exportToExcel = () => {
     
     const dataToExport = absences.map((abs) => ({

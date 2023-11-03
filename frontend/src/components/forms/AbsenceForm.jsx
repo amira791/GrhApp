@@ -119,7 +119,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             <FormControl isRequired >
                 <FormLabel>Date de debut</FormLabel>
                 <Input
-                    value={dateDebut.split('T')[0]} // split to remove the time from date
+                    value={new Date(dateDebut).toLocaleDateString()}// split to remove the time from date
                     // dateDebut cannot be modified cuz it is a part of absence's key
                     // so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setDateDebut(e.target.value) }}
@@ -130,7 +130,7 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             <FormControl isRequired >
                 <FormLabel>Date de fin</FormLabel>
                 <Input
-                    value={dateFin.split('T')[0]}// split to remove the time from date
+                    value={new Date(dateDebut).toLocaleDateString()}// split to remove the time from date
                     // dateFin cannot be modified cuz it is a part of absence's key
                     //so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setDateFin(e.target.value)}}
