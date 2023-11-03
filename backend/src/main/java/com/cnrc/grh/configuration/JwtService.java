@@ -36,12 +36,15 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ){
+        // todo change expiration date to a long duration , if it is not valid what to do ?
+        // todo i removed expiration for testing , you have to fix this problem
          return  Jwts
                 .builder()
                  .signWith(getSignInKey())
                  .claims().subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*24)).and().compact();
+                 .issuedAt(new Date(System.currentTimeMillis()))
+                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+                 .and().compact();
 
 
     }
@@ -49,7 +52,7 @@ public class JwtService {
     // verifier si le token apartient a un utilisateur bien specifique
     public boolean isTokenValid(String token , UserDetails userDetails){
        final String username = extractUsername(token);
-       return (username.equals(userDetails.getUsername()) ) && isTokenExpired(token) ;
+       return (username.equals(userDetails.getUsername()) ) && !isTokenExpired(token) ;
     }
 
     private boolean isTokenExpired(String token) {

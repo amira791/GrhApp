@@ -45,6 +45,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // check if the username is set and is not authenticated yet
         // if it is authenticated just pass the validation process
     if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+
+
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
         if(jwtService.isTokenValid(jwt , userDetails)){
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -56,9 +58,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new WebAuthenticationDetailsSource().buildDetails(request)
             );
             //update security context holder
+
             SecurityContextHolder.getContext().setAuthentication(authToken);
 
         }
+
     }
     filterChain.doFilter(request,response);
 
