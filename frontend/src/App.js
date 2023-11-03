@@ -19,6 +19,7 @@ import AjoutEmp01 from './components/AjoutEmp01';
 import AjoutEmp02 from './components/AjoutEmp02';
 import AjoutEmp03 from './components/AjoutEmp03';
 import AjoutEmp04 from './components/AjoutEmp04';
+import AuthPage from './pages/AuthPage';
 
 
 
@@ -29,7 +30,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route path="welcome" element={<WelcomePage />} />
+        <Route index element={<WelcomePage />} />
         <Route path="main" element={<MainLayout />}>
           <Route path="statistiques" element={<StatistiquesPage />} />
           <Route path="employes" element={<EmpolyesPage />} />
@@ -37,7 +38,7 @@ function App() {
             <Route path="AjoutEmp02" element={<AjoutEmp02 />} />
             <Route path="AjoutEmp03" element={<AjoutEmp03 />} />
             <Route path="AjoutEmp04" element={<AjoutEmp04 />} />
-            {/* Add more routes as needed */}
+           
           <Route path="dossier" element={<DossierPage />} />
           <Route path="mouvements" element={<MouvementsPage />} />
           <Route path="parametres" element={<ParametresPage />} />
