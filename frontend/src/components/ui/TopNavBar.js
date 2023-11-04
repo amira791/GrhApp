@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 function TopNavBar() {
@@ -13,12 +14,14 @@ function TopNavBar() {
     logOut();
     navigate("/");
   }
+  const {username} = useAuthContext();
+
   return (
     <div className="top-navbar">
       <div className="left-section">
         <div className="user-info">
           <FontAwesomeIcon icon={faUser} color='white'  />
-          <span>Username</span>
+          <span>{username}</span>
         </div>
       </div>
       <div className="right-section">

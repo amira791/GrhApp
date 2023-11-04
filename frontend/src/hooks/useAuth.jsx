@@ -24,7 +24,7 @@ export default function useAuth() {
             .then((result) => {
               setToken(result.token);
               setLoading(false);
-              dispatch({ type : 'LOGIN' , payload : result.token })
+              dispatch({ type : 'LOGIN' , payload : { token: result.token, username: result.username } })
               toast({
                   title: 'User authentifie',
                   description: "Le User a ete authentifie avec succes",
