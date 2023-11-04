@@ -18,8 +18,10 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    // todo refresh token if expired
+
     public AuthenticationResponse register(RegisterRequest request) {
-        // todo change the attribute declaration of password to have more space then 20 char
+
         var user = User.builder()
                 .username(request.getUsername())
                 .actif(request.getActif())

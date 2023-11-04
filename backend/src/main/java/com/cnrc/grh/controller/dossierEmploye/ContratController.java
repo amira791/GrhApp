@@ -21,15 +21,15 @@ public class ContratController {
     @Autowired
     private ContratService contratService;
 
-    @GetMapping("/Contrats/print")
-    public void imprimerContrat() {
-        try {
-            String fileContent = Arrays.toString(readFile("C:/Users/dell/Desktop/hola.txt"));
-            System.out.println("File Content:\n" + fileContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @GetMapping("/Contrats/print")
+//    public void imprimerContrat() {
+//        try {
+//            String fileContent = Arrays.toString(readFile("C:/Users/dell/Desktop/hola.txt"));
+//            System.out.println("File Content:\n" + fileContent);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /************************************************************************************************************************/
     /****** gestion des motifs de contrats*****/
@@ -87,12 +87,12 @@ public class ContratController {
     /*************************************************************************************************************************/
     /******* gestion des contrats ******/
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public List<Contrat> getAllContrats() {
         return contratService.getContratList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Contrat getContrat(@PathVariable String id) {
         return contratService.getContratById(id);
     }

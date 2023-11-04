@@ -36,8 +36,7 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ){
-        // todo change expiration date to a long duration , if it is not valid what to do ?
-        // todo i removed expiration for testing , you have to fix this problem
+        // todo if token not valid what to do ?
          return  Jwts
                 .builder()
                  .signWith(getSignInKey())
