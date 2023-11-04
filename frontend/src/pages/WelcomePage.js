@@ -11,15 +11,17 @@ import {
 } from '@chakra-ui/react';
 import '../style/WelcomePage.css';
 import AuthForm from '../components/forms/AuthForm';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { Navigate } from 'react-router-dom';
 
 export default function WelcomePage() {
+  const {isAuthenticated } = useAuthContext();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
   const handleClick = () => {
     onOpen();
-
   }
   return (
     <>
@@ -38,7 +40,7 @@ export default function WelcomePage() {
           <button>Module Formation </button>
         </div>
       </div>
-      <Modal
+     { !isAuthenticated ? <Modal
         mt={20}
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -50,11 +52,11 @@ export default function WelcomePage() {
           <ModalHeader>Se connecter</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-           <AuthForm/>
+           <AuthForm />
           </ModalBody>
         </ModalContent>
       </Modal>
-
+     : <Navigate to="/main" />}
     </>
 
   );

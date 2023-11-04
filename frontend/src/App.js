@@ -1,5 +1,6 @@
- import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-//layouts
+ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements , Navigate} from 'react-router-dom';
+import {useAuthContext} from './hooks/useAuthContext'
+ //layouts
  import MainLayout from './components/layouts/MainLayout';
 
 // //styles
@@ -19,7 +20,7 @@ import AjoutEmp01 from './components/AjoutEmp01';
 import AjoutEmp02 from './components/AjoutEmp02';
 import AjoutEmp03 from './components/AjoutEmp03';
 import AjoutEmp04 from './components/AjoutEmp04';
-import AuthPage from './pages/AuthPage';
+import LoginFirst from './pages/LoginFirst';
 
 
 
@@ -27,12 +28,15 @@ import AuthPage from './pages/AuthPage';
 
 
 function App() {
+  const { isAuthenticated } = useAuthContext();
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route index element={<WelcomePage />} />
-        <Route path="main" element={<MainLayout />}>
-          <Route path="statistiques" element={<StatistiquesPage />} />
+        <Route index element={!isAuthenticated ? <WelcomePage/> : <Navigate to="/main" /> } />
+
+        <Route path="main" element={isAuthenticated ? <MainLayout /> : <Navigate to="/"/>}>
+          
           <Route path="employes" element={<EmpolyesPage />} />
             <Route path="AjoutEmp01" element={<AjoutEmp01 />} />
             <Route path="AjoutEmp02" element={<AjoutEmp02 />} />
@@ -43,7 +47,10 @@ function App() {
           <Route path="mouvements" element={<MouvementsPage />} />
           <Route path="parametres" element={<ParametresPage />} />
           <Route path="prestations" element={<PrestationsPage />} />
+          <Route path="statistiques" element={<StatistiquesPage />} />
         </Route>
+       
+       <Route path="*" element={<LoginFirst/>} />
       </Route>
     )
   );

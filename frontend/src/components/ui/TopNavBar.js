@@ -1,9 +1,18 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 
 function TopNavBar() {
+  const {logOut} = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = ()=>{
+    logOut();
+    navigate("/");
+  }
   return (
     <div className="top-navbar">
       <div className="left-section">
@@ -17,7 +26,7 @@ function TopNavBar() {
           <FontAwesomeIcon icon={faBell} color='white'  />
           <span>Notification</span>
         </div>
-        <div className="logout">
+        <div className="logout" onClick={handleLogOut}>
           <span>Logout</span>
           <FontAwesomeIcon icon={faSignOutAlt} />  
         </div>
