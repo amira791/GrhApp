@@ -12,6 +12,7 @@ import com.cnrc.grh.repository.dossierEmploye.TypeContratRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,35 +35,6 @@ public class ContratService {
         this.emplTempRepository = emplTempRepository;
     }
 
-    // gestion des motifs de contrat
-
-    public List<MotifContrat> getMotifContratList() {
-        return motifContratRepository.findAll();
-    }
-
-    public MotifContrat getMotifContratById(String id) {
-        return motifContratRepository.findById(id).orElseThrow(() -> new RuntimeException("Motif de contrat non trouvé"));
-    }
-
-    public void createMotifContrat(MotifContrat motif) {
-        if (motifContratRepository.existsById(motif.getId())) {
-            throw new AlreadyExistsException("le type de contrat existe deja ");
-        } else motifContratRepository.save(motif);
-    }
-
-    public void updateMotifContrat(String id, MotifContrat updatedMotifContrat) {
-        MotifContrat oldMotifContrat = motifContratRepository.findById(id).orElseThrow(() -> new RuntimeException("Type de contrat non trouvé"));
-        oldMotifContrat.setLibelle(updatedMotifContrat.getLibelle());
-        oldMotifContrat.setLibelleAr(updatedMotifContrat.getLibelleAr());
-        motifContratRepository.save(oldMotifContrat);
-    }
-
-    public void deleteMotifContrat(String id) {
-        if (motifContratRepository.existsById(id)) {
-            motifContratRepository.deleteById(id);
-        } else throw new RuntimeException("Motif de contrat non trouv");
-
-    }
 
     // gestion des types de contrats
     public List<TypeContrat> getTypeContratList() {
@@ -106,11 +78,17 @@ public class ContratService {
         if (contratRepository.existsById(contrat.getId())) {
             throw new AlreadyExistsException("Le contrat avec l'id :" + contrat.getId() + "existe deja");
         } else {
+
             EmplTemp employe = new EmplTemp();
             employe.setMatricule(contrat.getEmplTemp().getMatricule());
             employe.setNom(contrat.getEmplTemp().getNom());
             employe.setPrenom(contrat.getEmplTemp().getPrenom());
             emplTempRepository.save(employe);
+
+            Date debut =  contrat.getDateDebut();
+            Date fin = contrat.getDateFin();
+            Long duree = fin.getTime() - debut.getTime();
+            System.out.println(duree);
             contratRepository.save(contrat);
         }
     }
@@ -124,6 +102,7 @@ public class ContratService {
         // contrat.setMotif(updatedContrat.getMotif());
         contratRepository.save(contrat);
     }
+
 
 
 //   public  void imprimerContrat (){
