@@ -1,18 +1,33 @@
 import { useEffect } from "react";
 
-export default function useJwt() {
+export default function useStorage() {
  
   const setToken = (token) => {
     localStorage.setItem('jwtToken', token);
   };
    
-   
   const getToken = () => {
     return localStorage.getItem('jwtToken');
   };
 
+  const deleteToken = () => {
+    localStorage.removeItem('jwtToken');
+   
+  };
 
-const createHeaders = () => {
+  const getUsername = ()=>{
+    return localStorage.getItem('username')
+  }
+
+  const setUsername = (username)=>{
+    localStorage.setItem('username' , username)
+  }
+  const deleteUsername = ()=>{
+    localStorage.removeItem('username')
+  }
+
+
+  const createHeaders = () => {
     const token = getToken();
     if (token) {
       return {
@@ -24,16 +39,14 @@ const createHeaders = () => {
       'Content-Type': 'application/json',
     };
   };
-
-  const deleteToken = () => {
-    localStorage.removeItem('jwtToken');
-   
-  };
   return {
     createHeaders,
     setToken,
     getToken,
-    deleteToken
+    deleteToken,
+    setUsername,
+    getUsername,
+    deleteUsername
   };
   
 }

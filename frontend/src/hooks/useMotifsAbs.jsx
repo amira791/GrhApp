@@ -1,13 +1,13 @@
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
-import useJwt from './useJwt';
+import useStorage from './useStorage';
 
 export default function useMotifsAbs() {
   const [motifsAbs, setMotifsAbs] = useState([]);
   const [loadingM, setLoading] = useState(false);
   const [errorM, setError] = useState(null);
   const toast = useToast();
-  const {createHeaders} = useJwt();
+  const {createHeaders} = useStorage();
 
   const fetchAllMotifsAbs = () => {
     setLoading(true);

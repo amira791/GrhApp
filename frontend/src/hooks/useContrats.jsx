@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
-import useJwt from './useJwt';
+import useStorage from './useStorage';
 
 
 
@@ -9,7 +9,7 @@ export default function useContrats() {
   const [contrat, setContrat] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {createHeaders} = useJwt();
+  const {createHeaders} = useStorage();
  
 
   const toast = useToast();

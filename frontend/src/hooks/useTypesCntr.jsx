@@ -1,13 +1,13 @@
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
-import useJwt from './useJwt';
+import useStorage from './useStorage';
 
 export default function useTypesCntr() {
   const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const toast = useToast();
-  const {createHeaders} = useJwt();
+  const {createHeaders} = useStorage();
 
   const fetchAllTypes = () => {
     setLoading(true);

@@ -28,7 +28,7 @@ export default function WelcomePage() {
 
       <div className="welcome-container">
         <div className="logo">
-          <img src={require('../assets/LogoCNRC.png')} alt="Logo" />
+          <img id='CNRC-logo' src={require('../assets/LogoCNRC.png')} alt="Logo" />
         </div>
         <div className="content">
           <h1><span>Bienvenue</span><br />dans<br/> l'application web GRH</h1>

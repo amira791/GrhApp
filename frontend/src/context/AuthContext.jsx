@@ -37,9 +37,9 @@ export const AuthContextPrivider = ({children}) => {
    useEffect(()=>{
     
      const token = localStorage.getItem('jwtToken');
-     console.log('Token from localStorage:', token);
-     if (token) {
-        dispatch({type : 'LOGIN' , payload: token})
+     const username = localStorage.getItem('username');
+     if (token && username) {
+        dispatch({type : 'LOGIN' , payload: {token : token , username : username}})
      }
    },[])
 

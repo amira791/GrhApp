@@ -11,21 +11,20 @@
    background-size:auto , auto;
   }
 
-  
   .content {
     flex: 2;
     text-align:end;
     margin-right: 10%;
-    margin-bottom: 30%;
+    margin-bottom: 15%;
   }
   .content h1 {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     color: #374957;
   }
   .content h1 span {
     font-weight: 700;
-    font-size: 80px;
+    font-size: 60px;
     color: #4FC1C2;
   }
   .buttons h1{
@@ -48,11 +47,7 @@
     left: 500; /* For left-side buttons */
     padding-left: 60px;
   }
-
-  
-
-
-  
+ 
 
   .buttons button {
     background-color: #1fadaf; /* Set the button background color */
@@ -67,12 +62,13 @@
     border-radius: 10px;
   }
 
-.logo img {
-  display: none;
+#CNRC-logo {
+  position: absolute;
+  left: 90%;
+  top: 5%;
+  bottom: 70%;
   height: 100px;
   width: auto;
-  max-height: 100vh;
-  max-width:100vh;
 } 
   
   

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import {useAuthContext} from '../hooks/useAuthContext'
-import useJwt from './useJwt';
+import useStorage from './useStorage';
 import { type } from '@testing-library/user-event/dist/type';
 
 export default function useAuth() {
@@ -9,7 +9,7 @@ export default function useAuth() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const toast = useToast();
-    const { deleteToken , setToken} =useJwt();
+    const { deleteToken , setToken , setUsername , deleteUsername} =useStorage();
     const { dispatch } = useAuthContext();
    
     const authenticate = (data) =>{
@@ -23,6 +23,7 @@ export default function useAuth() {
           .then((response) => response.json())
             .then((result) => {
               setToken(result.token);
+              setUsername(result.username);
               setLoading(false);
               dispatch({ type : 'LOGIN' , payload : { token: result.token, username: result.username } })
               toast({
@@ -46,6 +47,7 @@ export default function useAuth() {
     }
     
     const logOut = () =>{
+      deleteUsername();
       deleteToken();
       dispatch({type : 'LOGOUT' });
     }
