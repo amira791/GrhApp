@@ -33,7 +33,7 @@ export default function AuthForm() {
   return (
     <Form >
     <FormControl isRequired >
-    <FormLabel>Username</FormLabel>
+    <FormLabel>Nom d'utilisateur</FormLabel>
       <InputGroup>
         <InputRightElement pointerEvents='none'>
           <LockIcon color='gray.300' />
@@ -42,11 +42,11 @@ export default function AuthForm() {
           value={username}
           onChange={(e) =>  setUsername(e.target.value) }
           type="text" 
-          placeholder='Username' />
+          placeholder="saisir votre nom d'utilisateur"/>
       </InputGroup>
     </FormControl >
     <FormControl isRequired mt={8} mb={10}>
-      <FormLabel>Password</FormLabel>
+      <FormLabel>Mot de passe</FormLabel>
       <InputGroup>
         <InputRightElement pointerEvents='none'>
           <LockIcon color='gray.300' />
@@ -55,7 +55,7 @@ export default function AuthForm() {
          value={pwd}
          onChange={(e) => setPwd(e.target.value)}
          type="password" 
-         placeholder='password' />
+         placeholder='saisir votre mot de passe...' />
       </InputGroup>
     </FormControl>
     

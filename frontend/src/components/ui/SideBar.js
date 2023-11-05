@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import '../../style/App.css';
 import '../../style/SideBar.css';
-import '../../style/TopNavBar.css';
+
 
 
 

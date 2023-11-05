@@ -28,9 +28,9 @@ export default function ContratForm({ initialData, forModification, onClose }) {
    
    const { loading, addNewContrat, updateContrat, deleteContrat } = useContrats()
    const { types, fetchAllTypes } = useTypesCntr()
-   const formattedDateDebut = format(dateDebut, 'yyyy-MM-dd');
-   const formattedDateFin = format(dateFin, 'yyyy-MM-dd');
-   
+//    const formattedDateDebut = format(dateDebut, 'yyyy-MM-dd');
+//    const formattedDateFin = format(dateFin, 'yyyy-MM-dd');
+  
 
    useEffect(() => {
    
@@ -78,6 +78,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
         deleteContrat(id);
         onClose()
     }
+   
 
     return (
         <Form onSubmit={forModification ? handleUpdate : handleSubmit}>
@@ -136,7 +137,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
         <FormControl isRequired >
             <FormLabel>Date de debut</FormLabel>
             <Input
-                value={formattedDateDebut} // split to remove the time from date
+                value={dateDebut} // split to remove the time from date
                 onChange={(e) => setDateDebut(e.target.value)}
                 type="date" />
         </FormControl>
@@ -144,7 +145,7 @@ export default function ContratForm({ initialData, forModification, onClose }) {
         <FormControl isRequired >
             <FormLabel>Date de fin</FormLabel>
             <Input
-                value={formattedDateFin}// split to remove the time from date
+                value={dateFin}// split to remove the time from date
                 onChange={(e) => setDateFin(e.target.value)}
                 type="date" />
         </FormControl>

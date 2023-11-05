@@ -88,7 +88,7 @@ export default function Contrats() {
     >
       <ModalOverlay />
       <ModalContent >
-        <ModalHeader>{ isMotif ? 'Consulter motif':'Saisir une absence'}</ModalHeader>
+        <ModalHeader>{ isMotif ? 'Consulter motif':'Saisir un contrat'}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           {motifs &&!isMotif && <ContratForm initialData={data} onClose={onClose} forModification={false}/>}
