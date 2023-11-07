@@ -33,11 +33,11 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        <Route index element={!isAuthenticated ? <WelcomePage/> : <Navigate to="/main" /> } />
+        <Route index element={!isAuthenticated ? <WelcomePage/> : <Navigate to="/main/employes" /> } />
 
         <Route path="main" element={isAuthenticated ? <MainLayout /> : <Navigate to="/"/>}>
           
-          <Route path="employes" element={<EmpolyesPage />} />
+          <Route  path="employes" element={<EmpolyesPage />} />
             <Route path="AjoutEmp01" element={<AjoutEmp01 />} />
             <Route path="AjoutEmp02" element={<AjoutEmp02 />} />
             <Route path="AjoutEmp03" element={<AjoutEmp03 />} />
