@@ -45,8 +45,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
             id: {
             code: code,
             matricule: matricule,
-            dateDebut: dateDebut + "T00:00:00.000+00:00",
-            dateFin: dateFin + "T00:00:00.000+00:00",
+            dateDebut: dateDebut ,
+            dateFin: dateFin,
             },
             nbAbsence: nbAbsence,
             autorisee: autorisee
@@ -60,8 +60,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
         const data = {     
             code: code,
             matricule: matricule,
-            dateDebut: dateDebut + "T00:00:00.000+00:00",
-            dateFin: dateFin + "T00:00:00.000+00:00",
+            dateDebut: dateDebut ,
+            dateFin: dateFin ,
             nbAbsence: nbAbsence,
             autorisee: autorisee
         };
@@ -79,8 +79,8 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
         const id = {
             code:code,
             matricule: matricule,
-            dateDebut: dateDebut + "T00:00:00.000+00:00",
-            dateFin: dateFin + "T00:00:00.000+00:00"
+            dateDebut: dateDebut,
+            dateFin: dateFin
         };
         deleteAbsence(id)
         onClose() 
@@ -116,10 +116,10 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                 <FormHelperText>Saisir le matricule de l'employe</FormHelperText>
             </FormControl>
 
-            <FormControl isRequired >
+            <FormControl  >
                 <FormLabel>Date de debut</FormLabel>
                 <Input
-                    value={new Date(dateDebut).toLocaleDateString()}// split to remove the time from date
+                    value={dateDebut}// split to remove the time from date
                     // dateDebut cannot be modified cuz it is a part of absence's key
                     // so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setDateDebut(e.target.value) }}
@@ -127,10 +127,10 @@ export default function AbsenceForm({ initialData, forModification, onClose }) {
                     type="date" />
             </FormControl>
 
-            <FormControl isRequired >
+            <FormControl  >
                 <FormLabel>Date de fin</FormLabel>
                 <Input
-                    value={new Date(dateDebut).toLocaleDateString()}// split to remove the time from date
+                    value={dateFin}// split to remove the time from date
                     // dateFin cannot be modified cuz it is a part of absence's key
                     //so you need to verify first if it's not for modification you can save the changes
                     onChange={(e) => {!forModification && setDateFin(e.target.value)}}

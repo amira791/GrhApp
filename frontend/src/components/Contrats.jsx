@@ -31,15 +31,15 @@ export default function Contrats() {
   const {contrats , error , loading , fetchAllContrats} = useContrats()
   
   const data ={
-      id: 'id',
-      dateDebut : 'datedebut',
-      dateFin: 'datefin',
+      id: '',
+      dateDebut : '',
+      dateFin: '',
       duree : 0 ,
-      type:'type',
+      type:'',
       emplTemp : {
-        matricule : 'matricule',
-        nom : 'nom',
-        prenom : 'prenom'
+        matricule : '',
+        nom : '',
+        prenom : ''
       }
   }
 

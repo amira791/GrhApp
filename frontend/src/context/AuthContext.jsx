@@ -32,6 +32,7 @@ export const AuthContextPrivider = ({children}) => {
    const [state,dispatch] = useReducer(authReducer , {
     isAuthenticated: false,
     token: null,
+    username : null
    });
 
    useEffect(()=>{

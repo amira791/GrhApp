@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 export default function useStorage() {
  
@@ -37,8 +36,9 @@ export default function useStorage() {
     }
     return {
       'Content-Type': 'application/json',
-    };
-  };
+    }
+  }
+  
   return {
     createHeaders,
     setToken,
