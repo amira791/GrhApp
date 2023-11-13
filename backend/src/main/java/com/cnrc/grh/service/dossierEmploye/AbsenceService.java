@@ -1,6 +1,5 @@
 package com.cnrc.grh.service.dossierEmploye;
 
-import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.Request.AlreadyExistsException;
 import com.cnrc.grh.model.dossierEmploye.Absence;
 import com.cnrc.grh.model.dossierEmploye.Motifabs;
@@ -30,6 +29,7 @@ public class AbsenceService {
     public List<Motifabs> getMotifList() {return motifAbsRepository.findAll();}
 
     public void createMotif(Motifabs motif) {
+
 
         if(motifAbsRepository.existsById(motif.getId())){
             throw new AlreadyExistsException("Le motif avec l'id :" + motif.getId() +"existe deja");
@@ -63,6 +63,7 @@ public class AbsenceService {
     public List<Absence> getAbsencesList() { return absenceRepository.findAll();}
     public Optional<Absence> getAbsenceById(Absence.AbsenceId id) {return absenceRepository.findById(id);}
     public void createAbsence(Absence absence){
+        // todo calculate nb absence auto , and autorise or not
         if(absenceRepository.existsById(absence.getId())){
             throw new AlreadyExistsException("L'absence avec l'id :" + absence.getId() +"existe deja");
         }

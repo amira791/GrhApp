@@ -16,15 +16,11 @@ public class Contrat {
     private Date dateDebut;
     @Column(name = "DATE_FIN")
     private Date dateFin;
-//    @Column(name = "MAT")
-//    private String matricule;
-    // maybe we need unite de mesure for duree column
     @Column(name = "DUREE")
     private Float duree;
     @Column(name = "TYPE_CONTRAT")
     private String type;
-    // @Column(name = "MOTIF")
-    // private String motif;
+
 
     @ManyToOne
     @JoinColumn(name = "MAT", referencedColumnName = "MAT")

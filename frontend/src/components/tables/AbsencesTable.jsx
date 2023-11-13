@@ -27,18 +27,28 @@ export default function AbsencesTable({absences , motifs }) {
     initialSortColumn,
     initialSortDirection
   );
+  const data = {
+    id: {
+      code: '',
+      matricule: '',
+      dateDebut: '',
+      dateFin: ''
+    },
+    nbAbsence: 0,
+    autorisee: 'F'
+  }
 
-  const [data,setData] = useState(null)
+ 
 
   const handleRowClick = (row) => {
-      setData(row)
+    
       onOpen();
     };
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  console.log("im in absence table hehehe")
+  
   return (
     <>
       <TableContainer p="30px" overflow="auto">
@@ -57,29 +67,21 @@ export default function AbsencesTable({absences , motifs }) {
                   sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
                 )}
               </Th>
-              <Th onClick={() => handleColumnHeaderClick('Date de fin')}>
+              <Th>
                 Date de fin
-                {sortBy === 'Date de fin' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
+                
               </Th>
-              <Th onClick={() => handleColumnHeaderClick('Nombre d absences')}>
+              <Th >
                 Nombre d absences
-                {sortBy === 'Nombre d absences' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
+                
               </Th>
-              <Th onClick={() => handleColumnHeaderClick('Motif d absence')}>
+              <Th >
                 Motif d absence
-                {sortBy === 'Motif d absence' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
+                
               </Th>
-              <Th onClick={() => handleColumnHeaderClick('Autorisee')}>
+              <Th >
                 Autorisee
-                {sortBy === 'Autorisee' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
+                
               </Th>
              
             </Tr>
@@ -88,8 +90,8 @@ export default function AbsencesTable({absences , motifs }) {
           {absences.map((r, index) => (
             <Tr  key={index} onClick={() => handleRowClick(r)} style={{ cursor: 'pointer' }}>
                   <Td>{r.id.matricule}</Td>
-                  <Td>{new Date(r.id.dateDebut).toLocaleDateString()}</Td>
-                  <Td>{new Date(r.id.dateFin).toLocaleDateString()}</Td>
+                  <Td>{r.id.dateDebut}</Td>
+                  <Td>{r.id.dateFin}</Td>
                   <Td>{r.nbAbsence}</Td>
                   <Td>{motifs?.find((m) => m.id === r.id.code)?.libelle || "No matching libelle"}</Td>
                   <Td><Badge ml='1' fontSize='0.8em' colorScheme={r.autorisee === 'T' ? 'green' : 'red'}>

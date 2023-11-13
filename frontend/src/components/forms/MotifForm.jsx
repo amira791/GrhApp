@@ -106,7 +106,7 @@ export default function MotifForm({ useFunction ,initialData , forModification ,
             <AlertDialogOverlay>
             <AlertDialogContent>
                 <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                Supprimer absence
+                Supprimer motif absence
                 </AlertDialogHeader>
 
                 <AlertDialogBody>
