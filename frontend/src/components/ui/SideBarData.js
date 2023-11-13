@@ -19,7 +19,7 @@ export const SideBarData = [
         link: "mouvements"
     },
     {
-        title: "Prestatuions et avantages",
+        title: "Prestations et avantages",
         icon: <FontAwesomeIcon icon={faHospitalUser} />,
         link: "prestations"
     },

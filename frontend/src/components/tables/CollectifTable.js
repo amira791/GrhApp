@@ -2,7 +2,7 @@ import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import useTableSort from '../../hooks/useTableSort';
-import UniteForm from '../forms/UniteForm';
+import CollectifForm from '../forms/CollectifForm';
 import {
   Badge,
   Box,
@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useRef} from 'react';
 
-export default function ({ unite, searchQuery, filtredUnite, searchActive, searchUnite }) {
+export default function ({ collectif, searchQuery, filtredCollectif, searchActive, searchCollectif }) {
   //const [employe, setEmploye] = useState([]);
   const [sortBy, setSortBy] = useState(null);
   const [sortEchelon, setSortEchelon] = useState('asc');
@@ -30,7 +30,7 @@ export default function ({ unite, searchQuery, filtredUnite, searchActive, searc
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  console.log("im in absence table hehehe")
+
 
 
    const toggleSortEchelon = () => {
@@ -52,21 +52,21 @@ export default function ({ unite, searchQuery, filtredUnite, searchActive, searc
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th onClick={() => handleColumnHeaderClick('codeUnite')}>
-              Code Unite
-              {sortBy === 'codeUnite' && (
+            <Th onClick={() => handleColumnHeaderClick('codeCollectif')}>
+              Code Collectif
+              {sortBy === 'codeCollectif' && (
                 sortEchelon === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
               )}
             </Th>
-            <Th onClick={() => handleColumnHeaderClick('unite')}>
-              Unite
-              {sortBy === 'unite' && (
+            <Th onClick={() => handleColumnHeaderClick('collectif')}>
+              Collectif Designation
+              {sortBy === 'collectif' && (
                 sortEchelon === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
               )}
             </Th>
-            <Th onClick={() => handleColumnHeaderClick('UniteAr')}>
-              Unite Ar
-              {sortBy === 'UniteAr' && (
+            <Th onClick={() => handleColumnHeaderClick('CollectifAr')}>
+            Collectif Designation Ar
+              {sortBy === 'CollectifAr' && (
                 sortEchelon === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
               )}
             </Th>
@@ -75,20 +75,20 @@ export default function ({ unite, searchQuery, filtredUnite, searchActive, searc
         <Tbody>
           {searchQuery && searchActive ? (
             // This block executes when you are searching
-            searchUnite.map((u) => (
-              <Tr key={u.id}>
-                <Td>{u.id}</Td>
-                <Td>{u.uniteDesignation}</Td>
-                <Td> {u.uniteDesignationAr}</Td>
+            searchCollectif.map((c) => (
+              <Tr key={c.id}>
+                <Td>{c.id}</Td>
+                <Td>{c.collectifDesignation}</Td>
+                <Td> {c.collectifDesignationAr}</Td>
               </Tr>
             ))
           ): (
             // This block executes when you are neither searching nor filtering
-            unite.map((u) => (
-                <Tr key={u.id} onClick={() => handleRowClick(u)} style={{ cursor: 'pointer' }}>
-                <Td>{u.id}</Td>
-                <Td>{u.uniteDesignation}</Td>
-                <Td> {u.uniteDesignationAr}</Td>
+            collectif.map((c) => (
+                <Tr key={c.id} onClick={() => handleRowClick(c)} style={{ cursor: 'pointer' }}>
+                <Td>{c.id}</Td>
+                <Td>{c.collectifDesignation}</Td>
+                <Td> {c.collectifDesignationAr}</Td>
               </Tr>
             ))
           )}
@@ -102,11 +102,11 @@ export default function ({ unite, searchQuery, filtredUnite, searchActive, searc
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modifier unite</ModalHeader>
+            <ModalHeader>Modifier collectif</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <Box maxW="100vh">
-                <UniteForm initialData={data} forModification={true} onClose={onClose}/>
+                <CollectifForm initialData={data} forModification={true} onClose={onClose}/>
               </Box>
             </ModalBody>
           </ModalContent>

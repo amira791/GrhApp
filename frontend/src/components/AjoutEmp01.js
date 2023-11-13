@@ -122,7 +122,7 @@ function AjoutEmp01() {
         <div>
           <Stack spacing={20} marginTop="3rem">
             <Flex direction="row" marginX={20}>
-              <Input
+              <Input isRequired
                 placeholder="Matricule"
                 size="md"
                 marginRight={4}

@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import '../style/EmployesPage.css';
 import '../style/TopNavBar.css';
 import SearchBar from '../components/SearchBar';
-
 import {
   Button,
   HStack,
@@ -22,19 +21,20 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import StatusTable from '../components/tables/StatusTable'
+import CollectifTable from '../components/tables/CollectifTable'
+import CollectifeForm from '../components/forms/CollectifForm'
 import { AddIcon, QuestionIcon, DownloadIcon } from '@chakra-ui/icons';
-import StatusForm from '../components/forms/StatutForm';
+import CollectifForm from '../components/forms/CollectifForm';
 import { NavLink } from 'react-router-dom';
-import useStatus from '../hooks/useStatus';
+import useCollectif from '../hooks/useCollectif';
 
-export default function Status() {
+export default function Collectif() {
 
     const [searchActive, setSearchActive] = useState(false); 
     const [searchQuery, setSearchQuery] = useState('');
-    const [status, setStatus] = useState([]); 
-    const [searchStatus, setSearchStatus] = useState([]);
-    const [filteredStatus, setFilteredStatus] = useState([]); 
+    const [collectif, setCollectif] = useState([]); 
+    const [searchCollectif, setSearchCollectif] = useState([]);
+    const [filteredCollectif, setFilteredCollectif] = useState([]); 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const blob = new Blob(['Blob content'], { type: 'text/plain' });
     const initialRef = useRef(null)
@@ -43,8 +43,8 @@ export default function Status() {
 
     const data = {
       id: '',
-      statusDesignation: '',
-      statusDesignationAr: ''
+      collectifDesignation: '',
+      collectifDesignationAr: ''
     }
   
     const reader = new FileReader();
@@ -55,32 +55,32 @@ export default function Status() {
     };
 
 
-  /*********************** GET ALL Status ***********************/
+  /*********************** GET ALL CollectifS ***********************/
     useEffect(() => {
         // Fetch employee data here
-        const apiUrl = 'http://localhost:8089/status/statusall';
+        const apiUrl = 'http://localhost:8089/Collectif/CollectifAll';
         fetch(apiUrl)
           .then((response) => response.json())
           .then((result) => {
-            setStatus(result);
+            setCollectif(result);
           })
           .catch((error) => {
             console.error('Error fetching employee data:', error);
           });
       }, []);
 
-  /********************** Rech Status ******************************/
+  /********************** Rech Collectif ******************************/
   const handleSearch = (query) => {
     setSearchQuery(query);
     setSearchActive(query.trim() !== '');
 
-    const filteredStatus = status.filter((u) =>
+    const filteredCollectif = collectif.filter((u) =>
       u.id.toLowerCase().includes(query.toLowerCase()) ||
-      u.statusDesignation.toLowerCase().includes(query.toLowerCase()) ||
-      u.statusDesignationAr.toLowerCase().includes(query.toLowerCase())
+      u.collectifDesignation.toLowerCase().includes(query.toLowerCase()) ||
+      u.collectifDesignationAr.toLowerCase().includes(query.toLowerCase())
     );
 
-    setSearchStatus(filteredStatus);
+    setSearchCollectif(filteredCollectif);
   };
           return (
             <Stack spacing={-200}>
@@ -99,13 +99,13 @@ export default function Status() {
        
           <Button  leftIcon={<AddIcon />} colorScheme="teal" marginLeft={0}        
            onClick={() => {onOpen(); }}>
-            Ajouter une Status
+            Ajouter une Collectif
           </Button>
 
                 </HStack>
               </Flex>
               <div style={{ marginTop: '-150px' }}>
-                <StatusTable status={status} filteredStatus={filteredStatus}  searchActive={searchActive} searchQuery={searchQuery}  searchStatus={searchStatus} />
+                <CollectifTable collectif={collectif} filteredCollectif={filteredCollectif}  searchActive={searchActive} searchQuery={searchQuery}  searchCollectif={searchCollectif} />
               </div>
 
               <Modal
@@ -119,7 +119,7 @@ export default function Status() {
         <ModalContent >
           <ModalCloseButton />
           <ModalBody pb={6}>
-            { <StatusForm initialData={data} onClose={onClose} forModification={false} />}
+            { <CollectifeForm initialData={data} onClose={onClose} forModification={false} />}
           </ModalBody>
         </ModalContent>
       </Modal>
