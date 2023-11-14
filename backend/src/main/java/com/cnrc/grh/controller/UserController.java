@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    // todo remove the controller cuz it is used by admim , maybe the admin will user the JWT auth cntroller that i will create later
+    // todo remove the controller cuz it is used by admim , maybe the admin will user the JWT auth cntroller
     private final UserService userService;
     @Autowired
     public UserController(UserService userService) {

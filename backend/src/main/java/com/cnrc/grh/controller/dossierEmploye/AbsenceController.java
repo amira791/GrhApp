@@ -1,6 +1,5 @@
 package com.cnrc.grh.controller.dossierEmploye;
 
-import com.cnrc.grh.Request.AbsenceRequest;
 import com.cnrc.grh.model.dossierEmploye.Absence;
 import com.cnrc.grh.model.dossierEmploye.Motifabs;
 import com.cnrc.grh.service.dossierEmploye.AbsenceService;
@@ -73,8 +72,8 @@ public class AbsenceController {
 
     @PutMapping("/update/{code}/{dateDebut}/{dateFin}/{matricule}")
     public void updateAbsence(@PathVariable String code,
-                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateDebut,
-                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
+                              @PathVariable  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateDebut,
+                              @PathVariable  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")  Date dateFin,
                               @PathVariable String matricule ,
                               @RequestBody Absence updatedAbsence) {
 
@@ -87,8 +86,8 @@ public class AbsenceController {
     }
     @DeleteMapping("/delete/{code}/{dateDebut}/{dateFin}/{matricule}")
     public void deleteAbsence(@PathVariable String code,
-                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateDebut,
-                              @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX") Date dateFin,
+                              @PathVariable  Date dateDebut,
+                              @PathVariable  Date dateFin,
                               @PathVariable String matricule) {
         Absence.AbsenceId id = new Absence.AbsenceId();
         id.setCode(code);

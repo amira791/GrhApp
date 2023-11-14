@@ -22,12 +22,7 @@ import AbsenceForm from '../forms/AbsenceForm';
 export default function AbsencesTable({absences , motifs }) {
   const initialSortColumn = 'Matricule';
   const initialSortDirection = 'asc'; 
-  const { sortBy, sortDirection, handleColumnHeaderClick } = useTableSort(
-    absences,
-    initialSortColumn,
-    initialSortDirection
-  );
-  const data = {
+  const [data,setData] = useState({
     id: {
       code: '',
       matricule: '',
@@ -36,12 +31,11 @@ export default function AbsencesTable({absences , motifs }) {
     },
     nbAbsence: 0,
     autorisee: 'F'
-  }
-
+  })
  
 
   const handleRowClick = (row) => {
-    
+      setData(row)
       onOpen();
     };
 
@@ -55,43 +49,20 @@ export default function AbsencesTable({absences , motifs }) {
         <Table variant='simple'>
           <Thead>
             <Tr>
-              <Th onClick={() => handleColumnHeaderClick('Matricule')}>
-                Matricule
-                {sortBy === 'Matricule' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
-              </Th>
-              <Th onClick={() => handleColumnHeaderClick('Date de debut')}>
-                Date de debut
-                {sortBy === 'Date de debut' && (
-                  sortDirection === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
-                )}
-              </Th>
-              <Th>
-                Date de fin
-                
-              </Th>
-              <Th >
-                Nombre d absences
-                
-              </Th>
-              <Th >
-                Motif d absence
-                
-              </Th>
-              <Th >
-                Autorisee
-                
-              </Th>
-             
+              <Th>Matricule</Th>
+              <Th>Date de debut</Th>
+              <Th>Date de fin</Th>
+              <Th>Nombre d absences</Th>
+              <Th>Motif d absence</Th>
+              <Th>Autorisee</Th>
             </Tr>
           </Thead>
           <Tbody>
           {absences.map((r, index) => (
             <Tr  key={index} onClick={() => handleRowClick(r)} style={{ cursor: 'pointer' }}>
                   <Td>{r.id.matricule}</Td>
-                  <Td>{r.id.dateDebut}</Td>
-                  <Td>{r.id.dateFin}</Td>
+                  <Td>{ new Date(r.id.dateDebut).toLocaleDateString()}</Td>
+                  <Td>{ new Date(r.id.dateFin).toLocaleDateString()}</Td>
                   <Td>{r.nbAbsence}</Td>
                   <Td>{motifs?.find((m) => m.id === r.id.code)?.libelle || "No matching libelle"}</Td>
                   <Td><Badge ml='1' fontSize='0.8em' colorScheme={r.autorisee === 'T' ? 'green' : 'red'}>

@@ -31,6 +31,7 @@ public class Absence implements Serializable {
 //        private Motifabs motifAbs;
     }
 
+
     @EmbeddedId
     private AbsenceId id;
     @Column(name = "NOMBRE")

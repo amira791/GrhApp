@@ -28,7 +28,7 @@ export default function useAuth() {
               dispatch({ type : 'LOGIN' , payload : { token: result.token, username: result.username } })
               toast({
                   title: 'User authentifie',
-                  description: "Le User a ete authentifie avec succes",
+                  description: "L'utilisateur a ete authentifie avec succes",
                   status: 'success',
                   duration: 5000,
                   isClosable: true,
@@ -39,7 +39,7 @@ export default function useAuth() {
               setLoading(false);
               toast({
                   title: 'Une erreur',
-                  description: error.message,
+                  description: 'Verifie le nom utilisateur oubien le mot de passe',
                   status: 'error',
                   duration: 5000,
                 })
