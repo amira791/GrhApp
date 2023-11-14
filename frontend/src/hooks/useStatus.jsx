@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react'
+import useStorage from './useStorage';
 
 
 export default function useStatus() {
   const [status, setStatus] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useStorage();
 
   const toast = useToast()
  
@@ -13,7 +15,7 @@ export default function useStatus() {
   const addNewStatus = (Status) => {
     fetch('http://localhost:8089/status/CreateStatus', {
               method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+              headers: createHeaders(), 
       body: JSON.stringify(Status),
     })
       .then(() => {
@@ -40,7 +42,7 @@ export default function useStatus() {
   const updateStatus = (data) => {
     fetch(`http://localhost:8089/status/updateStatus/${data.id}`,
      { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+     headers: createHeaders(), 
       body: JSON.stringify(data),
     })
       .then(() => {
@@ -67,6 +69,7 @@ export default function useStatus() {
   const deleteStatus = (id) => {
     fetch(`http://localhost:8089/status/deleteStatus/${id}`, {
       method: 'DELETE',
+      headers: createHeaders(), 
     })
       .then(() => {
         toast({

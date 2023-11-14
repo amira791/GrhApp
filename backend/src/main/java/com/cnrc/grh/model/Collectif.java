@@ -19,9 +19,9 @@ public class Collectif {
     @Column(name = "CODE_COL")
     private String id;
     @Column(name = "LIB_COL")
-    private String CollectifDesignation;
+    private String collectifDesignation;
     @Column(name = "LIB_COL_AR")
-    private String CollectifDesignationAr;
+    private String collectifDesignationAr;
 
 
 }

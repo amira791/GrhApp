@@ -19,9 +19,9 @@ public class Status {
     @Column(name = "CODE_STATUT")
     private String id;
     @Column(name = "LIB_STATUT")
-    private String StatusDesignation;
+    private String statusDesignation;
     @Column(name = "LIB_STATUT_AR")
-    private String StatusDesignationAr;
+    private String statusDesignationAr;
 
 
 }

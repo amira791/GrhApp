@@ -6,6 +6,7 @@ import Poste from '../components/Poste';
 import Status from '../components/Status';
 import Collectif from '../components/Collectif';
 
+
 export default function ParametresPage() {
   const tabs = [
     

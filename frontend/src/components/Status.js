@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import '../style/EmployesPage.css';
 import '../style/TopNavBar.css';
 import SearchBar from '../components/SearchBar';
+import useStorage from '../hooks/useStorage';
 
 import {
   Button,
@@ -36,9 +37,11 @@ export default function Status() {
     const [searchStatus, setSearchStatus] = useState([]);
     const [filteredStatus, setFilteredStatus] = useState([]); 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { loading, addNewStatus, updateStatus, deleteStatus } = useStatus()
     const blob = new Blob(['Blob content'], { type: 'text/plain' });
     const initialRef = useRef(null)
     const finalRef = useRef(null)
+    const {createHeaders} = useStorage();
   
 
     const data = {
@@ -59,7 +62,10 @@ export default function Status() {
     useEffect(() => {
         // Fetch employee data here
         const apiUrl = 'http://localhost:8089/status/statusall';
-        fetch(apiUrl)
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: createHeaders(), 
+        })
           .then((response) => response.json())
           .then((result) => {
             setStatus(result);

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react'
+import useStorage from './useStorage';
 
 
 export default function useUnite() {
   const [unite, setUnit] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useStorage();
 
   const toast = useToast()
  
@@ -13,7 +15,7 @@ export default function useUnite() {
   const addNewUnite = (Unite) => {
     fetch('http://localhost:8089/Unite/CreateUnite', {
               method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+              headers: createHeaders(),
       body: JSON.stringify(Unite),
     })
       .then(() => {
@@ -40,7 +42,7 @@ export default function useUnite() {
   const updateUnite = (data) => {
     fetch(`http://localhost:8089/Unite/UpdateUnite/${data.id}`,
      { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+     headers: createHeaders(),
       body: JSON.stringify(data),
     })
       .then(() => {
@@ -67,6 +69,7 @@ export default function useUnite() {
   const deleteUnite = (id) => {
     fetch(`http://localhost:8089/Unite/DeleteUnite/${id}`, {
       method: 'DELETE',
+      headers: createHeaders(),
     })
       .then(() => {
         toast({

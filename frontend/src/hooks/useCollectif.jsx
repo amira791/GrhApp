@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react'
+import useStorage from './useStorage';
 
 
 export default function useCollectif() {
   const [collectif, setCollectif] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useStorage();
 
   const toast = useToast()
  
@@ -13,7 +15,7 @@ export default function useCollectif() {
   const addNewCollectif = (Collectif) => {
     fetch('http://localhost:8089/Collectif/CreateCollectif', {
               method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+              headers: createHeaders(), 
       body: JSON.stringify(Collectif),
     })
       .then(() => {
@@ -40,7 +42,7 @@ export default function useCollectif() {
   const updateCollectif = (data) => {
     fetch(`http://localhost:8089/Collectif/UpdateCollectif/${data.id}`,
      { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+     headers: createHeaders(), 
       body: JSON.stringify(data),
     })
       .then(() => {
@@ -67,6 +69,7 @@ export default function useCollectif() {
   const deleteCollectif = (id) => {
     fetch(`http://localhost:8089/Collectif/DeleteCollectif/${id}`, {
       method: 'DELETE',
+      headers: createHeaders(), 
     })
       .then(() => {
         toast({

@@ -26,7 +26,7 @@ import StructureTable from '../components/tables/StructureTable'
 import { AddIcon, QuestionIcon, DownloadIcon } from '@chakra-ui/icons';
 import StructureForm from '../components/forms/StructureForm';
 import { NavLink } from 'react-router-dom';
-
+import useStorage from '../hooks/useStorage';
 export default function Structure() {
 
     const [searchActive, setSearchActive] = useState(false); 
@@ -37,6 +37,7 @@ export default function Structure() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialRef = useRef(null)
     const finalRef = useRef(null)
+    const {createHeaders} = useStorage();
   
     const blob = new Blob(['Blob content'], { type: 'text/plain' });
   
@@ -59,7 +60,10 @@ export default function Structure() {
     useEffect(() => {
         // Fetch employee data here
         const apiUrl = 'http://localhost:8089/Structure/StructureeAll';
-        fetch(apiUrl)
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: createHeaders(), 
+        })
           .then((response) => response.json())
           .then((result) => {
             setStructure(result);

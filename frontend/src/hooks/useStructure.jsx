@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react'
+import useStorage from './useStorage';
 
 
 export default function useStructure() {
   const [structure, setStructure] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {createHeaders} = useStorage();
 
   const toast = useToast()
  
@@ -13,7 +15,7 @@ export default function useStructure() {
   const addNewStructure = (Structure) => {
     fetch('http://localhost:8089/Structure/CreateStructure', {
               method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+              headers: createHeaders(), 
       body: JSON.stringify(Structure),
     })
       .then(() => {
@@ -40,7 +42,7 @@ export default function useStructure() {
   const updateStructure = (data) => {
     fetch(`http://localhost:8089/Structure/UpdateStructure/${data.id}`,
      { method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
+     headers: createHeaders(), 
       body: JSON.stringify(data),
     })
       .then(() => {
@@ -67,6 +69,7 @@ export default function useStructure() {
   const deleteStructure = (id) => {
     fetch(`http://localhost:8089/Structure/DeleteStructure/${id}`, {
       method: 'DELETE',
+      headers: createHeaders(), 
     })
       .then(() => {
         toast({
