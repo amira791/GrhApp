@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import '../style/EmployesPage.css';
 import '../style/TopNavBar.css';
 import SearchBar from '../components/SearchBar';
+
 import {
   Button,
   HStack,
@@ -26,6 +27,7 @@ import { AddIcon, QuestionIcon, DownloadIcon } from '@chakra-ui/icons';
 import UniteForm from '../components/forms/UniteForm';
 import { NavLink } from 'react-router-dom';
 import useUnite from '../hooks/useUnite';
+import useStorage from '../hooks/useStorage';
 
 export default function Unite() {
 
@@ -38,7 +40,7 @@ export default function Unite() {
     const blob = new Blob(['Blob content'], { type: 'text/plain' });
     const initialRef = useRef(null)
     const finalRef = useRef(null)
-  
+    const {createHeaders} = useStorage();
 
     const data = {
       id: '',
@@ -58,7 +60,9 @@ export default function Unite() {
     useEffect(() => {
         // Fetch employee data here
         const apiUrl = 'http://localhost:8089/Unite/UniteAll';
-        fetch(apiUrl)
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: createHeaders(), })
           .then((response) => response.json())
           .then((result) => {
             setUnite(result);

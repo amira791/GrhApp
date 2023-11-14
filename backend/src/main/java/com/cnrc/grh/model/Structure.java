@@ -19,12 +19,12 @@ public class Structure {
     @Column(name = "CODE_STR")
     private String id;
     @Column(name = "LIB_STR")
-    private String StructureDesignation;
+    private String structureDesignation;
     @Column(name = "TYPE_STR")
-    private String TypeStructure;
+    private String typeStructure;
     @Column(name = "BLOQUE")
-    private String Bloque;
+    private String bloque;
     @Column(name = "LIB_STR_AR")
-    private String StructureDesignationAr;
+    private String structureDesignationAr;
 
 }

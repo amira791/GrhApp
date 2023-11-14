@@ -19,7 +19,7 @@ public class Unite {
     @Column(name = "CODE_UNI")
     private String id;
     @Column(name = "LIB_UNI")
-    private String UniteDesignation;
+    private String uniteDesignation;
     @Column(name = "LIB_UNI_AR")
-    private String UniteDesignationAr;
+    private String uniteDesignationAr;
 }

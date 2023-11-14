@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 import { Form } from 'react-router-dom';
 import useContrats from '../../hooks/useContrats'
 import useTypesCntr from '../../hooks/useTypesCntr'
-import { format } from "date-fns";
 
 
 export default function ContratForm({ initialData, forModification, onClose }) {

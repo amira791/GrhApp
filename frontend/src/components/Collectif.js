@@ -27,6 +27,7 @@ import { AddIcon, QuestionIcon, DownloadIcon } from '@chakra-ui/icons';
 import CollectifForm from '../components/forms/CollectifForm';
 import { NavLink } from 'react-router-dom';
 import useCollectif from '../hooks/useCollectif';
+import useStorage from '../hooks/useStorage';
 
 export default function Collectif() {
 
@@ -39,6 +40,7 @@ export default function Collectif() {
     const blob = new Blob(['Blob content'], { type: 'text/plain' });
     const initialRef = useRef(null)
     const finalRef = useRef(null)
+    const {createHeaders} = useStorage();
   
 
     const data = {
@@ -59,7 +61,10 @@ export default function Collectif() {
     useEffect(() => {
         // Fetch employee data here
         const apiUrl = 'http://localhost:8089/Collectif/CollectifAll';
-        fetch(apiUrl)
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: createHeaders(), 
+        })
           .then((response) => response.json())
           .then((result) => {
             setCollectif(result);
