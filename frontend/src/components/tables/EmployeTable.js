@@ -51,15 +51,17 @@ export default function DataTable({ employe, filteredEmploye,  searchQuery, sear
 
   // Function to get posteDesignation by codePoste
   const getPosteDesignation = (codePoste) => {
-    return posteData[codePoste] || 'N/A';
+    return posteData[codePoste] || 'poste de travail';
   };
   // Function to calculate anciennete
   const calculateAnciennete = (dateEntree) => {
     const currentDate = new Date(); // Current date
     const dateEntreeYear = new Date(dateEntree).getFullYear(); // Year of DateEntree
+  
     const anciennete = currentDate.getFullYear() - dateEntreeYear; // Calculate anciennete
+
     return anciennete;
-  };
+  }
   
   return (
     <TableContainer p="30px" marginTop="200px">
@@ -91,7 +93,7 @@ export default function DataTable({ employe, filteredEmploye,  searchQuery, sear
               )}
             </Th>
             <Th onClick={() => handleColumnHeaderClick('dateEntree')}>
-              Date d'Entrée
+             Ancientee
               {sortBy === 'dateEntree' && (
                 sortEchelon === 'asc' ? <TriangleUpIcon /> : <TriangleDownIcon />
               )}
@@ -136,7 +138,7 @@ export default function DataTable({ employe, filteredEmploye,  searchQuery, sear
                 <Td>{e.id}</Td>
                 <Td>{e.nom} {e.prenom}</Td>
                 <Td>{getPosteDesignation(e.codePoste)}</Td>
-                <Td>{e.echelon}</Td>
+                <Td>{e.echelon? e.echelon : '0' }</Td>
                 <Td>{calculateAnciennete(e.dateEntree)} ans</Td>
                 <Td style={{ backgroundColor: getEtatColor(e.etat) }}>{e.etat}</Td>
               </Tr>

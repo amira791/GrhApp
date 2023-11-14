@@ -11,6 +11,7 @@ import {
   NumberDecrementStepper,
   Button,
   ButtonGroup,
+  FormControl
 } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -46,7 +47,7 @@ function AjoutEmp01() {
     nationalite: '',
     niveauEtude: '',
     sexe: '',
-    etat: '',
+    etat: 'Actif',
     nom: '',
     prenom: '',
     categorie: '',
@@ -122,6 +123,7 @@ function AjoutEmp01() {
         <div>
           <Stack spacing={20} marginTop="3rem">
             <Flex direction="row" marginX={20}>
+            <FormControl isRequired >
               <Input isRequired
                 placeholder="Matricule"
                 size="md"
@@ -130,7 +132,8 @@ function AjoutEmp01() {
                 value={formData.id}
                 onChange={handleInputChange}
               />
-              <Input
+              </FormControl>
+              <Input required
                 placeholder="Nom"
                 size="md"
                 marginRight={4}
@@ -216,7 +219,7 @@ function AjoutEmp01() {
                 </NumberInputStepper>
               </NumberInput>
             </Flex>
-            <Flex direction="row" marginX={20}>
+            {/* <Flex direction="row" marginX={20}>
               <Select
                 placeholder="Etat.."
                 size="md"
@@ -232,8 +235,7 @@ function AjoutEmp01() {
                   </option>
                 ))}
               </Select>
-              {/* Add more fields here */}
-            </Flex>
+            </Flex> */}
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <ButtonGroup variant="outline" spacing="6" marginX={20}>
                 <NavLink to="/main/employes" activeClassName="active">

@@ -6,6 +6,7 @@ import Stepper from './ui/Stepper04';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useNavigate, useLocation, location } from 'react-router-dom';
+import useStorage from '../hooks/useStorage';
 
 function AjoutEmp04() {
 
@@ -13,7 +14,7 @@ function AjoutEmp04() {
   const formDataFromPrevStep = location.state?.formData; // Access formData from the previous step (AjoutEmp03)
   const [jsonData, setJsonData] = useState('');
   const [formData, setFormData] = useState(formDataFromPrevStep || {});
-
+  const {createHeaders} = useStorage();
   // Define a function to handle form field changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,9 +38,7 @@ function AjoutEmp04() {
     // Example: Sending formData to the server
     fetch('http://localhost:8089/Employe/CreateEmploye', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: createHeaders(),
       body: JSON.stringify(formData), 
     })
       .then((response) => response.json())
@@ -73,7 +72,7 @@ function AjoutEmp04() {
                 value={formData.numTelephonl}
                 onChange={handleInputChange} />
                  </InputGroup>
-              <Input
+              <Input 
                 placeholder="Groupe Sanguin"
                 size="md"
                 marginRight={4}

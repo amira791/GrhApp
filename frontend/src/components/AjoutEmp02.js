@@ -14,6 +14,7 @@ function AjoutEmp02() {
   const navigate = useNavigate();
   const location = useLocation();
   const formDataFromPrevStep = location.state?.formData;
+  console.log("previous data"+formDataFromPrevStep)
 
   const [formData, setFormData] = useState(formDataFromPrevStep);
   

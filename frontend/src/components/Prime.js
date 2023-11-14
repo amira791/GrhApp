@@ -16,6 +16,7 @@ import { writeFileSync } from 'xlsx';
 import * as XLSX from 'xlsx';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import useStorage from '../hooks/useStorage';
 
 
 
@@ -26,6 +27,7 @@ export default function EmployePage() {
   const [filteredEmploye, setFilteredEmploye] = useState([]); // State for filtered employees
   const [posteData, setPosteData] = useState({});
   const [searchEmploye, setSearchEmploye] = useState([]);
+  const {createHeaders} = useStorage();
 
   const blob = new Blob(['Blob content'], { type: 'text/plain' });
 
@@ -41,7 +43,10 @@ export default function EmployePage() {
   useEffect(() => {
     // Fetch employee data here
     const apiUrl = 'http://localhost:8089/Employe/EmployeAll';
-    fetch(apiUrl)
+    fetch(apiUrl , {
+      method:  "GET",
+      headers: createHeaders()
+    })
       .then((response) => response.json())
       .then((result) => {
         setEmploye(result);
@@ -51,7 +56,10 @@ export default function EmployePage() {
       });
 
     const posteApiUrl = 'http://localhost:8089/PosteTravail/P';
-    fetch(posteApiUrl)
+    fetch(posteApiUrl ,{
+      method: "GET",
+      headers : createHeaders()
+    })
       .then((response) => response.json())
       .then((result) => {
         // Convert the array of postes into a dictionary for easy access
